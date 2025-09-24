@@ -1,0 +1,84 @@
+.brands {
+  color: #fff;
+  padding: 18px 0 28px;
+}
+
+.brands__wrap {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.brands__rule {
+  border: none;
+  height: 3px;
+  background: rgba(255, 255, 255, 255);
+  margin: 8px auto 14px;
+  width: 80vw;
+
+  height: 3px;
+}
+
+.brands__heading {
+  text-align: center;
+  font-weight: 800;
+  font-size: 28px;
+  margin: 0 0 12px;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
+}
+
+/* grid of logos */
+.brands__grid {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 26px 32px;
+  align-items: center;
+}
+
+.brands__cell {
+  display: grid;
+  place-items: center;
+  min-height: 96px;
+}
+
+.brands__logo {
+  max-width: 220px;
+  max-height: 92px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.25));
+  display: block;
+}
+.brands__logo:hover {
+  filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.35));
+  transform: translateY(-2px);
+  transition: all 0.3s ease;
+}
+
+.brands__ph {
+  width: 180px;
+  height: 80px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+}
+
+/* RTL alignment for the heading only (logos are centered already) */
+body.rtl .brands__heading {
+  text-align: center;
+}
+
+/* responsive */
+@media (max-width: 900px) {
+  .brands__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 520px) {
+  .brands__grid {
+    grid-template-columns: 1fr;
+  }
+}
