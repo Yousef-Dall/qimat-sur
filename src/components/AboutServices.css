@@ -1,0 +1,251 @@
+/* Section background matches your blue→indigo gradient */
+.aboutServices {
+  color: #fff;
+  padding: 28px 16px 48px;
+}
+
+.as__block {
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  padding: 16px 18px;
+}
+.as__block:hover {
+  background: rgba(0, 0, 0, 0.35);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.45);
+  transform: translateY(-4px);
+  transition: all 0.3s ease;
+}
+
+.as__about {
+  width: 70vw;
+  margin: 5% auto 3%;
+}
+/* #about {
+  background: rgba(0, 0, 0, 0.35);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.45);
+  transform: translateY(-4px);
+  transition: all 0.3s ease;
+} */
+
+.as__heading {
+  font-family: "Inknut Antiqua", Georgia, "Times New Roman", serif;
+  font-weight: 800;
+  font-size: 28px;
+  margin: 0 0 10px;
+  text-shadow: 0 2px 2px rgba(0, 0, 0, 0.25);
+}
+
+.as__subhead {
+  font-family: "Inknut Antiqua", Georgia, "Times New Roman", serif;
+  font-weight: 700;
+  font-size: 18px;
+  margin: 0 0 8px;
+  letter-spacing: 1px;
+}
+
+.as__para {
+  margin: 0;
+  line-height: 1.55;
+  font-size: 15.5px;
+}
+
+.as__vm {
+  width: 70vw;
+  margin: 0 auto 5%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.as__rule {
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+  margin: 20px auto;
+  max-width: 980px;
+}
+
+.as__center {
+  text-align: center;
+}
+
+/* Services grid */
+.as__grid {
+  list-style: none;
+  padding: 0;
+  margin: 18px auto 0;
+  max-width: 1100px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px 22px;
+}
+
+.as__card {
+  text-align: center;
+  padding: 8px 10px 14px;
+}
+
+/* Real icon (when provided) */
+.as__icon {
+  width: 90%;
+  height: 90%;
+  object-fit: contain;
+}
+
+/* Fallback circle when no image yet */
+.as__circleFallback {
+  width: 60%;
+  height: 60%;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.12);
+}
+
+.as__title {
+  margin: 10px 0 6px;
+  font-weight: 700;
+  font-size: 17px;
+}
+
+.as__desc {
+  margin: 0 auto;
+  max-width: 320px;
+  font-size: 14.5px;
+  line-height: 1.5;
+  color: #f0f3f8;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
+}
+
+/* Responsive */
+@media (max-width: 980px) {
+  .as__vm {
+    grid-template-columns: 1fr;
+  }
+  .as__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 640px) {
+  .as__grid {
+    grid-template-columns: 1fr;
+  }
+}
+/* Make each card center a single circular "bubble" that contains EVERYTHING */
+.as__card {
+  display: grid;
+  place-items: center;
+  padding: 0;
+}
+
+/* The circle that holds icon + title + text */
+.as__bubble {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: #0e0e15;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.45);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  text-align: center;
+  padding: 18px 16px;
+  color: #fff;
+}
+.as__bubble:hover {
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.55);
+  transform: translateY(-4px);
+  transition: all 0.3s ease;
+}
+.as__bubble:focus-within {
+  outline: 3px solid #6ee7ff;
+  outline-offset: 4px;
+}
+.as__bubble:active {
+  transform: translateY(0);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.45);
+  transition: all 0.1s ease;
+}
+.as__bubble img {
+  width: 65%;
+  height: 45%;
+}
+
+/* Icon inside the circle */
+.as__icon {
+  width: 48%;
+  height: auto;
+  object-fit: contain;
+  flex: 0 0 auto;
+}
+
+/* Fallback shape when no icon yet */
+.as__circleFallback {
+  width: 48%;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.12);
+}
+
+/* Title + description now live inside the circle */
+.as__title {
+  margin: 4px 0 0;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.2;
+}
+
+.as__desc {
+  margin: 2px 0 0;
+  font-size: 12.5px;
+  line-height: 1.35;
+  color: #e9eef7;
+}
+.as__icon {
+  width: 50%;
+  height: 50%;
+}
+.as__icon img {
+  width: 100%;
+  height: 50px;
+}
+/* Responsive sizing so text still fits in the circle */
+@media (max-width: 1100px) {
+  .as__bubble {
+    width: 260px;
+    height: 260px;
+    padding: 14px;
+  }
+  .as__icon {
+    width: 50%;
+    height: 50%;
+  }
+  .as__title {
+    font-size: 15px;
+  }
+  .as__desc {
+    font-size: 12px;
+  }
+}
+@media (max-width: 640px) {
+  .as__bubble {
+    width: 240px;
+    height: 240px;
+  }
+}
+
+/* (Optional) If any descriptions are too long, clamp to 4 lines: */
+.as__desc {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.brands__rule {
+  border: none;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.75);
+  margin: 50px 50px 50px 50px;
+  width: 90%;
+}

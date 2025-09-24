@@ -1,0 +1,233 @@
+.team {
+  color: #fff;
+  padding: 24px 16px;
+}
+body.rtl .team__heading,
+body.rtl .team__name,
+body.rtl .team__role,
+body.rtl .team__bio {
+  text-align: right;
+}
+.team__email,
+.team__phone {
+  unicode-bidi: plaintext;
+}
+
+.team__email,
+.team__phone {
+  unicode-bidi: plaintext;
+}
+.team__wrap {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px 16px 48px;
+}
+
+.team__rule {
+  border: none;
+  border-top: 2px solid rgba(255, 255, 255, 0.35);
+  margin: 6px 0 14px;
+}
+.team__heading {
+  text-align: center;
+  margin: 0 0 18px;
+  font-family: "Inknut Antiqua", Georgia, "Times New Roman", serif;
+  font-weight: 800;
+  font-size: 32px;
+  text-shadow: 0 2px 2px rgba(0, 0, 0, 0.25);
+}
+
+/* Grid: featured card full-width, others in two columns (collapse on mobile) */
+.team__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(280px, 1fr)); /* exactly two */
+  gap: 18px 69px; /* tweak spacing if you like */
+  margin-bottom: 5%;
+}
+.team__card--featured {
+  grid-column: 1 / -1;
+}
+
+/* Card */
+.team__card {
+  background: #0e0e15;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 12px;
+  box-shadow: 0 18px 36px rgba(0, 0, 0, 0.35);
+  padding: 14px;
+  height: 25vh;
+  width: 30vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.team__card:hover {
+  box-shadow: 0 22px 44px rgba(0, 0, 0, 0.45);
+  transform: translateY(-4px);
+  transition: all 0.3s ease;
+}
+.team__card:focus-within {
+  outline: 3px solid #6ee7ff;
+  outline-offset: 4px;
+}
+.team__card:active {
+  transform: translateY(0);
+  box-shadow: 0 18px 36px rgba(0, 0, 0, 0.35);
+  transition: all 0.1s ease;
+}
+.team__cardHead {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.team__head {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0.02)
+  );
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+  padding: 10px 12px;
+  margin-bottom: 10px;
+}
+.team__name {
+  margin: 0;
+  font-weight: 800;
+  font-size: 18px;
+}
+.team__role {
+  margin: 2px 0 0;
+  color: #c8d5ff;
+  font-size: 13.5px;
+}
+
+.team__bio {
+  margin: 0 0 10px;
+  color: #e9eef7;
+  line-height: 1.55;
+  font-size: 14.5px;
+}
+
+/* Contact pills */
+.team__contact {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.team__pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.28);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #eaf2ff;
+  text-decoration: none;
+  font-size: 13.5px;
+}
+.team__pill:hover {
+  background: rgba(0, 0, 0, 0.4);
+}
+.team__pill:focus-visible {
+  outline: 3px solid #6ee7ff;
+  outline-offset: 2px;
+}
+
+@media (max-width: 860px) {
+  .team__grid {
+    grid-template-columns: 1fr;
+  }
+}
+/* === Who is Who: centered 2-column layout with tidy spacing === */
+.team {
+  padding: 36px 16px;
+}
+
+.team__wrap {
+  max-width: 1160px; /* keeps the row from stretching too wide */
+  margin: 0 auto;
+}
+
+/* Two cards per row, centered as a block */
+.team__grid {
+  display: grid;
+  grid-template-columns: repeat(
+    2,
+    minmax(320px, 520px)
+  ); /* fixed-looking card width */
+  justify-content: center; /* center the two columns in the container */
+  gap: 28px 69px; /* row / column gaps */
+}
+
+/* Make each card consistent and centered in its cell */
+.team__card {
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+  border-radius: 14px;
+  padding: 18px 20px;
+  /* background: rgba(255, 255, 255, 0.06); keep your look; adjust if needed */
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+}
+
+/* Tighter internal spacing */
+.team__cardHead {
+  margin-bottom: 8px;
+}
+.team__name {
+  margin: 0 0 4px;
+}
+.team__role {
+  margin: 0;
+  opacity: 0.9;
+}
+.team__bio {
+  margin: 8px 0 12px;
+  line-height: 1.55;
+}
+.team__contact {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 6px;
+}
+
+/* RTL niceties */
+body.rtl .team__heading,
+body.rtl .team__name,
+body.rtl .team__role,
+body.rtl .team__bio {
+  text-align: right;
+}
+.team__email,
+.team__phone {
+  unicode-bidi: plaintext;
+}
+
+/* One card per row on smaller screens */
+@media (max-width: 860px) {
+  .team__grid {
+    grid-template-columns: minmax(280px, 520px);
+    gap: 22px;
+  }
+}
+/* --- Featured first card: single row centered --- */
+.team__grid > .team__card:first-child {
+  grid-column: 1 / -1; /* span both columns */
+  justify-self: center; /* center within the spanned area */
+  width: 100%;
+  max-width: 520px; /* same card width you use in the grid */
+}
+
+/* Keep two columns for the rest (already defined by your grid) */
+
+/* On small screens it's one column anyway */
+@media (max-width: 860px) {
+  .team__grid > .team__card:first-child {
+    grid-column: 1;
+  }
+}

@@ -1,0 +1,42 @@
+:root {
+  /* Brand gradient tokens — tweak once here */
+  --bg-start: #087ccf;
+  --bg-end: #1b1a78;
+  --text: #ffffff;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  color: var(--text);
+  /* ← The only background in the whole site */
+  background: linear-gradient(90deg, var(--bg-start) 0%, var(--bg-end) 100%);
+  background-attachment: fixed; /* subtle stability; remove if mobile perf is an issue */
+}
+
+/* Page wrapper (optional, just semantic) */
+.page {
+  min-height: 100%;
+  position: relative;
+}
+
+/* Unified section look: transparent + consistent spacing/max-width */
+.site-section {
+  background: transparent !important; /* nukes local backgrounds */
+}
+
+/* .site-container {
+  max-width: 1280px;
+  margin: 0 auto;
+} */
+
+/* If any section used a white/solid bg on inner cards, keep those; only section shells go transparent */
