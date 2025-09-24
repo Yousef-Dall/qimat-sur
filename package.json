@@ -6,7 +6,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "dependencies": {
     "nodemailer": "^6.9.10",
@@ -22,6 +24,8 @@
   ],
   "devDependencies": {
     "gh": "^2.8.9",
+    "gh-pages": "^6.3.0",
     "pages": "^0.0.16"
-  }
+  },
+  "homepage": "https://yousef-dall.github.io/qimat-sur"
 }
