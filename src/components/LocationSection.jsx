@@ -2,7 +2,7 @@ import React from "react";
 import "./LocationSection.css";
 import { useI18n } from "../i18n/I18nProvider";
 
-// Optional map preview image (leave commented if you don't use it)
+
 import mapImg from "../assets/qsmt-map.png";
 
 const PinIcon = (props) => (
@@ -14,25 +14,25 @@ const PinIcon = (props) => (
 export default function LocationSection() {
   const { t, lang } = useI18n();
 
-  // Replace with your exact Google Maps link
+  
   const mapsUrl = "https://www.google.com/maps?q=QSMT,+Sur,+Oman";
 
-  // Address text (you can move these to strings.js if you prefer)
+  
   const addressEn = "QSMT Workshop, Sur Industrial Area, Ash Sharqiyah South, Oman";
   const addressAr = "ورشة قمة صور، المنطقة الصناعية بولاية صور، جنوب الشرقية، عُمان";
   const address = lang === "ar" ? addressAr : addressEn;
 
   return (
     
-    <section className={`location ${lang === "ar" ? "location--rtl" : ""}`}>
+    <section   className={`location ${lang === "ar" ? "location--rtl" : ""}`}>
       <div className="site-container location__wrap">
-        {/* Title (bilingual) */}
+        
         <hr className="tca__rule" />
-        <h2 className="location__title">
+        <h2 id="location" className="location__title">
           {t("location.title", lang === "ar" ? "الموقع" : "Location")}
         </h2>
 
-        {/* Optional map image preview */}
+      
         <a
           href={mapsUrl}
           target="_blank"
@@ -48,7 +48,7 @@ export default function LocationSection() {
         </a>
        
 
-        {/* Address line with pin icon (clickable) */}
+        
         
       </div>
     </section>

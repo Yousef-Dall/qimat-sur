@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import "./StickyHeader.css";
+import "./Header.css";
 import logo from "../assets/logo.png";
 import { useI18n } from "../i18n/I18nProvider";
 

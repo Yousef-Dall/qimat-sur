@@ -1,5 +1,5 @@
 .location {
-  background: transparent; /* global gradient shows through */
+  background: transparent;
   color: inherit;
   padding: 5%;
 }
@@ -9,8 +9,6 @@
   gap: 14px;
   align-items: start;
 }
-
-/* Title */
 .location__title {
   margin: auto;
   font-weight: 800;
@@ -18,7 +16,6 @@
   letter-spacing: 0.2px;
 }
 
-/* Optional map image link */
 .location__map {
   display: block;
   border-radius: 14px;
@@ -34,7 +31,6 @@
   object-fit: cover;
 }
 
-/* Address line with pin icon */
 .location__address {
   display: inline-flex;
   align-items: center;
@@ -64,7 +60,6 @@
   line-height: 1.2;
 }
 
-/* RTL tweaks */
 .location--rtl .location__title {
   text-align: right;
 }

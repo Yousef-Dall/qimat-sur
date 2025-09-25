@@ -2,7 +2,7 @@ import React from "react";
 import "./AboutServices.css";
 import { useI18n } from "../i18n/I18nProvider";
 
-// ⬇️ your existing service icons (same ones you used before)
+
 import svcRepair      from "../assets/repair.png";
 import svcInspection  from "../assets/inspection.png";
 import svcCooling     from "../assets/cooling.png";
@@ -13,7 +13,7 @@ import svcEmergency   from "../assets/emergency.png";
 import svcManufacture from "../assets/manufacture.png";
 import svcContracts   from "../assets/contracts.png";
 
-// Stable mapping: id → image file
+
 const SERVICE_IMG = {
   repair:      svcRepair,
   inspection:  svcInspection,
@@ -28,13 +28,13 @@ const SERVICE_IMG = {
 
 export default function AboutServices() {
   const { t } = useI18n();
-  const services = t("about.services"); // now includes id/title/desc
+  const services = t("about.services"); 
 
   return (
     <section className="aboutServices" id="about">
               <hr class="brands__rule"></hr>
 
-      {/* About + Vision/Mission */}
+      {/* about */}
       <div className="as__block as__about" id="about">
         <h2 className="as__heading">{t("about.heading")}</h2>
         <p className="as__para">{t("about.body")}</p>
@@ -54,12 +54,12 @@ export default function AboutServices() {
              <hr class="brands__rule"></hr>
 
 
-      {/* Services */}
+      {/* services*/}
       <h2 className="as__heading as__center" id="services">{t("about.services_h")}</h2>
 
       <ul className="as__grid">
         {services.map((s) => {
-          const img = SERVICE_IMG[s.id]; // pick image by id
+          const img = SERVICE_IMG[s.id];
           return (
             <li className="as__card" key={s.id}>
               <div className="as__bubble">

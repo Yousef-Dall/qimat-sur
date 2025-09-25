@@ -1,46 +1,61 @@
 import React from "react";
 import "./SpecialisedBrands.css";
 import { useI18n } from "../i18n/I18nProvider";
-
-// logo files (adjust extensions if yours differ)
 import volvo     from "../assets/volvo.png";
 import scania    from "../assets/scania.png";
 import fuso      from "../assets/fuso.png";
 import isuzu     from "../assets/isuzu.png";
 import mercedes  from "../assets/mercedes.png";
 import man       from "../assets/man.png";
+import hyundai   from "../assets/hyundai.png";
+import JAC      from "../assets/JAC.png";
+import Daihatsu from "../assets/daihatsu.png";
 
-const IMG = { volvo, scania, fuso, isuzu, mercedes, man };
+const IMG = { volvo, scania, fuso, isuzu, mercedes, man, hyundai, JAC, Daihatsu };
 
-export default function SpecialisedBrands() {
-  const { t } = useI18n();
-  const heading = t("specialised.heading", "");
-  const items = t("specialised.items", []);
+export default function BrandsWeSpecialise() {
+  const { t, lang } = useI18n();
+  const isAr = lang === "ar";
+
+  const title = t(
+    "brands.title",
+    isAr ? "نحن متخصصون في" : "We Are Specialised In"
+  );
+
+
+  const BRANDS = [
+    { id: "volvo",     img: volvo,     alt: "Volvo"},
+    { id: "scania",    img: scania,    alt: "Scania"},
+    { id: "fuso",      img: fuso,      alt: "FUSO Canter"},
+    { id: "isuzu",     img: isuzu,     alt: "ISUZU"},
+    { id: "mercedes",  img: mercedes,  alt: "Mercedes-Benz"},
+    { id: "man",       img: man,       alt: "MAN"},
+    { id: "daihatsu",  img: Daihatsu,  alt: "Daihatsu"},
+    { id: "hyundai",   img: hyundai,   alt: "Hyundai"},
+    { id: "jac",       img: JAC,       alt: "JAC"},
+  ];
 
   return (
-    <section className="brands" aria-labelledby="brands-heading">
-      <div className="brands__wrap">
-        <hr className="brands__rule" />
-        {heading && (
-          <h2 id="brands-heading" className="brands__heading">{heading}</h2>
-        )}
+    <section className={`brands ${isAr ? "brands--rtl" : ""}`}>
+      <div className="site-container">
+        <h2 className="brands__title">{title}</h2>
 
-        <ul className="brands__grid">
-          {Array.isArray(items) && items.map((b) => (
-            <li key={b.id} className="brands__cell">
-              {IMG[b.id] ? (
+        <div className="brands__grid">
+          {BRANDS.map((b) => (
+            <div className="brands__item" key={b.id}>
+              {b.img ? (
                 <img
                   className="brands__logo"
-                  src={IMG[b.id]}
-                  alt={b.alt || ""}
+                  src={b.img}
+                  alt={b.alt}
                   loading="lazy"
                 />
               ) : (
-                <div className="brands__ph" aria-hidden="true" />
+                <span className="brands__text">{isAr ? b.ar : b.en}</span>
               )}
-            </li>
+            </div>
           ))}
-        </ul>
+        </div>
       </div>
     </section>
   );
