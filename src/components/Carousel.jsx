@@ -11,7 +11,7 @@ export default function GalleryCarousel({
   titleAr = "المعرض",
   titleAlign = "center",
 }) {
-  const { lang } = useI18n();                       // ← read current language
+  const { lang } = useI18n();                  
   const currentLang = lang ?? (document?.dir === "rtl" ? "ar" : "en");
   const titleText = currentLang === "ar" ? titleAr : titleEn;
 

@@ -149,10 +149,9 @@
   }
 }
 
-/* Canvas */
 .hero {
   position: relative;
-  background: transparent; /* global gradient shows through */
+  background: transparent;
   color: #fff;
   min-height: clamp(520px, 62vh, 720px);
   overflow: hidden;
@@ -171,7 +170,6 @@
   z-index: 1;
 }
 
-/* Badge (white circle) */
 .hero__badge {
   position: absolute;
   left: clamp(18px, 3.6vw, 48px);
@@ -214,11 +212,10 @@
   object-fit: contain;
 }
 
-/* Brand lockup (bottom-left) */
 .hero__brandLockup {
   position: absolute;
   left: clamp(22px, 3.6vw, 52px);
-  /* bottom: clamp(78px, 14vh, 120px); */
+
   bottom: 7vh;
   margin: 0;
   z-index: 3;
@@ -242,7 +239,6 @@
   margin-left: 2%;
 }
 
-/* Tagline (bottom-right) */
 .hero__tagline {
   position: absolute;
   right: clamp(20px, 3.6vw, 44px);
@@ -254,7 +250,6 @@
   text-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
 }
 
-/* ===== RTL mirror ===== */
 .hero--rtl .hero__badge {
   left: auto;
   right: clamp(18px, 3.6vw, 48px);
@@ -272,10 +267,9 @@
 .hero--rtl .hero__trucks {
   right: auto;
   left: 0;
-  transform: scaleX(-1); /* mirror the convoy */
+  transform: scaleX(-1);
 }
 
-/* Mobile */
 @media (max-width: 900px) {
   .hero {
     min-height: 680px;
@@ -290,7 +284,7 @@
   .hero--rtl .hero__badge {
     left: 50%;
     right: auto;
-    transform: translateX(-50%); /* keep centered on small screens */
+    transform: translateX(-50%);
   }
   .hero__brandLockup {
     left: 50%;
