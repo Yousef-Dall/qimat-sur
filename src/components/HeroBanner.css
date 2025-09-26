@@ -7,9 +7,6 @@
   overflow: hidden;
   height: 85vh;
 }
-.hero__inner {
-  /* (not used now but kept for future) */
-}
 
 .hero__rule {
   position: absolute;
