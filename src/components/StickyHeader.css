@@ -203,3 +203,12 @@
     min-width: auto;
   }
 }
+@media (max-width: 480px) {
+  .qsmtHeader__nav {
+    overflow-x: auto;
+    padding-bottom: 4px;
+  }
+  .qsmtHeader__nav::-webkit-scrollbar {
+    display: none;
+  }
+}
