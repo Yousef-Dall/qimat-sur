@@ -3,7 +3,7 @@ import "./SiteFooter.css";
 import logo from "../assets/logo.png";
 import { useI18n } from "../i18n/I18nProvider";
 
-/* Clean SVG icons */
+
 const WhatsAppIcon = (p) => (
   <svg viewBox="0 0 256 256" width="20" height="20" {...p}>
     <path fill="currentColor" d="M128 24a104 104 0 0 0-89.53 156.78L24 232l51.76-14.15A104 104 0 1 0 128 24Zm0 192a88 88 0 0 1-44.86-12.35l-6.4-3.82-30 8.2 8.32-28.77-4.13-6.78A88 88 0 1 1 128 216Zm45.13-57.62c-2.48-1.24-14.7-7.21-17-8s-3.93-1.24-5.6 1.24-6.41 8-7.86 9.74-2.9 1.86-5.38.62a72.38 72.38 0 0 1-21.27-13.14 79.67 79.67 0 0 1-14.76-18.29c-1.53-2.62-.16-4 1.08-5.22s2.48-3.1 3.72-4.65a17.54 17.54 0 0 0 2.48-4.14 4.88 4.88 0 0 0-.23-4.65c-.62-1.24-5.6-13.46-7.66-18.49s-4.13-4.26-5.6-4.26-3.1-.16-4.78-.16a9.19 9.19 0 0 0-6.71 3.1c-2.3 2.48-8.8 8.58-8.8 20.94s9 24.31 10.18 26a114.37 114.37 0 0 0 30.3 31.2c21.08 14.38 25.33 11.4 29.9 10.78s14.7-5.67 16.78-11.18a20.24 20.24 0 0 0 1.39-11.18c-.46-1.16-2.07-1.86-4.55-3.1Z"/>
@@ -33,25 +33,25 @@ const PhoneIcon = (p) => (
 export default function SiteFooter() {
   const { t, lang } = useI18n();
 
-  // Contacts
-  const whatsapp  = "96892405017";
+
+  const whatsapp  = "96893689729";
   const instagram = { handle: "qsmt_oman", url: "https://instagram.com/qsmt_oman" };
   const twitter   = { handle: "qsmt_oman", url: "https://twitter.com/qsmt_oman" };
   const facebook  = { name: "Qimat Sur Modern Trading", url: "https://facebook.com/" };
-  const phones    = ["+968 92405017", "+968 79178056", "+968 93689729"];
+  const phones    = ["+968 92405017", "+968 91394776", "+968 93689729"];
 
-  // Language-aware WhatsApp prefill
+  
   const waText = t(
     "footer.whatsapp_prefill",
     lang === "ar" ? "مرحبًا QSMT، أود الحجز/الاستفسار." : "Hello QSMT, I’d like to book / ask a question."
   );
   const waHref = `https://wa.me/${whatsapp}?text=${encodeURIComponent(waText)}`;
 
-  // Force re-mount when lang changes so it always re-renders
+  
   return (
     <footer className="footer" key={lang} data-lang={lang}>
       <div className="footer__wrap">
-        {/* LEFT: logo + Contact (translated) */}
+      
         <div className="footer__left">
           <img src={logo} alt="QSMT" className="footer__logo" />
           <div className="footer__title">
@@ -59,7 +59,7 @@ export default function SiteFooter() {
           </div>
         </div>
 
-        {/* CENTER: icons; phone is three stacked icons (one per number) */}
+    
         <nav className="footer__center" aria-label={t("footer.social_aria", "Social links")}>
           <div className="footer__stack" aria-label={t("footer.phones_aria", "Phone numbers")}>
             {phones.map((p) => (
@@ -92,7 +92,7 @@ export default function SiteFooter() {
           </a>
         </nav>
 
-        {/* RIGHT: CTA (translated) */}
+       
         <div className="footer__right">
           <a className="footer__button" href={waHref} target="_blank" rel="noopener noreferrer">
             {t("footer.book_now", lang === "ar" ? "احجز الآن" : "Book Now")}

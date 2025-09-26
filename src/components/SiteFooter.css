@@ -1,24 +1,18 @@
-/* ===========================
-   QSMT Footer – Full Styles
-   =========================== */
-
 .footer {
   background: #151618;
   color: #fff;
 }
 
-/* 3-column layout: left | center | right */
 .footer__wrap {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 24px 16px; /* extra height */
+  padding: 24px 16px;
   display: grid;
   grid-template-columns: auto 1fr auto;
   align-items: center;
   gap: 20px;
 }
 
-/* LEFT cluster: logo + "Contact US" */
 .footer__left {
   display: flex;
   align-items: center;
@@ -26,7 +20,7 @@
   min-width: 0;
 }
 .footer__logo {
-  width: 130px; /* bigger logo */
+  width: 130px;
   height: 130px;
   object-fit: contain;
 }
@@ -36,7 +30,6 @@
   font-size: 20px;
 }
 
-/* RIGHT cluster: CTA */
 .footer__right {
   justify-self: end;
 }
@@ -56,36 +49,33 @@
   filter: brightness(1.05);
 }
 
-/* CENTER cluster: icons + inline labels */
 .footer__center {
   display: flex;
   align-items: center;
-  justify-content: space-evenly; /* evenly spaced blocks */
+  justify-content: space-evenly;
   gap: 24px;
   position: relative;
   overflow: visible;
 }
 
-/* Phone stack: three phone icons stacked vertically */
 .footer__stack {
   display: flex;
   flex-direction: column;
-  align-items: center; /* keep the three phones centered as a column */
+  align-items: center;
   gap: 10px;
 }
 
-/* Icon button */
 .footer__iconLink {
   position: relative;
   display: inline-flex;
   align-items: center;
-  gap: 12px; /* icon <-> label */
+  gap: 12px;
   color: #fff;
   text-decoration: none;
   padding: 8px 10px;
   border-radius: 12px;
-  height: 2vh; /* taller target */
-  min-width: 52px; /* keeps width stable before label shows */
+  height: 2vh;
+  min-width: 52px;
 }
 .footer__iconLink:hover,
 .footer__iconLink:focus-visible {
@@ -94,12 +84,11 @@
   height: 5vh;
 }
 .footer__icon {
-  width: 26px; /* bigger icons */
+  width: 26px;
   height: 26px;
   opacity: 0.96;
 }
 
-/* Inline label (text NEXT TO icon) */
 .footer__label {
   display: inline-block;
   max-width: 0;
@@ -119,12 +108,10 @@
   transform: translateX(0);
 }
 
-/* ===== Kill any legacy bubble tooltip styles app-wide (safety) ===== */
 .footer__tooltip {
   display: none !important;
 }
 
-/* Responsive stacking */
 @media (max-width: 900px) {
   .footer__wrap {
     grid-template-columns: 1fr;
@@ -144,7 +131,6 @@
   }
 }
 
-/* Touch devices: show inline labels by default for usability */
 @media (hover: none) and (pointer: coarse) {
   .footer__label {
     max-width: 1000px;

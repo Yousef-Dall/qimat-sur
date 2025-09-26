@@ -2,7 +2,7 @@ import React from "react";
 import "./TechCapacityApproach.css";
 import { useI18n } from "../i18n/I18nProvider";
 
-// IMAGES (keep these paths the same as your project; adjust if needed)
+
 import imgTeam    from "../assets/team.jpg";
 import imgOffroad from "../assets/emergency.png";
 import imgTools   from "../assets/tools.jpg";
@@ -11,7 +11,7 @@ import icoService from "../assets/service.png";
 import icoMarket  from "../assets/market.png";
 import icoAdapt   from "../assets/adapt.png";
 
-// Stable mappings: id -> image
+
 const CAPACITY_IMG = {
   team: imgTeam,
   offroad: imgOffroad,
@@ -23,7 +23,7 @@ const APPROACH_ICON = {
   adapt: icoAdapt,
 };
 
-// Ensure we always render safely even if a key is missing
+
 const asArray = (x, fallback = []) => (Array.isArray(x) ? x : fallback);
 
 export default function TechCapacityApproach() {

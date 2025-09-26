@@ -1,14 +1,12 @@
-/* Full-viewport hero with background image */
 .contactHero {
   position: relative;
-  min-height: 100vh; /* full page height */
-  /* width: 100vw; */
+  min-height: 100vh;
+
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
 
-/* Scrim to keep the form readable on any photo */
 .contactHero__scrim {
   position: absolute;
   inset: 0;
@@ -19,20 +17,18 @@
   );
 }
 
-/* Centers content and pushes card to the right (like your screenshot) */
 .contactHero__content {
   position: relative;
   z-index: 1;
-  /* max-width: 1200px; */
+
   margin: 0 auto;
   height: 100vh;
   padding: clamp(16px, 3vw, 32px);
   display: flex;
   align-items: center;
-  justify-content: flex-end; /* right side on desktop */
+  justify-content: flex-end;
 }
 
-/* The white form card */
 .contactHero__card {
   width: min(560px, 92%);
   background: #ffffff;
@@ -41,7 +37,6 @@
   box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
 }
 
-/* Typography + form controls (same look you had) */
 .contact__title {
   margin: 2px 0 14px;
   font-weight: 800;
@@ -98,7 +93,6 @@
   color: #065f46;
 }
 
-/* Mobile: center the card */
 @media (max-width: 900px) {
   .contactHero__content {
     justify-content: center;

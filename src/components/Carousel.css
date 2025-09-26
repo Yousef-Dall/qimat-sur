@@ -1,7 +1,4 @@
-/* One-file Carousel – external styles */
-
 .gc {
-  /* defaults; component will override with CSS vars */
   --gc-aspect: 16/9;
   --gc-title-align: center;
 
@@ -13,7 +10,6 @@
   color: inherit;
 }
 
-/* Keep slide math stable even on RTL pages */
 .gc,
 .gc-viewport,
 .gc-track {
@@ -35,14 +31,13 @@
   background: rgba(255, 255, 255, 0.06);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
 
-  /* Your requested sizes */
-  width: 70vw;
+  width: 60vw;
+  height: 88vh;
   max-width: 100%;
   margin: 0 auto;
   outline: none;
 }
 
-/* Aspect ratio box */
 .gc-viewport::before {
   content: "";
   display: block;
@@ -84,15 +79,13 @@
   border-radius: 10px;
   font-weight: 600;
   font-size: 14px;
-  text-align: left; /* default */
+  text-align: left;
 }
 
-/* Flip caption alignment in Arabic */
 .gc.gc--ar .gc-caption {
   text-align: right;
 }
 
-/* Dots */
 .gc-dots {
   display: flex;
   gap: 8px;
@@ -113,7 +106,6 @@
   width: 22px;
 }
 
-/* Arrows */
 .gc-nav {
   position: absolute;
   top: 50%;

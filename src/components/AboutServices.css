@@ -1,4 +1,3 @@
-/* Section background matches your blue→indigo gradient */
 .aboutServices {
   color: #fff;
   padding: 28px 16px 48px;
@@ -21,12 +20,6 @@
   width: 70vw;
   margin: 5% auto 3%;
 }
-/* #about {
-  background: rgba(0, 0, 0, 0.35);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.45);
-  transform: translateY(-4px);
-  transition: all 0.3s ease;
-} */
 
 .as__heading {
   font-family: "Inknut Antiqua", Georgia, "Times New Roman", serif;
@@ -69,7 +62,6 @@
   text-align: center;
 }
 
-/* Services grid */
 .as__grid {
   list-style: none;
   padding: 0;
@@ -85,14 +77,12 @@
   padding: 8px 10px 14px;
 }
 
-/* Real icon (when provided) */
 .as__icon {
   width: 90%;
   height: 90%;
   object-fit: contain;
 }
 
-/* Fallback circle when no image yet */
 .as__circleFallback {
   width: 60%;
   height: 60%;
@@ -110,13 +100,12 @@
 .as__desc {
   margin: 0 auto;
   max-width: 320px;
-  font-size: 30px;
+  font-size: 14.5px;
   line-height: 1.5;
   color: #f0f3f8;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
 }
 
-/* Responsive */
 @media (max-width: 980px) {
   .as__vm {
     grid-template-columns: 1fr;
@@ -130,14 +119,13 @@
     grid-template-columns: 1fr;
   }
 }
-/* Make each card center a single circular "bubble" that contains EVERYTHING */
+
 .as__card {
   display: grid;
   place-items: center;
   padding: 0;
 }
 
-/* The circle that holds icon + title + text */
 .as__bubble {
   width: 300px;
   height: 300px;
@@ -172,7 +160,6 @@
   height: 45%;
 }
 
-/* Icon inside the circle */
 .as__icon {
   width: 48%;
   height: auto;
@@ -180,7 +167,6 @@
   flex: 0 0 auto;
 }
 
-/* Fallback shape when no icon yet */
 .as__circleFallback {
   width: 48%;
   aspect-ratio: 1 / 1;
@@ -189,7 +175,6 @@
   box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.12);
 }
 
-/* Title + description now live inside the circle */
 .as__title {
   margin: 4px 0 0;
   font-weight: 700;
@@ -199,7 +184,7 @@
 
 .as__desc {
   margin: 2px 0 0;
-  font-size: 20px;
+  font-size: 12.5px;
   line-height: 1.35;
   color: #e9eef7;
 }
@@ -211,7 +196,7 @@
   width: 100%;
   height: 50px;
 }
-/* Responsive sizing so text still fits in the circle */
+
 @media (max-width: 1100px) {
   .as__bubble {
     width: 260px;
@@ -234,18 +219,12 @@
     width: 240px;
     height: 240px;
   }
-}
 
-/* (Optional) If any descriptions are too long, clamp to 4 lines: */
-.as__desc {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-.brands__rule {
-  border: none;
-  height: 3px;
-  background: rgba(255, 255, 255, 0.75);
-  margin: 50px 50px 50px 50px;
-  width: 90%;
+  .brands__rule {
+    border: none;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.75);
+    margin: 50px 50px 50px 50px;
+    width: 90%;
+  }
 }

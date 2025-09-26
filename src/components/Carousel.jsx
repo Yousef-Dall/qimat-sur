@@ -2,19 +2,10 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useI18n } from "../i18n/I18nProvider";
 import "./Carousel.css";
 
-/**
- * One-file Carousel with i18n title
- * Props:
- *  - images: [{ src, alt_en, alt_ar, caption_en?, caption_ar? }, ...]
- *  - intervalMs: number (default 3500)
- *  - aspect: CSS aspect-ratio string (default "16/9")
- *  - titleEn: string (default "Gallery")
- *  - titleAr: string (default "المعرض")
- *  - titleAlign: "center" | "start" | "end" (default "center")
- */
+
 export default function GalleryCarousel({
   images = [],
-  intervalMs = 3500,
+  intervalMs = 2500,
   aspect = "16/9",
   titleEn = "Gallery",
   titleAr = "المعرض",
@@ -28,10 +19,9 @@ export default function GalleryCarousel({
   const timer = useRef(null);
   const count = images.length;
 
-  // Reset index on language change (keeps dots/nav in sync if captions change width)
   useEffect(() => { setIndex(0); }, [currentLang]);
 
-  // Autoplay with pause-on-hover
+ 
   useEffect(() => {
     if (count <= 1) return;
     clearInterval(timer.current);
@@ -51,7 +41,7 @@ export default function GalleryCarousel({
     <div className="gc" key={currentLang} aria-roledescription="carousel">
       
 <hr className="tca__rule" />
-      <h2 className="gc-title">{titleText}</h2>
+      <h2 className="gc-title"  id="gallery">{titleText}</h2>
 
       <div
         className="gc-viewport"

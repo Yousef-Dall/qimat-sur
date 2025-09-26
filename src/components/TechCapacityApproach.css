@@ -25,7 +25,6 @@
   text-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
 }
 
-/* ------- CAPACITY (top row with photos) ------- */
 .tca__capacityGrid {
   list-style: none;
   padding: 0;
@@ -71,7 +70,6 @@
   text-align: center;
 }
 
-/* ------- APPROACH (bottom row with icons) ------- */
 .tca__approachGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -80,7 +78,7 @@
 }
 
 .tca__approachItem {
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(0, 0, 0, 0.6);
   border-radius: 16px;
   padding: 18px 16px;
   box-shadow: 0 10px 22px rgba(0, 0, 0, 0.25);
@@ -130,7 +128,6 @@
   text-align: center;
 }
 
-/* ------- Placeholders ------- */
 .tca__ph {
   background: rgba(255, 255, 255, 0.2);
 }
@@ -144,7 +141,6 @@
   border-radius: 50%;
 }
 
-/* ------- RTL niceties ------- */
 body.rtl .tca__heading,
 body.rtl .tca__capText,
 body.rtl .tca__approachTitle,
@@ -152,7 +148,6 @@ body.rtl .tca__approachText {
   text-align: right;
 }
 
-/* ------- Responsive ------- */
 @media (max-width: 980px) {
   .tca__capacityGrid {
     grid-template-columns: 1fr;
