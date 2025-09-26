@@ -1,64 +1,47 @@
 /* Canvas */
 .hero {
   position: relative;
+  background: transparent; /* global gradient shows through */
   color: #fff;
+  min-height: clamp(520px, 62vh, 720px);
   overflow: hidden;
-  height: 80vh;
+  height: 85vh;
 }
 .hero__inner {
-  position: relative;
-  max-width: 1280px;
-  margin: 0 auto;
-  min-height: 62vh;
-  height: clamp(520px, 62vh, 720px);
+  /* (not used now but kept for future) */
 }
 
-/* thin top rule */
 .hero__rule {
   position: absolute;
   top: 14px;
   left: 3%;
   right: 3%;
   height: 3px;
-  background: rgba(255, 255, 255, 255);
   border-radius: 2px;
+  background: rgba(255, 255, 255, 0.65);
   pointer-events: none;
-  width: 80vw;
-  margin: auto;
-  height: 3px;
+  z-index: 1;
 }
 
-/* White circular badge */
+/* Badge (white circle) */
 .hero__badge {
   position: absolute;
-  left: clamp(16px, 4vw, 48px);
-  top: clamp(22px, 6vh, 64px);
-  width: clamp(240px, 28vw, 360px);
+  left: clamp(18px, 3.6vw, 48px);
+  top: clamp(26px, 6vh, 72px);
+  width: clamp(200px, 24vw, 320px);
   aspect-ratio: 1 / 1;
+  z-index: 3;
 }
-
 .hero__badgeCircle {
   width: 100%;
   height: 100%;
   border-radius: 9999px;
-  background: #fff; /* <-- the white circle */
+  background: #fff;
   display: grid;
   place-items: center;
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
-  position: relative;
+  margin-left: 14%;
 }
-
-/* optional subtle edge ring for polish */
-.hero__badgeCircle::after {
-  content: "";
-  position: absolute;
-  inset: 10px;
-  border-radius: 9999px;
-  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.06);
-  pointer-events: none;
-}
-
-/* Your logo centered inside the circle */
 .hero__badgeLogo {
   width: 78%;
   max-width: 86%;
@@ -70,10 +53,12 @@
 .hero__trucks {
   position: absolute;
   right: 0;
-  bottom: 16vh;
-  width: min(56%, 760px);
-  pointer-events: none;
+  bottom: 20vh;
+  width: 58vw;
+  max-width: 860px;
+  z-index: 1;
   filter: drop-shadow(0 18px 24px rgba(0, 0, 0, 0.35));
+  pointer-events: none;
 }
 .hero__trucks img {
   width: 100%;
@@ -81,80 +66,112 @@
   object-fit: contain;
 }
 
-/* Brand lockup */
-.hero__title {
+/* Brand lockup (bottom-left) */
+.hero__brandLockup {
   position: absolute;
-  left: clamp(20px, 4vw, 48px);
-  bottom: -30px;
+  left: clamp(22px, 3.6vw, 52px);
+  /* bottom: clamp(78px, 14vh, 120px); */
+  bottom: 7vh;
   margin: 0;
-  line-height: 1.02;
+  z-index: 3;
+  max-width: min(520px, 42vw);
+  line-height: 1.04;
   text-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
 }
 .hero__brand {
   display: block;
   font-weight: 900;
-  font-size: 5vw;
+  font-size: 5.3vw;
   letter-spacing: 0.5px;
+  font-family: Georgia, "Times New Roman", serif;
 }
 .hero__sub {
   display: block;
-  font-weight: 800;
   margin-top: 8px;
-  font-size: 2.9vw;
+  font-weight: 800;
+  font-size: 3vw;
+  font-family: Georgia, "Times New Roman", serif;
+  margin-left: 2%;
 }
 
-/* Tagline bottom-right */
+/* Tagline (bottom-right) */
 .hero__tagline {
   position: absolute;
-  right: clamp(20px, 4vw, 44px);
-  bottom: clamp(32px, 6vh, 54px);
-  max-width: min(44ch, 44vw);
-  font-size: clamp(16px, 1.6vw, 20px);
+  right: clamp(20px, 3.6vw, 44px);
+  bottom: clamp(26px, 6vh, 48px);
+  z-index: 3;
+  max-width: min(48ch, 44vw);
+  font-size: clamp(15px, 1.6vw, 20px);
   line-height: 1.35;
   text-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
 }
 
-/* RTL flip */
-.hero--rtl .hero__title {
+/* ===== RTL mirror ===== */
+.hero--rtl .hero__badge {
   left: auto;
-  right: clamp(20px, 4vw, 48px);
+  right: clamp(18px, 3.6vw, 48px);
+}
+.hero--rtl .hero__brandLockup {
+  left: auto;
+  right: clamp(22px, 3.6vw, 52px);
   text-align: right;
 }
 .hero--rtl .hero__tagline {
   right: auto;
-  left: clamp(20px, 4vw, 44px);
+  left: clamp(20px, 3.6vw, 44px);
   text-align: right;
 }
 .hero--rtl .hero__trucks {
   right: auto;
   left: 0;
-  transform: scaleX(-1);
+  transform: scaleX(-1); /* mirror the convoy */
 }
 
-/* Mobile tweaks */
+/* Mobile */
 @media (max-width: 900px) {
-  .hero__badge {
-    top: clamp(18px, 4vh, 36px);
-    left: 50%;
-    transform: translateX(-50%);
-    width: clamp(200px, 38vw, 300px);
+  .hero {
+    min-height: 680px;
   }
-  .hero__title {
+  .hero__badge {
     left: 50%;
+    right: auto;
+    top: clamp(20px, 5vh, 40px);
     transform: translateX(-50%);
+    width: clamp(180px, 42vw, 280px);
+  }
+  .hero--rtl .hero__badge {
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%); /* keep centered on small screens */
+  }
+  .hero__brandLockup {
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+    bottom: clamp(160px, 22vh, 200px);
     text-align: center;
-    bottom: clamp(120px, 20vh, 160px);
+    max-width: 90vw;
+  }
+  .hero--rtl .hero__brandLockup {
+    text-align: center;
   }
   .hero__tagline {
     left: 50%;
     right: auto;
     transform: translateX(-50%);
+    bottom: clamp(24px, 6vh, 40px);
     text-align: center;
-    bottom: clamp(28px, 6vh, 48px);
     max-width: 90vw;
   }
   .hero__trucks {
-    width: min(86%, 860px);
-    opacity: 0.9;
+    width: 90vw;
+    right: 50%;
+    left: auto;
+    transform: translateX(50%);
+  }
+  .hero--rtl .hero__trucks {
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%) scaleX(-1);
   }
 }

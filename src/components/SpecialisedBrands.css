@@ -8,7 +8,13 @@
   margin: 0 auto;
   padding: 0 16px;
 }
-
+.brands__title {
+  text-align: center;
+  font-weight: 700;
+  font-size: clamp(20px, 2.2vw, 28px);
+  letter-spacing: 0.2px;
+  margin: 0 0 8px;
+}
 .brands__rule {
   border: none;
   height: 3px;
@@ -30,11 +36,11 @@
 /* grid of logos */
 .brands__grid {
   list-style: none;
-  padding: 0;
+  padding-left: 15vw;
   margin: 0;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 26px 32px;
+  gap: 10vh 10vw;
   align-items: center;
 }
 

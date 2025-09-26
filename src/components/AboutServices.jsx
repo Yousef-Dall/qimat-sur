@@ -68,7 +68,7 @@ export default function AboutServices() {
                 ) : (
                   <div className="as__circleFallback" aria-hidden="true" />
                 )}
-                <h4 className="as__title">{s.title}</h4>
+                {/* <h4 className="as__title">{s.title}</h4> */}
                 <p className="as__desc">{s.desc}</p>
               </div>
             </li>

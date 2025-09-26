@@ -2,44 +2,51 @@ import React from "react";
 import "./HeroBanner.css";
 import { useI18n } from "../i18n/I18nProvider";
 
-// ⬇️ update paths if yours differ
-import qsmtLogo from "../assets/logo.png";    // <-- rename "qsmt logo.png" to qsmt-logo.png
+// Update these paths to match your assets
+import qsmtLogo from "../assets/logo.png";
 import trucksPng from "../assets/trucks.png";
 
 export default function Hero() {
   const { t, lang } = useI18n();
+  const isAr = lang === "ar";
+
+  const brand = t("hero.brand", isAr ? "صور قمة شرمة" : "QIMAT SUR");
+  const sub   = t("hero.sub",   isAr ? "شركة مودرن للتجارة ش.م.م" : "Modern Trading LLC");
+  const tagline = t(
+    "hero.tagline",
+    isAr
+      ? "صيانة وإصلاح وخدمات موثوقة لجميع أحجام الشاحنات – للحفاظ على أسطولك في العمل"
+      : "Reliable maintenance, repairs, and service for trucks of all sizes – keeping your fleet running"
+  );
 
   return (
-    <section className={`hero ${lang === "ar" ? "hero--rtl" : ""}`} aria-label="QSMT Hero">
+    <section
+      className={`hero ${isAr ? "hero--rtl" : ""}`}
+      dir={isAr ? "rtl" : "ltr"}
+      aria-label="QSMT Hero"
+    >
       <div className="hero__rule" />
 
-      <div className="hero__inner">
-        {/* LEFT — White circular badge that holds your logo */}
-        <div className="hero__badge">
-          <div className="hero__badgeCircle">
-            <img src={qsmtLogo} alt="QSMT logo" className="hero__badgeLogo" />
-          </div>
+      {/* White circular badge */}
+      <div className="hero__badge">
+        <div className="hero__badgeCircle">
+          <img src={qsmtLogo} alt="QSMT logo" className="hero__badgeLogo" />
         </div>
-
-        {/* RIGHT — trucks */}
-        <div className="hero__trucks">
-          <img src={trucksPng} alt="" aria-hidden="true" />
-        </div>
-
-        {/* Bottom-left brand lockup */}
-        <h1 className="hero__title">
-          <span className="hero__brand">QIMAT SUR</span>
-          <span className="hero__sub">Modern Trading LLC</span>
-        </h1>
-
-        {/* Bottom-right tagline (bilingual) */}
-        <p className="hero__tagline">
-          {t(
-            "hero.tagline",
-            "Reliable maintenance, repairs, and service for trucks of all sizes – keeping your fleet running"
-          )}
-        </p>
       </div>
+
+      {/* Trucks */}
+      <div className="hero__trucks" aria-hidden="true">
+        <img src={trucksPng} alt="" />
+      </div>
+
+      {/* Brand lockup */}
+      <h1 className="hero__brandLockup">
+        <span className="hero__brand">{brand}</span>
+        <span className="hero__sub">{sub}</span>
+      </h1>
+
+      {/* Tagline */}
+      <p className="hero__tagline">{tagline}</p>
     </section>
   );
 }

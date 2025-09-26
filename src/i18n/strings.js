@@ -178,7 +178,7 @@ export const STRINGS = {
         },
         {
           id: "sakher",
-          name: "Sakher. Mubarak Al Dawoodi",
+          name: "Sakher Al Dawoodi",
           role: "Shareholder and Marketing & PR Manager",
           bio: "Omani graduate in business management with strong knowledge of Omani laws and procedures and a network of contacts across the market.",
           email: "m.aldawoodi@qsmtoman.com",
