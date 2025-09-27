@@ -1,9 +1,10 @@
-
+// src/components/TeamWhoIsWho.jsx
 import React from "react";
 import "./TeamWhoIsWho.css";
 import { useI18n } from "../i18n/I18nProvider";
+import { STRINGS } from "../i18n/strings"; // ⬅️ use your dictionary
 
-
+/* helpers */
 const normalizeTelHref = (raw) => {
   if (!raw) return "";
   let s = String(raw).trim().replace(/\s+/g, "").replace(/-/g, "");
@@ -11,17 +12,14 @@ const normalizeTelHref = (raw) => {
   if (!s.startsWith("+")) s = "+" + s;
   return s;
 };
+// supports either a plain string or an object like { en, ar }
 const tr = (val, lang) => {
   if (!val) return "";
   if (typeof val === "string") return val;
-
-  if (val[lang]) return val[lang];
-  if (lang === "ar" && val.ar) return val.ar;
-  if (lang === "en" && val.en) return val.en;
-  return Object.values(val)[0] || "";
+  return val[lang] ?? val.en ?? val.ar ?? Object.values(val)[0] ?? "";
 };
 
-
+/* tiny inline icons */
 const MailIcon = (p) => (
   <svg viewBox="0 0 256 256" width="16" height="16" aria-hidden="true" {...p}>
     <path fill="currentColor" d="M224 56H32a16 16 0 0 0-16 16v112a16 16 0 0 0 16 16h192a16 16 0 0 0 16-16V72a16 16 0 0 0-16-16Zm0 24v3.72l-92.69 58.93a8 8 0 0 1-8.62 0L32 83.72V80Zm-192 96V100l80.34 51a24 24 0 0 0 25.32 0L224 100v76Z"/>
@@ -33,73 +31,28 @@ const PhoneIcon = (p) => (
   </svg>
 );
 
-
 export default function WhoIsWho({ members: propMembers }) {
   const { t, lang } = useI18n();
   const isAr = lang === "ar";
 
-
+  // ✅ pull members from i18n (fallback to EN if needed)
+  const dict = STRINGS[lang] || STRINGS.en;
+  const membersFromStrings = dict?.team?.members;
   const members =
-    propMembers ??
-    [
-      {
-        id: "mubarak",
-        name: "Mubarak Hamad Al Dawoodi",
-        role: "Shareholder & Managing Director",
-        bio:
-          "Over 35 years of experience in transport & road safety management, including maintenance and fleet management in leading companies in Oman and the region.",
-        email: "m.aldawoodi@qsmtoman.com",
-        phone: "0096891394776",
-      },
-      {
-        id: "yaser",
-        name: "Eng. Yaser Abdul Aziz Gad",
-        role: "Shareholder & Managing Director",
-        bio:
-          "Mechanical engineer with more than 25 years in mechanics workshops and vehicle maintenance in Egypt, Oman, and the region.",
-        email: "yassr.abdulaziz@qsmtoman.com",
-        phone: "0096892405017",
-      },
-      {
-        id: "sakher",
-        name: "Sakher. Mubarak Al Dawoodi",
-        role: "Shareholder and Marketing & PR Manager",
-        bio:
-          "Omani graduate in business management with strong knowledge of Omani laws and procedures and a network of contacts across the market.",
-       
-        phone: "0096879677735",
-      },
-      {
-        id: "dhiaa_sup",
-        name: "Taha Mamdouh Mohamed",
-        role: "Maintenance Supervisor",
-        bio:
-          "Mechanical engineer specialized in maintenance and repair of heavy trucks and large equipment, with 8+ years’ experience.",
-        email: "operations@qsmtoman.com",
-        phone: "0096893689729",
-      },
-      {
-        id: "dhiaa_md",
-        name: "Dhiaa Ahmed Baddawi",
-        role: "Shareholder & Managing Director",
-        bio:
-          "Experienced in logistics and customer-care fields with strong knowledge of the spare-parts market in Oman and the region.",
-        email: "m.aldawoodi@qsmtoman.com",
-        phone: "0096879178056",
-      },
-    ];
+    (Array.isArray(propMembers) && propMembers.length && propMembers) ||
+    (Array.isArray(membersFromStrings) && membersFromStrings.length && membersFromStrings) ||
+    (STRINGS.en?.team?.members || []);
 
   return (
     <section className="team" dir={isAr ? "rtl" : "ltr"}>
       <div className="site-container team__wrap">
         <hr className="team__rule" />
-        <h2 className="team__heading"  id="staff">
-          {t("team.heading", isAr ? "من هو من في قمة صور" : "Who is Who At QSMT")}
-        
+        <h2 className="team__heading" id="staff">
+          {t("team.heading")}
         </h2>
 
         <div className="team__grid">
-          {members && members.length ? (
+          {members.length ? (
             members.map((m, i) => (
               <article
                 className={`team__card ${i === 0 ? "team__card--featured" : ""}`}
@@ -139,9 +92,7 @@ export default function WhoIsWho({ members: propMembers }) {
               </article>
             ))
           ) : (
-            <div className="team__empty">
-              {t("team.empty", isAr ? "تفاصيل الفريق قريباً." : "Team details coming soon.")}
-            </div>
+            <div className="team__empty">{t("team.empty", isAr ? "تفاصيل الفريق قريباً." : "Team details coming soon.")}</div>
           )}
         </div>
       </div>

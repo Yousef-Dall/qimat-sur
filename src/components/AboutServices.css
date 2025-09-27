@@ -156,8 +156,8 @@
   transition: all 0.1s ease;
 }
 .as__bubble img {
-  width: 65%;
-  height: 45%;
+  width: 85%;
+  height: 40%;
 }
 
 .as__icon {
@@ -184,7 +184,7 @@
 
 .as__desc {
   margin: 2px 0 0;
-  font-size: 12.5px;
+  font-size: 13.5px;
   line-height: 1.35;
   color: #e9eef7;
 }

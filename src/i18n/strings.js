@@ -100,48 +100,48 @@ export const STRINGS = {
       services: [
         {
           id: "repair",
-          title: "Mechanical • Electrical • Electronic",
-          desc: "Repair of mechanical, electrical and electronic control-system faults.",
+          title: "Mechanical & Electrical Repairs ",
+          desc: "​Repair of all mechanical, electrical and circuits control systems faults ",
         },
         {
           id: "inspection",
-          title: "Inspections & Road Tests",
-          desc: "Comprehensive inspections and road tests with clear findings and recommendations.",
+          title: "Vehicles Enhancement & Renovation ",
+          desc: "Carrying out a comprehensive renovation of cars and trailers, including adding all types accessories fixing and installations.",
         },
         {
           id: "cooling",
-          title: "Mobile Cooling Units",
-          desc: "Checks, maintenance, and repair of all types of mobile cooling units.",
+          title: "Cooling Units",
+          desc: "​Checks, Maintenance & Repairs of all types of mobile cooling units.",
         },
         {
           id: "painting",
-          title: "Painting & Finishing",
-          desc: "High-standard painting and finishing for all vehicles.",
+          title: "Painting Works",
+          desc: "Painting of all vehicles at the highest standards of paint quality and finishing​",
         },
         {
           id: "fleet",
-          title: "Fleet Management Packages",
-          desc: "Tailor-made fleet agreements to ensure smooth, low-downtime operations.",
+          title: "Fleet Management",
+          desc: "A tailor-made agreement for managing your fleet of various vehicles’ categories, to ensure your smooth and zero loss-time operation",
         },
         {
           id: "preventive",
-          title: "Preventive Maintenance",
-          desc: "Scheduled checkups and reporting to prevent breakdowns.",
+          title: "Periodic Checks, Reports & Preventive Maintenance​",
+          desc: "Scheduled inspections and reporting to prevent breakdowns, reduce downtime, and keep your vehicles in top condition.",
         },
         {
           id: "emergency",
-          title: "Emergency Support",
-          desc: "Immediate support services in case of breakdowns—anywhere.",
+          title: "Off-Road Emergency Support​",
+          desc: "Provide immediate support service in case of emergency breakdowns anywhere.",
         },
         {
           id: "manufacture",
-          title: "Manufacture & Refurbish",
-          desc: "Manufacturing and renovation to OEM and international standards.",
+          title: "Trailers Manufacturing:​",
+          desc: "Manufacturing and renovation of all types of semi and small trailers for all purposes, meeting all national and international standards​",
         },
         {
           id: "contracts",
-          title: "Contracts • SLAs • Packages",
-          desc: "All services available under contract scope with custom SLAs and packages.",
+          title: "Contracts, SLAs & Special Service Packages​",
+          desc: "All QSMT’s services can be provided through specific client’s contract scope and/or tailor-made SLAs and Packages​",
         },
       ],
     },
@@ -287,20 +287,20 @@ export const STRINGS = {
       lang_ar: "العربية",
     },
     hero: {
-      line1: "قيمت صور",
+      line1: "شركة قمة صور",
       line2: "للتجارة الحديثة ش.م.م",
       tagline:
-        "صيانة وإصلاح وخدمات موثوقة للشاحنات بمختلف الأحجام — للحفاظ على أسطولك في العمل",
+        "خدمات صيانة وإصلاح موثوقة لمختلف أحجام الشاحنات لضمان استمرارية عمل شاحناتك بكفاءة.",
     },
     about: {
       heading: "من نحن",
-      body: "تُعد «قيمت صور للتجارة الحديثة ش.م.م» شركة عمانية رائدة متخصصة في صيانة وإصلاح المركبات والمعدات بمختلف الفئات والأحجام. نلتزم بالسلامة والجودة ورضا العملاء، ونطور أساليب ذكية وموثوقة تساعد الأفراد والجهات على تحسين عمليات النقل وتوفير الوقت والجهد والتكلفة.",
+      body: "قمة صور الحديثة للتجارة ش.م.م هي شركة عمانية رائدة متخصصة في صيانة وإصلاح المركبات والمعدات بمختلف أنواعها وأحجامها. نلتزم بأعلى معايير السلامة والجودة ونسعى لتحقيق رضا العملاء من خلال حلول ذكية وموثوقة تسهم في تحسين عمليات النقل وتقليل الوقت والجهد والتكاليف للأفراد والمؤسسات.",
       vision_h: "الرؤية",
       vision_t:
-        "أن نكون الجهة الأكثر ثقة في خدمات المركبات على مستوى دول مجلس التعاون.",
+        "أن نكون الجهة الأكثر ثقة في خدمات المركبات على مستوى دول مجلس التعاون الخليجي.",
       mission_h: "الرسالة",
       mission_t:
-        "تقديم خدمات مركبات موثوقة وآمنة وعالية الجودة وبتكلفة فعّالة تفوق توقعات العملاء.",
+        "نسعى لتقديم خدمات مركبات تتسم بالموثوقية والسلامة والجودة العالية، وبأسعار فعالة تفوق توقعات العملاء.",
       services_h: "خدمات QSMT",
       services: [
         {

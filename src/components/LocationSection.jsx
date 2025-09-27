@@ -18,8 +18,8 @@ export default function LocationSection() {
   const mapsUrl = "https://www.google.com/maps?q=QSMT,+Sur,+Oman";
 
   
-  const addressEn = "QSMT Workshop, Sur Industrial Area, Ash Sharqiyah South, Oman";
-  const addressAr = "ورشة قمة صور، المنطقة الصناعية بولاية صور، جنوب الشرقية، عُمان";
+  const addressEn = "Barka Industrial Area, Barka Province, Al Batinah South Governorate, Muscat, Oman";
+  const addressAr = "المنطقة الصناعية بولاية بركاء، محافظة بركاء ، جنوب الباطنة، مسقط ، عُمان";
   const address = lang === "ar" ? addressAr : addressEn;
 
   return (
