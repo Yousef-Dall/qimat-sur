@@ -1,13 +1,19 @@
-// api/send-email.js  (CommonJS, works on Vercel/Netlify serverless)
-// Required env:
-//   SMTP_HOST, SMTP_PORT, SMTP_SECURE ("true"/"false"), SMTP_USER, SMTP_PASS
-//   TO_EMAIL
-// Optional:
-//   SMTP_FROM (defaults to SMTP_USER), ALLOW_ORIGINS (comma-separated list)
-
+// api/send-email.js  (CommonJS; Vercel/Netlify compatible)
+//
+// ENV you must set in Vercel → Project → Settings → Environment Variables:
+//
+//   SMTP_HOST=smtp.gmail.com
+//   SMTP_PORT=465
+//   SMTP_SECURE=true
+//   SMTP_USER=longliveyousefdalloul@gmail.com
+//   SMTP_PASS=<YOUR_GMAIL_APP_PASSWORD>
+//   SMTP_FROM=longliveyousefdalloul@gmail.com            # optional (defaults to SMTP_USER)
+//   TO_EMAIL=yousef.n.d.2002@gmail.com                  # receiver inbox
+//   ALLOW_ORIGINS=https://qimat-sur.vercel.app,http://localhost:3000
+//
 const nodemailer = require("nodemailer");
 
-/** Very small CORS helper (allows OPTIONS preflight) */
+/** Tiny CORS helper (handles OPTIONS preflight) */
 function applyCors(req, res) {
   const allowList = (process.env.ALLOW_ORIGINS || "")
     .split(",")
@@ -18,7 +24,6 @@ function applyCors(req, res) {
   if (allowList.length && origin && allowList.includes(origin)) {
     res.setHeader("Access-Control-Allow-Origin", origin);
   } else if (!allowList.length) {
-    // fallback: allow all if list not provided
     res.setHeader("Access-Control-Allow-Origin", "*");
   }
   res.setHeader("Vary", "Origin");
@@ -35,7 +40,7 @@ function applyCors(req, res) {
 const bad = (res, code, msg) => res.status(code).json({ error: msg });
 const ok = (res, data) => res.status(200).json({ ok: true, ...data });
 
-/** Minimal HTML escaper for safe email rendering */
+/** Minimal HTML escaping for email body safety */
 const esc = (s = "") =>
   String(s)
     .replace(/&/g, "&amp;")
@@ -45,7 +50,6 @@ const esc = (s = "") =>
     .replace(/'/g, "&#039;");
 
 module.exports = async (req, res) => {
-  // CORS / preflight
   if (applyCors(req, res)) return;
 
   if (req.method !== "POST") {
@@ -54,7 +58,6 @@ module.exports = async (req, res) => {
   }
 
   try {
-    // Body may be a string on some platforms; normalize to object
     const body =
       typeof req.body === "string"
         ? JSON.parse(req.body || "{}")
@@ -66,21 +69,18 @@ module.exports = async (req, res) => {
       email = "",
       message = "",
       website = "",
+      lang,
     } = body;
 
-    // Honeypot (add hidden input named "website" in your form; it must stay empty)
+    // Honeypot – if bots fill it, silently succeed
     if (website) return ok(res, { filtered: true });
 
-    // Validate basics
     if (!name.trim() || !email.trim() || !message.trim()) {
       return bad(res, 400, "Missing required fields.");
     }
     const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRe.test(email)) {
-      return bad(res, 400, "Invalid email.");
-    }
+    if (!emailRe.test(email)) return bad(res, 400, "Invalid email.");
 
-    // SMTP config
     const port = Number(process.env.SMTP_PORT || 465);
     const secure =
       String(process.env.SMTP_SECURE || "").toLowerCase() === "true" ||
@@ -96,13 +96,16 @@ module.exports = async (req, res) => {
       },
     });
 
-    const to = process.env.TO_EMAIL || "longliveyousefdalloul@gmail.com";
+    const to = process.env.TO_EMAIL || "yousef.n.d.2002@gmail.com";
     const fromAddr = process.env.SMTP_FROM || process.env.SMTP_USER;
 
-    const subject = `QSMT Inquiry from ${name}`;
+    const subject =
+      lang === "ar"
+        ? `طلب تواصل من ${name} - QSMT`
+        : `QSMT Inquiry from ${name}`;
 
     const text = [
-      "New Inquiry / Feedback",
+      lang === "ar" ? "رسالة جديدة (نموذج الموقع)" : "New Inquiry / Feedback",
       "",
       `Name: ${name}`,
       `Email: ${email}`,
@@ -117,7 +120,13 @@ module.exports = async (req, res) => {
 
     const html = `
       <div style="font-family:system-ui,Segoe UI,Roboto,Arial,sans-serif;line-height:1.6;color:#111;">
-        <h2 style="margin:0 0 10px;">New Inquiry / Feedback</h2>
+        <h2 style="margin:0 0 10px;">
+          ${
+            lang === "ar"
+              ? "رسالة جديدة (نموذج الموقع)"
+              : "New Inquiry / Feedback"
+          }
+        </h2>
         <p><strong>Name:</strong> ${esc(name)}</p>
         <p><strong>Email:</strong> ${esc(email)}</p>
         <p><strong>Phone:</strong> ${esc(phone || "-")}</p>

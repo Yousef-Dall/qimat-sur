@@ -12,7 +12,7 @@ export default function ContactSection() {
     phone: "",
     email: "",
     message: "",
-    website: "", // honeypot
+    website: "", // honeypot field (must stay empty)
   });
   const [status, setStatus] = useState({ state: "idle", msg: "" });
 
@@ -37,10 +37,17 @@ export default function ContactSection() {
       const res = await fetch("/api/send-email", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...form, lang }),
+        body: JSON.stringify({
+          name: form.name,
+          phone: form.phone,
+          email: form.email,
+          message: form.message,
+          website: form.website, // honeypot
+          lang,
+        }),
       });
 
-      const data = await res.json();
+      const data = await res.json().catch(() => ({}));
       if (!res.ok) throw new Error(data?.error || "Failed");
 
       setStatus({ state: "success", msg: t("contact.sent") });
@@ -52,17 +59,16 @@ export default function ContactSection() {
 
   return (
     <>
-      <hr className="brands__rule" />
+      <hr className="as__rule" />
 
       <section
-        className="contactHero"
         id="contact"
+        className="contactHero"
         dir={isAr ? "rtl" : "ltr"}
         aria-label={t("contact.heading")}
         style={{ backgroundImage: `url(${mechanic})` }}
       >
         <div className="contactHero__scrim" />
-
         <div className="contactHero__content">
           <div className="contactHero__card">
             <h2 className="contact__title" style={{ whiteSpace: "pre-line" }}>
@@ -70,30 +76,23 @@ export default function ContactSection() {
             </h2>
 
             <form className="contact__form" onSubmit={onSubmit} noValidate>
-              {/* Honeypot: hidden from users, catches basic bots */}
-              <div
-                className="hp"
+              {/* Honeypot (bots fill it, humans never see it) */}
+              <input
+                type="text"
+                name="website"
+                value={form.website}
+                onChange={onChange}
+                tabIndex={-1}
+                autoComplete="off"
                 aria-hidden="true"
                 style={{
                   position: "absolute",
-                  left: "-10000px",
-                  top: "auto",
-                  width: 1,
-                  height: 1,
-                  overflow: "hidden",
+                  left: "-9999px",
+                  width: "1px",
+                  height: "1px",
+                  opacity: 0,
                 }}
-              >
-                <label htmlFor="website">Leave this field empty</label>
-                <input
-                  id="website"
-                  type="text"
-                  name="website"
-                  value={form.website}
-                  onChange={onChange}
-                  autoComplete="off"
-                  tabIndex={-1}
-                />
-              </div>
+              />
 
               <input
                 className="contact__input"
