@@ -1,7 +1,7 @@
 .contactHero {
   position: relative;
   min-height: 100vh;
-
+  min-height: 100svh; /* mobile browsers */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -20,13 +20,20 @@
 .contactHero__content {
   position: relative;
   z-index: 1;
-
   margin: 0 auto;
   height: 100vh;
-  padding: clamp(16px, 3vw, 32px);
+  height: 100svh;
+  padding: max(16px, 3vw);
+  padding-left: max(16px, env(safe-area-inset-left));
+  padding-right: max(16px, env(safe-area-inset-right));
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: flex-end; /* EN: card on right */
+}
+
+/* Mirror the layout in Arabic: card on the left */
+.contactHero[dir="rtl"] .contactHero__content {
+  justify-content: flex-start;
 }
 
 .contactHero__card {
@@ -44,11 +51,13 @@
   line-height: 1.05;
   color: #111827;
 }
+
 .contact__form {
   display: grid;
   gap: 12px;
 }
 
+/* Inputs */
 .contact__input,
 .contact__textarea {
   width: 100%;
@@ -58,7 +67,23 @@
   font-size: 15px;
   background: #f4f6ff;
   outline: none;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease;
 }
+
+/* Align text to the UI language */
+.contactHero[dir="rtl"] .contact__input,
+.contactHero[dir="rtl"] .contact__textarea {
+  text-align: right;
+}
+
+/* But keep email/phone logically LTR for readability */
+.contact__input[type="email"],
+.contact__input[type="tel"] {
+  direction: ltr;
+  unicode-bidi: plaintext;
+  text-align: left;
+}
+
 .contact__input:focus,
 .contact__textarea:focus {
   border-color: #6366f1;
@@ -77,6 +102,9 @@
   font-size: 16px;
   cursor: pointer;
 }
+.contact__btn:hover {
+  filter: brightness(1.05);
+}
 .contact__btn:disabled {
   opacity: 0.7;
   cursor: not-allowed;
@@ -93,11 +121,32 @@
   color: #065f46;
 }
 
+/* Honeypot: keep it in DOM but off-screen */
+.hp {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* Responsive: center the card on smaller screens */
 @media (max-width: 900px) {
   .contactHero__content {
     justify-content: center;
   }
 }
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .contact__input,
+  .contact__textarea {
+    transition: none;
+  }
+}
+
+/* Divider you’re already using above the section */
 .brands__rule {
   border: none;
   height: 3px;

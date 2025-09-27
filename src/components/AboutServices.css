@@ -1,21 +1,24 @@
+/* === About & Services (cleaned) === */
 .aboutServices {
   color: #fff;
   padding: 28px 16px 48px;
 }
 
+/* Reusable block shell */
 .as__block {
   background: rgba(0, 0, 0, 0.6);
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 10px;
   padding: 16px 18px;
+  transition: box-shadow 0.3s ease, transform 0.3s ease, background 0.3s ease;
 }
 .as__block:hover {
   background: rgba(0, 0, 0, 0.35);
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.45);
   transform: translateY(-4px);
-  transition: all 0.3s ease;
 }
 
+/* Intro copy */
 .as__about {
   width: 70vw;
   margin: 5% auto 3%;
@@ -43,6 +46,7 @@
   font-size: 15.5px;
 }
 
+/* Vision/Mission two-up */
 .as__vm {
   width: 70vw;
   margin: 0 auto 5%;
@@ -51,6 +55,7 @@
   gap: 14px;
 }
 
+/* Divider */
 .as__rule {
   border: none;
   border-top: 1px solid rgba(255, 255, 255, 0.3);
@@ -58,6 +63,7 @@
   max-width: 980px;
 }
 
+/* Grid of circular service cards */
 .as__center {
   text-align: center;
 }
@@ -68,67 +74,22 @@
   margin: 18px auto 0;
   max-width: 1100px;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, 1fr); /* desktop: 3 columns */
   gap: 18px 22px;
 }
 
-.as__card {
-  text-align: center;
-  padding: 8px 10px 14px;
-}
-
-.as__icon {
-  width: 90%;
-  height: 90%;
-  object-fit: contain;
-}
-
-.as__circleFallback {
-  width: 60%;
-  height: 60%;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.08);
-  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.12);
-}
-
-.as__title {
-  margin: 10px 0 6px;
-  font-weight: 700;
-  font-size: 17px;
-}
-
-.as__desc {
-  margin: 0 auto;
-  max-width: 320px;
-  font-size: 14.5px;
-  line-height: 1.5;
-  color: #f0f3f8;
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
-}
-
-@media (max-width: 980px) {
-  .as__vm {
-    grid-template-columns: 1fr;
-  }
-  .as__grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-@media (max-width: 640px) {
-  .as__grid {
-    grid-template-columns: 1fr;
-  }
-}
-
+/* Card → bubble */
 .as__card {
   display: grid;
   place-items: center;
   padding: 0;
+  text-align: center;
 }
 
 .as__bubble {
-  width: 300px;
-  height: 300px;
+  /* perfect circle that scales */
+  width: clamp(220px, 26vw, 300px);
+  aspect-ratio: 1 / 1;
   border-radius: 50%;
   background: #0e0e15;
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.45);
@@ -137,94 +98,95 @@
   align-items: center;
   justify-content: flex-start;
   gap: 8px;
-  text-align: center;
   padding: 18px 16px;
   color: #fff;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 .as__bubble:hover {
   box-shadow: 0 16px 32px rgba(0, 0, 0, 0.55);
   transform: translateY(-4px);
-  transition: all 0.3s ease;
 }
 .as__bubble:focus-within {
   outline: 3px solid #6ee7ff;
   outline-offset: 4px;
 }
-.as__bubble:active {
-  transform: translateY(0);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.45);
-  transition: all 0.1s ease;
-}
-.as__bubble img {
-  width: 85%;
-  height: 40%;
-}
 
+/* Icon area (kept consistent; remove duplicates) */
 .as__icon {
-  width: 48%;
-  height: auto;
-  object-fit: contain;
+  width: 52%;
+  max-width: 180px;
   flex: 0 0 auto;
 }
+.as__icon img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 120px; /* keeps tall logos in check */
+  object-fit: contain;
+}
 
+/* Fallback circle if no image */
 .as__circleFallback {
-  width: 48%;
+  width: 52%;
+  max-width: 180px;
   aspect-ratio: 1 / 1;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.08);
   box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.12);
 }
 
+/* Title + description inside bubble */
 .as__title {
-  margin: 4px 0 0;
+  margin: 6px 0 0;
   font-weight: 700;
   font-size: 16px;
   line-height: 1.2;
+  padding: 0 8px;
+  word-break: break-word;
 }
 
 .as__desc {
-  margin: 2px 0 0;
+  margin: 4px 0 0;
   font-size: 13.5px;
   line-height: 1.35;
   color: #e9eef7;
-}
-.as__icon {
-  width: 50%;
-  height: 50%;
-}
-.as__icon img {
-  width: 100%;
-  height: 50px;
+  padding: 0 10px;
+  max-width: 32ch;
 }
 
+/* RTL niceties */
+body.rtl .as__heading,
+body.rtl .as__subhead,
+body.rtl .as__para {
+  text-align: center;
+}
+
+/* Responsiveness */
 @media (max-width: 1100px) {
   .as__bubble {
-    width: 260px;
-    height: 260px;
-    padding: 14px;
-  }
-  .as__icon {
-    width: 50%;
-    height: 50%;
+    width: clamp(200px, 32vw, 260px);
   }
   .as__title {
     font-size: 15px;
   }
   .as__desc {
-    font-size: 12px;
+    font-size: 12.5px;
   }
 }
-@media (max-width: 640px) {
-  .as__bubble {
-    width: 240px;
-    height: 240px;
-  }
 
-  .brands__rule {
-    border: none;
-    height: 3px;
-    background: rgba(255, 255, 255, 0.75);
-    margin: 50px 50px 50px 50px;
-    width: 90%;
+@media (max-width: 980px) {
+  .as__vm {
+    grid-template-columns: 1fr;
   }
+  .as__grid {
+    grid-template-columns: repeat(2, 1fr);
+  } /* tablet: 2 columns */
 }
+
+@media (max-width: 640px) {
+  .as__grid {
+    grid-template-columns: 1fr;
+  } /* mobile: 1 column */
+}
+
+/* Removed stray .brands__rule — it belongs in the brands section, not here */

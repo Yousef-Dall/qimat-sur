@@ -9,7 +9,7 @@ import Carousel from "./components/Carousel";
 import TeamWhoIsWho from "./components/TeamWhoIsWho";
 import ContactSection from "./components/ContactSection";
 import SiteFooter from "./components/SiteFooter";
-import StickyHeader from "./components/Header";
+import Header from "./components/Header";
 import FacilityShowcase from "./components/FacilityShowcase";
 import SpecialisedBrands from "./components/SpecialisedBrands";
 import img1 from "./assets/g1.jpg";
@@ -42,7 +42,7 @@ export default function App() {
         <I18nProvider>
           <section className="site-section">
             <div className="site-container">
-              <StickyHeader />
+              <Header />
             </div>
           </section>
           <section className="site-section">
@@ -79,7 +79,7 @@ export default function App() {
             <div className="site-container">
               <Carousel
                 images={gallery}
-                intervalMs={3500}
+                intervalMs={1500}
                 aspect="16/9"
                 titleEn="Gallery"
                 titleAr="المعرض"

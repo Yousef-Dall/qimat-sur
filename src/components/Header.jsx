@@ -52,8 +52,8 @@ export default function StickyHeader() {
   };
 
   const mapsUrl =
-    "https://www.google.com/maps/search/?api=1&query=Qimat+Sur+Modern+Trading+LLC,+Barka+Industrial+Area,+Oman";
-  const waNumber = "96892405017";
+    "https://maps.app.goo.gl/wmLJ7fKsQ4g4ZjHEA";
+  const waNumber = "0096893689729";
 
   return (
     <>
@@ -88,7 +88,7 @@ export default function StickyHeader() {
             </div>
             <div className="qsmtHeader__item">
               <Phone />
-              <a href="tel:+96892405017">+968 92405017</a>&nbsp;&nbsp;
+              <a href="tel:+96892405017">+968 92405017</a>;
               <a href="tel:+96879178056">+968 79178056</a>
             </div>
           </div>

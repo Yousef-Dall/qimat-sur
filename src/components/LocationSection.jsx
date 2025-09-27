@@ -15,7 +15,7 @@ export default function LocationSection() {
   const { t, lang } = useI18n();
 
   
-  const mapsUrl = "https://www.google.com/maps?q=QSMT,+Sur,+Oman";
+  const mapsUrl = "https://maps.app.goo.gl/QpwBGe4HPZCzp3FY6";
 
   
   const addressEn = "Barka Industrial Area, Barka Province, Al Batinah South Governorate, Muscat, Oman";

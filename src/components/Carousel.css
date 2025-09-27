@@ -10,12 +10,14 @@
   color: inherit;
 }
 
+/* Keep slide math stable even on RTL pages */
 .gc,
 .gc-viewport,
 .gc-track {
   direction: ltr;
 }
 
+/* Title */
 .gc-title {
   margin: 0 0 12px;
   font-weight: 800;
@@ -24,6 +26,7 @@
   text-align: var(--gc-title-align);
 }
 
+/* Viewport — responsive, aspect-ratio based */
 .gc-viewport {
   position: relative;
   border-radius: 16px;
@@ -31,13 +34,12 @@
   background: rgba(255, 255, 255, 0.06);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
 
-  width: 60vw;
-  height: 88vh;
+  width: 70vw; /* was 60vw; a bit wider feels better */
   max-width: 100%;
   margin: 0 auto;
   outline: none;
 }
-
+/* Reserve height by ratio (no fixed height!) */
 .gc-viewport::before {
   content: "";
   display: block;
@@ -45,12 +47,18 @@
   aspect-ratio: var(--gc-aspect);
 }
 
+/* Track / slides */
 .gc-track {
   position: absolute;
   inset: 0;
   display: flex;
   transition: transform 500ms ease;
   will-change: transform;
+}
+@media (prefers-reduced-motion: reduce) {
+  .gc-track {
+    transition: none;
+  }
 }
 
 .gc-slide {
@@ -60,7 +68,6 @@
   place-items: center;
   background: #0d0f1a;
 }
-
 .gc-slide img {
   width: 100%;
   height: 100%;
@@ -68,6 +75,7 @@
   display: block;
 }
 
+/* Caption */
 .gc-caption {
   position: absolute;
   left: 16px;
@@ -81,11 +89,11 @@
   font-size: 14px;
   text-align: left;
 }
-
 .gc.gc--ar .gc-caption {
   text-align: right;
 }
 
+/* Dots */
 .gc-dots {
   display: flex;
   gap: 8px;
@@ -105,7 +113,12 @@
   opacity: 1;
   width: 22px;
 }
+.gc-dot:focus-visible {
+  outline: 3px solid #6ee7ff;
+  outline-offset: 2px;
+}
 
+/* Arrows */
 .gc-nav {
   position: absolute;
   top: 50%;
@@ -130,4 +143,28 @@
 }
 .gc-nav:hover {
   background: rgba(255, 255, 255, 0.25);
+}
+.gc-nav:focus-visible {
+  outline: 3px solid #6ee7ff;
+  outline-offset: 2px;
+}
+
+/* Responsive tweaks */
+@media (max-width: 1024px) {
+  .gc-viewport {
+    width: 82vw;
+  }
+}
+@media (max-width: 640px) {
+  .gc-viewport {
+    width: 92vw;
+  }
+}
+@media (max-width: 480px) {
+  .gc-nav {
+    width: 32px;
+    height: 32px;
+    font-size: 20px;
+    line-height: 32px;
+  }
 }
