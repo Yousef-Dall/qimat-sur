@@ -11,7 +11,7 @@
     "deploy": "gh-pages -d build"
   },
   "dependencies": {
-    "nodemailer": "^6.9.10",
+    "nodemailer": "^6.10.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-scripts": "^5.0.1",
@@ -30,11 +30,12 @@
   },
   "homepage": "http://qimat-surtrd.com",
   "eslintConfig": {
-    "plugins": ["react-hooks"],
+    "plugins": [
+      "react-hooks"
+    ],
     "rules": {
       "react-hooks/rules-of-hooks": "error",
       "react-hooks/exhaustive-deps": "warn"
     }
   }
-  
 }
