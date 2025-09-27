@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.7d366ac6.css",
-    "main.js": "/static/js/main.458bdb70.js",
+    "main.css": "/static/css/main.7378e2f0.css",
+    "main.js": "/static/js/main.0059dc39.js",
     "static/js/453.a56096d8.chunk.js": "/static/js/453.a56096d8.chunk.js",
     "static/media/cooling.png": "/static/media/cooling.32bbbe1b5a76b0c6293d.png",
     "static/media/hero-mechanic.jpg": "/static/media/hero-mechanic.ced866db5152ec701b73.jpg",
@@ -41,12 +41,12 @@
     "static/media/scania.png": "/static/media/scania.1cb7b21ad25b6deb7fdc.png",
     "static/media/isuzu.png": "/static/media/isuzu.d882bf4501bd540f6841.png",
     "index.html": "/index.html",
-    "main.7d366ac6.css.map": "/static/css/main.7d366ac6.css.map",
-    "main.458bdb70.js.map": "/static/js/main.458bdb70.js.map",
+    "main.7378e2f0.css.map": "/static/css/main.7378e2f0.css.map",
+    "main.0059dc39.js.map": "/static/js/main.0059dc39.js.map",
     "453.a56096d8.chunk.js.map": "/static/js/453.a56096d8.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.7d366ac6.css",
-    "static/js/main.458bdb70.js"
+    "static/css/main.7378e2f0.css",
+    "static/js/main.0059dc39.js"
   ]
 }
