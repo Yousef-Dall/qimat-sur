@@ -1,33 +1,21 @@
+/* === TeamWhoIsWho.css (final, deduped) === */
 .team {
   color: #fff;
-  padding: 24px 16px;
-}
-body.rtl .team__heading,
-body.rtl .team__name,
-body.rtl .team__role,
-body.rtl .team__bio {
-  text-align: right;
-}
-.team__email,
-.team__phone {
-  unicode-bidi: plaintext;
+  padding: 36px 16px;
 }
 
-.team__email,
-.team__phone {
-  unicode-bidi: plaintext;
-}
 .team__wrap {
-  max-width: 1100px;
+  max-width: 1160px;
   margin: 0 auto;
-  padding: 24px 16px 0px;
+  padding: 24px 16px 0;
 }
 
 .team__rule {
   border: none;
   border-top: 2px solid rgba(255, 255, 255, 0.35);
-  margin: 6px 0 14px;
+  margin: 6px 0 18px;
 }
+
 .team__heading {
   text-align: center;
   margin: 0 0 18px;
@@ -37,28 +25,37 @@ body.rtl .team__bio {
   text-shadow: 0 2px 2px rgba(0, 0, 0, 0.25);
 }
 
+/* Grid: 2 columns, centered */
 .team__grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(280px, 1fr));
-  gap: 18px 69px;
+  grid-template-columns: repeat(2, minmax(320px, 520px));
+  justify-content: center; /* center the two columns block */
+  gap: 28px 69px; /* row / column gaps */
   margin-bottom: 5%;
 }
+
+/* First card spans full row */
 .team__card--featured {
   grid-column: 1 / -1;
+  justify-self: center;
+  max-width: 640px; /* a touch wider for the featured card */
 }
 
+/* Card */
 .team__card {
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
   background: #0e0e15;
   border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: 12px;
+  border-radius: 14px;
   box-shadow: 0 18px 36px rgba(0, 0, 0, 0.35);
-  padding: 14px;
-  height: 25vh;
-  width: 30vw;
+  padding: 18px 20px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  gap: 10px;
 }
+
 .team__card:hover {
   box-shadow: 0 22px 44px rgba(0, 0, 0, 0.45);
   transform: translateY(-4px);
@@ -73,46 +70,39 @@ body.rtl .team__bio {
   box-shadow: 0 18px 36px rgba(0, 0, 0, 0.35);
   transition: all 0.1s ease;
 }
+
 .team__cardHead {
   display: flex;
   align-items: center;
   gap: 12px;
-  margin-bottom: 10px;
+  margin-bottom: 6px;
 }
 
-.team__head {
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.1),
-    rgba(255, 255, 255, 0.02)
-  );
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 10px;
-  padding: 10px 12px;
-  margin-bottom: 10px;
-}
 .team__name {
-  margin: 0;
+  margin: 0 0 4px;
   font-weight: 800;
   font-size: 18px;
 }
 .team__role {
-  margin: 2px 0 0;
+  margin: 0;
   color: #c8d5ff;
   font-size: 13.5px;
+  opacity: 0.95;
 }
 
 .team__bio {
-  margin: 0 0 10px;
+  margin: 4px 0 8px;
   color: #e9eef7;
   line-height: 1.55;
   font-size: 14.5px;
 }
 
+/* Contact pills */
 .team__contact {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 12px;
+  margin-top: 6px;
 }
 .team__pill {
   display: inline-flex;
@@ -134,60 +124,7 @@ body.rtl .team__bio {
   outline-offset: 2px;
 }
 
-@media (max-width: 860px) {
-  .team__grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-.team {
-  padding: 36px 16px;
-}
-
-.team__wrap {
-  max-width: 1160px;
-  margin: 0 auto;
-}
-
-.team__grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(320px, 520px));
-  justify-content: center;
-  gap: 28px 69px;
-}
-
-.team__card {
-  width: 100%;
-  max-width: 520px;
-  margin: 0 auto;
-  border-radius: 14px;
-  padding: 18px 20px;
-
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
-  height: 30vh;
-}
-
-.team__cardHead {
-  margin-bottom: 8px;
-}
-.team__name {
-  margin: 0 0 4px;
-}
-.team__role {
-  margin: 0;
-  opacity: 0.9;
-}
-.team__bio {
-  margin: 8px 0 12px;
-  line-height: 1.55;
-}
-.team__contact {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-  margin-top: 6px;
-}
-
+/* BiDi niceties */
 body.rtl .team__heading,
 body.rtl .team__name,
 body.rtl .team__role,
@@ -196,25 +133,17 @@ body.rtl .team__bio {
 }
 .team__email,
 .team__phone {
-  unicode-bidi: plaintext;
+  unicode-bidi: plaintext; /* keep numbers/emails LTR inside RTL */
 }
 
+/* Responsive: single column on small screens */
 @media (max-width: 860px) {
   .team__grid {
-    grid-template-columns: minmax(280px, 520px);
+    grid-template-columns: minmax(280px, 1fr);
     gap: 22px;
   }
-}
-
-.team__grid > .team__card:first-child {
-  grid-column: 1 / -1;
-  justify-self: center;
-  width: 100%;
-  max-width: 520px;
-}
-
-@media (max-width: 860px) {
-  .team__grid > .team__card:first-child {
-    grid-column: 1;
+  .team__card--featured {
+    grid-column: 1; /* no spanning in 1-col layout */
+    max-width: 100%;
   }
 }

@@ -49,7 +49,7 @@ export default function SiteFooter() {
 
   
   return (
-    <footer className="footer" key={lang} data-lang={lang}>
+    <footer className="footer" key={lang} data-lang={lang} dir={lang === "ar" ? "rtl" : "ltr"}>
       <div className="footer__wrap">
       
         <div className="footer__left">

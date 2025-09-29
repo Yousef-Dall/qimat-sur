@@ -2,7 +2,6 @@
 import React from "react";
 import "./TeamWhoIsWho.css";
 import { useI18n } from "../i18n/I18nProvider";
-import { STRINGS } from "../i18n/strings"; // ⬅️ use your dictionary
 
 /* helpers */
 const normalizeTelHref = (raw) => {
@@ -31,24 +30,24 @@ const PhoneIcon = (p) => (
   </svg>
 );
 
-export default function WhoIsWho({ members: propMembers }) {
+export default function WhoIsWho({ members: overrideMembers }) {
   const { t, lang } = useI18n();
   const isAr = lang === "ar";
 
-  // ✅ pull members from i18n (fallback to EN if needed)
-  const dict = STRINGS[lang] || STRINGS.en;
-  const membersFromStrings = dict?.team?.members;
-  const members =
-    (Array.isArray(propMembers) && propMembers.length && propMembers) ||
-    (Array.isArray(membersFromStrings) && membersFromStrings.length && membersFromStrings) ||
-    (STRINGS.en?.team?.members || []);
+  // Prefer i18n data (keeps EN/AR in sync). Allow prop override for flexibility.
+  const fromI18n = t("team.members");
+  const members = (Array.isArray(overrideMembers) && overrideMembers.length
+    ? overrideMembers
+    : Array.isArray(fromI18n) && fromI18n.length
+    ? fromI18n
+    : []);
 
   return (
     <section className="team" dir={isAr ? "rtl" : "ltr"}>
       <div className="site-container team__wrap">
         <hr className="team__rule" />
         <h2 className="team__heading" id="staff">
-          {t("team.heading")}
+          {t("team.heading", isAr ? "الهيكل الإداري في QSMT" : "Who is Who At QSMT")}
         </h2>
 
         <div className="team__grid">
@@ -70,7 +69,7 @@ export default function WhoIsWho({ members: propMembers }) {
                     <a
                       className="team__pill team__email"
                       href={`mailto:${m.email}`}
-                      aria-label={t("team.email", "Email")}
+                      aria-label={t("team.email", isAr ? "البريد" : "Email")}
                       dir="ltr"
                     >
                       <MailIcon />
@@ -81,7 +80,7 @@ export default function WhoIsWho({ members: propMembers }) {
                     <a
                       className="team__pill team__phone"
                       href={`tel:${normalizeTelHref(m.phone)}`}
-                      aria-label={t("team.call", "Call")}
+                      aria-label={t("team.call", isAr ? "اتصال" : "Call")}
                       dir="ltr"
                     >
                       <PhoneIcon />
@@ -92,7 +91,9 @@ export default function WhoIsWho({ members: propMembers }) {
               </article>
             ))
           ) : (
-            <div className="team__empty">{t("team.empty", isAr ? "تفاصيل الفريق قريباً." : "Team details coming soon.")}</div>
+            <div className="team__empty">
+              {t("team.empty", isAr ? "تفاصيل الفريق قريباً." : "Team details coming soon.")}
+            </div>
           )}
         </div>
       </div>

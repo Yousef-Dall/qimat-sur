@@ -1,12 +1,34 @@
 export const STRINGS = {
   en: {
-    footer: {
-      contact: "Contact US",
-      book_now: "Book Now",
-      whatsapp_prefill: "Hello QSMT, I’d like to book / ask a question.",
-      social_aria: "Social links",
-      phones_aria: "Phone numbers",
+    header: {
+      book: "Book Now",
+      hours: "Saturday–Thursday  08:00–13:00  ||  16:00–22:00",
+      nav: {
+        services: "Services",
+        location: "Location",
+        gallery: "Gallery",
+        staff: "Staff",
+      },
+      address:
+        "Barka Industrial Area, Barka Province, Al Batinah South Governorate, Muscat, Oman",
+      lang_en: "English",
+      lang_ar: "العربية",
     },
+
+    hero: {
+      // aliases used by your HeroBanner.jsx
+      brand: "QIMAT SUR",
+      sub: "Modern Trading LLC",
+      // keep original too (safe for any other component)
+      line1: "QIMAT SUR",
+      line2: "Modern Trading LLC",
+      tagline:
+        "Reliable maintenance, repairs, and service for trucks of all sizes — keeping your fleet running",
+    },
+
+    // alias so BrandsWeSpecialise.jsx can call t("brands.title")
+    brands: { title: "We Are Specialised In" },
+
     specialised: {
       heading: "We Are Specialised In",
       items: [
@@ -18,13 +40,64 @@ export const STRINGS = {
         { id: "man", alt: "MAN" },
       ],
     },
-    location: {
-      heading: "Location",
-      address_label: "Address",
-      address_full:
-        "Barka Industrial Area, Barka Province, Al Batinah South Governorate, Muscat, Oman",
-      open_maps: "Open in Google Maps",
-      directions: "Get Directions",
+
+    about: {
+      heading: "About Us",
+      body: "Qimat Sur Modern Trading L.L.C. (QSMT), a leading Omani Company specialized in repairs and maintenance services of all categories and sizes of vehicles and equipment. With a commitment to safety, quality, and client satisfaction, we, continuously, exploring smart and creative methods and reliable solutions that assist establishments and individuals to optimize their transportation operations and save their time, efforts and cost through our various service packages.​",
+      vision_h: "VISION",
+      vision_t:
+        "To become the leading trusted vehicles’ services company in the GCC region.",
+      mission_h: "MISSION",
+      mission_t:
+        "To deliver reliable, safe, high-quality, and cost-effective vehicles’ services that exceed client expectations.",
+      services_h: "QSMT Services",
+      services: [
+        {
+          id: "repair",
+          title: "Mechanical & Electrical Repairs ",
+          desc: "​Repair of all mechanical, electrical and circuits control systems faults ",
+        },
+        {
+          id: "inspection",
+          title: "Vehicles Enhancement & Renovation ",
+          desc: "Carrying out a comprehensive renovation of cars and trailers, including adding all types accessories fixing and installations.",
+        },
+        {
+          id: "cooling",
+          title: "Cooling Units",
+          desc: "​Checks, Maintenance & Repairs of all types of mobile cooling units.",
+        },
+        {
+          id: "painting",
+          title: "Painting Works",
+          desc: "Painting of all vehicles at the highest standards of paint quality and finishing​",
+        },
+        {
+          id: "fleet",
+          title: "Fleet Management",
+          desc: "A tailor-made agreement for managing your fleet of various vehicles’ categories, to ensure your smooth and zero loss-time operation",
+        },
+        {
+          id: "preventive",
+          title: "Periodic Checks, Reports & Preventive Maintenance​",
+          desc: "Scheduled inspections and reporting to prevent breakdowns, reduce downtime, and keep your vehicles in top condition.",
+        },
+        {
+          id: "emergency",
+          title: "Off-Road Emergency Support​",
+          desc: "Provide immediate support service in case of emergency breakdowns anywhere.",
+        },
+        {
+          id: "manufacture",
+          title: "Trailers Manufacturing:​",
+          desc: "Manufacturing and renovation of all types of semi and small trailers for all purposes, meeting all national and international standards​",
+        },
+        {
+          id: "contracts",
+          title: "Contracts, SLAs & Special Service Packages​",
+          desc: "All QSMT’s services can be provided through specific client’s contract scope and/or tailor-made SLAs and Packages​",
+        },
+      ],
     },
 
     tca: {
@@ -67,96 +140,6 @@ export const STRINGS = {
       ],
     },
 
-    header: {
-      book: "Book Now",
-      hours: "Saturday–Thursday  08:00–13:00  ||  16:00–22:00",
-      nav: {
-        services: "Services",
-        location: "Location",
-        gallery: "Gallery",
-        staff: "Staff",
-      },
-      address:
-        "Barka Industrial Area, Barka Province, Al Batinah South Governorate, Muscat, Oman",
-      lang_en: "English",
-      lang_ar: "العربية",
-    },
-    hero: {
-      line1: "QIMAT SUR",
-      line2: "Modern Trading LLC",
-      tagline:
-        "Reliable maintenance, repairs, and service for trucks of all sizes — keeping your fleet running",
-    },
-    about: {
-      heading: "About Us",
-      body: "Qimat Sur Modern Trading L.L.C. (QSMT), a leading Omani Company specialized in repairs and maintenance services of all categories and sizes of vehicles and equipment. With a commitment to safety, quality, and client satisfaction, we, continuously, exploring smart and creative methods and reliable solutions that assist establishments and individuals to optimize their transportation operations and save their time, efforts and cost through our various service packages.​",
-      vision_h: "VISION",
-      vision_t:
-        "To become the leading trusted vehicles’ services company in the GCC region.",
-      mission_h: "MISSION",
-      mission_t:
-        "To deliver reliable, safe, high-quality, and cost-effective vehicles’ services that exceed client expectations.",
-      services_h: "QSMT Services",
-      services: [
-        {
-          id: "repair",
-          title: "Mechanical & Electrical Repairs ",
-          desc: "​Repair of all mechanical, electrical and circuits control systems faults ",
-        },
-        {
-          id: "inspection",
-          title: "Vehicles Enhancement & Renovation ",
-          desc: "Carrying out a comprehensive renovation of cars and trailers, including adding all types accessories fixing and installations.",
-        },
-        {
-          id: "cooling",
-          title: "Cooling Units",
-          desc: "​Checks, Maintenance & Repairs of all types of mobile cooling units.",
-        },
-        {
-          id: "painting",
-          title: "Painting Works",
-          desc: "Painting of all vehicles at the highest standards of paint quality and finishing​",
-        },
-        {
-          id: "fleet",
-          title: "Fleet Management",
-          desc: "A tailor-made agreement for managing your fleet of various vehicles’ categories, to ensure your smooth and zero loss-time operation",
-        },
-        {
-          id: "preventive",
-          title: "Periodic Checks, Reports & Preventive Maintenance​",
-          desc: "Scheduled inspections and reporting to prevent breakdowns, reduce downtime, and keep your vehicles in top condition.",
-        },
-        {
-          id: "emergency",
-          title: "Off-Road Emergency Support​",
-          desc: "Provide immediate support service in case of emergency breakdowns anywhere.",
-        },
-        {
-          id: "manufacture",
-          title: "Trailers Manufacturing:​",
-          desc: "Manufacturing and renovation of all types of semi and small trailers for all purposes, meeting all national and international standards​",
-        },
-        {
-          id: "contracts",
-          title: "Contracts, SLAs & Special Service Packages​",
-          desc: "All QSMT’s services can be provided through specific client’s contract scope and/or tailor-made SLAs and Packages​",
-        },
-      ],
-    },
-    contact: {
-      heading: "Inquiry and\nFeedback",
-      name: "Your Name",
-      phone: "Your Contact Number",
-      email: "Your E-mail",
-      message: "Message",
-      send: "Send",
-      sending: "Sending…",
-      sent: "Sent! We’ll get back to you shortly.",
-      err_generic:
-        "Couldn’t send right now. Please try again in a minute or email us directly.",
-    },
     team: {
       heading: "Who is Who At QSMT",
       members: [
@@ -181,7 +164,6 @@ export const STRINGS = {
           name: "Sakher Mubarak Al Dawoodi",
           role: "Shareholder and Marketing & PR Manager",
           bio: "Omani graduate in business management with strong knowledge of Omani laws and procedures and a network of contacts across the market.",
-          // email: "m.aldawoodi@qsmtoman.com",
           phone: "0096879677735",
         },
         {
@@ -202,76 +184,46 @@ export const STRINGS = {
         },
       ],
     },
-    location: { heading: "Location", address_label: "Open in Google Maps" },
-    footer: { contact_us: "Contact US", book: "Book Now" },
+
+    // unified shape that matches LocationSection.jsx
+    location: {
+      title: "Location", // <— was "heading" before; now both components can use "title"
+      address_label: "Address",
+      address_full:
+        "Barka Industrial Area, Barka Province, Al Batinah South Governorate, Muscat, Oman",
+      openMaps: "Open in Google Maps", // <— alias for the code that asks "openMaps"
+      open_maps: "Open in Google Maps", // keep original too
+      directions: "Get Directions",
+    },
+
+    contact: {
+      heading: "Inquiry and\nFeedback",
+      name: "Your Name",
+      phone: "Your Contact Number",
+      email: "Your E-mail",
+      message: "Message",
+      send: "Send",
+      sending: "Sending…",
+      sent: "Sent! We’ll get back to you shortly.",
+      err_generic:
+        "Couldn’t send right now. Please try again in a minute or email us directly.",
+    },
+
+    facility: {
+      title: "Our Facility",
+      alt: "QSMT workshop frontage with signage",
+    },
+
+    footer: {
+      contact: "Contact US",
+      book_now: "Book Now",
+      whatsapp_prefill: "Hello QSMT, I’d like to book / ask a question.",
+      social_aria: "Social links",
+      phones_aria: "Phone numbers",
+    },
   },
 
   ar: {
-    footer: {
-      contact: "تواصل معنا",
-      book_now: "احجز الآن",
-      whatsapp_prefill: "مرحبًا QSMT، أود الحجز/الاستفسار.",
-      social_aria: "روابط التواصل الاجتماعي",
-      phones_aria: "أرقام الهاتف",
-    },
-
-    specialised: {
-      heading: "نحن متخصصون في",
-      items: [
-        { id: "volvo", alt: "فولفو" },
-        { id: "scania", alt: "سكانيا" },
-        { id: "fuso", alt: "فوسو كانتر" },
-        { id: "isuzu", alt: "إيسوزو" },
-        { id: "mercedes", alt: "مرسيدس-بنز" },
-        { id: "man", alt: "مان" },
-      ],
-    },
-    location: {
-      heading: "الموقع",
-      address_label: "العنوان",
-      address_full:
-        "منطقة بركاء الصناعية، ولاية بركاء، محافظة جنوب الباطنة، مسقط، عمان",
-      open_maps: "افتح في خرائط جوجل",
-      directions: "الاتجاهات",
-    },
-    tca: {
-      heading_capacity: "القدرات الفنية في QSMT",
-      capacity: [
-        {
-          id: "team",
-          alt: "فريق المهندسين في QSMT",
-          caption: "مهندسون ميكانيكيون وكهربائيون مؤهلون وفنيون مهرة",
-        },
-        {
-          id: "offroad",
-          alt: "فريق الاستجابة الطارئة خارج الطرق",
-          caption: "فريق مدرّب على الاستجابة الطارئة خارج الطرق",
-        },
-        {
-          id: "tools",
-          alt: "معدات وأدوات الورشة",
-          caption: "أحدث الأدوات والمعدات ذات المعايير العالية",
-        },
-      ],
-      heading_approach: "نهج QSMT",
-      approach: [
-        {
-          id: "service",
-          title: "تميّز الخدمة:",
-          text: "جودة الخدمة هي حجر الأساس في الصيانة والإصلاح لدى QSMT — تشمل العمل الفني وتجربة العميل الكاملة.",
-        },
-        {
-          id: "market",
-          title: "تحليل السوق:",
-          text: "فهم الطلب المحلي وتحديد الشريحة المستهدفة ومعرفة المنافسين أمور أساسية.",
-        },
-        {
-          id: "adapt",
-          title: "التأقلم والنمو:",
-          text: "قطاع السيارات يتطور سريعًا؛ تستثمر QSMT في التدريب وأجهزة التشخيص الحديثة لمواكبة التطور.",
-        },
-      ],
-    },
     header: {
       book: "احجز الآن",
       hours: "السبت – الخميس  08:00–13:00  ||  16:00–22:00",
@@ -286,12 +238,30 @@ export const STRINGS = {
       lang_en: "English",
       lang_ar: "العربية",
     },
+
     hero: {
+      brand: "شركة قمة صور", // <— alias used by HeroBanner.jsx
+      sub: "للتجارة الحديثة ش.م.م", // <— alias used by HeroBanner.jsx
       line1: "شركة قمة صور",
       line2: "للتجارة الحديثة ش.م.م",
       tagline:
         "خدمات صيانة وإصلاح موثوقة لمختلف أحجام الشاحنات لضمان استمرارية عمل شاحناتك بكفاءة.",
     },
+
+    brands: { title: "نحن متخصصون في" },
+
+    specialised: {
+      heading: "نحن متخصصون في",
+      items: [
+        { id: "volvo", alt: "فولفو" },
+        { id: "scania", alt: "سكانيا" },
+        { id: "fuso", alt: "فوسو كانتر" },
+        { id: "isuzu", alt: "إيسوزو" },
+        { id: "mercedes", alt: "مرسيدس-بنز" },
+        { id: "man", alt: "مان" },
+      ],
+    },
+
     about: {
       heading: "من نحن",
       body: "قمة صور الحديثة للتجارة ش.م.م هي شركة عمانية رائدة متخصصة في صيانة وإصلاح المركبات والمعدات بمختلف أنواعها وأحجامها. نلتزم بأعلى معايير السلامة والجودة ونسعى لتحقيق رضا العملاء من خلال حلول ذكية وموثوقة تسهم في تحسين عمليات النقل وتقليل الوقت والجهد والتكاليف للأفراد والمؤسسات.",
@@ -350,6 +320,46 @@ export const STRINGS = {
         },
       ],
     },
+
+    tca: {
+      heading_capacity: "القدرات الفنية في QSMT",
+      capacity: [
+        {
+          id: "team",
+          alt: "فريق المهندسين في QSMT",
+          caption: "مهندسون ميكانيكيون وكهربائيون مؤهلون وفنيون مهرة",
+        },
+        {
+          id: "offroad",
+          alt: "فريق الاستجابة الطارئة خارج الطرق",
+          caption: "فريق مدرّب على الاستجابة الطارئة خارج الطرق",
+        },
+        {
+          id: "tools",
+          alt: "معدات وأدوات الورشة",
+          caption: "أحدث الأدوات والمعدات ذات المعايير العالية",
+        },
+      ],
+      heading_approach: "نهج QSMT",
+      approach: [
+        {
+          id: "service",
+          title: "تميّز الخدمة:",
+          text: "جودة الخدمة هي حجر الأساس في الصيانة والإصلاح لدى QSMT — تشمل العمل الفني وتجربة العميل الكاملة.",
+        },
+        {
+          id: "market",
+          title: "تحليل السوق:",
+          text: "فهم الطلب المحلي وتحديد الشريحة المستهدفة ومعرفة المنافسين أمور أساسية.",
+        },
+        {
+          id: "adapt",
+          title: "التأقلم والنمو:",
+          text: "قطاع السيارات يتطور سريعًا؛ تستثمر QSMT في التدريب وأجهزة التشخيص الحديثة لمواكبة التطور.",
+        },
+      ],
+    },
+
     team: {
       heading: "الهيكل الإداري في QSMT",
       members: [
@@ -394,6 +404,17 @@ export const STRINGS = {
         },
       ],
     },
+
+    location: {
+      title: "الموقع", // <— aligns with LocationSection.jsx
+      address_label: "العنوان",
+      address_full:
+        "منطقة بركاء الصناعية، ولاية بركاء، محافظة جنوب الباطنة، مسقط، عمان",
+      openMaps: "افتح في خرائط جوجل", // alias used by code
+      open_maps: "افتح في خرائط جوجل", // keep original too
+      directions: "الاتجاهات",
+    },
+
     contact: {
       heading: "الاستفسارات\nوالملاحظات",
       name: "الاسم",
@@ -407,8 +428,17 @@ export const STRINGS = {
         "تعذر الإرسال حاليًا. حاول لاحقًا أو راسلنا مباشرة عبر البريد.",
     },
 
-    location: { heading: "الموقع", address_label: "افتح في خرائط جوجل" },
+    facility: {
+      title: "مرافقنا",
+      alt: "واجهة ورشة QSMT مع اللافتة",
+    },
 
-    footer: { contact_us: "تواصل معنا", book: "احجز الآن" },
+    footer: {
+      contact: "تواصل معنا",
+      book_now: "احجز الآن",
+      whatsapp_prefill: "مرحبًا QSMT، أود الحجز/الاستفسار.",
+      social_aria: "روابط التواصل الاجتماعي",
+      phones_aria: "أرقام الهاتف",
+    },
   },
 };

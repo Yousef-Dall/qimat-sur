@@ -9,14 +9,14 @@ export default function HeroBanner() {
   const { t, lang } = useI18n();
   const isAr = lang === "ar";
 
-  // Fallbacks keep things readable even if a key is missing
-  const brand = t("hero.brand", isAr ? "شركة قِمَة صُور" : "QIMAT SUR");
-  const sub   = t("hero.sub",   isAr ? "الحديثة للتجارة ش.م.م" : "Modern Trading LLC");
+  // Use the keys that exist in strings.js
+  const brand = t("hero.line1", isAr ? "شركة قمة صور" : "QIMAT SUR");
+  const sub   = t("hero.line2", isAr ? "للتجارة الحديثة ش.م.م" : "Modern Trading LLC");
   const tagline = t(
     "hero.tagline",
-    // isAr
-    //   ? "خدمات صيانة وإصلاح موثوقة لمختلف أحجام الشاحنات — لضمان استمرارية عمل شاحناتك بكفاءة."
-    //   : "Reliable maintenance, repairs, and service for trucks of all sizes – keeping your fleet running"
+    isAr
+      ? "خدمات صيانة وإصلاح موثوقة لمختلف أحجام الشاحنات لضمان استمرارية عمل أسطولك."
+      : "Reliable maintenance, repairs, and service for trucks of all sizes – keeping your fleet running."
   );
 
   return (
@@ -28,14 +28,14 @@ export default function HeroBanner() {
       <div className="hero__rule" />
 
       <div className="hero__inner">
-        {/* White badge */}
+        {/* Logo badge */}
         <div className="hero__badge">
           <div className="hero__badgeCircle">
             <img src={qsmtLogo} alt="QSMT logo" className="hero__badgeLogo" />
           </div>
         </div>
 
-        {/* Trucks (decorative) */}
+        {/* Decorative trucks image */}
         <div className="hero__trucks" aria-hidden="true">
           <img src={trucksPng} alt="" />
         </div>

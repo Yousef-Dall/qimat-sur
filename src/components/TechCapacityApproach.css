@@ -19,12 +19,13 @@
 .tca__heading {
   font-size: 28px;
   font-weight: 800;
-  text-align: center;
+  text-align: center; /* stays centered EN & AR */
   letter-spacing: 0.3px;
   margin: 0 0 18px;
   text-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
 }
 
+/* Capacity */
 .tca__capacityGrid {
   list-style: none;
   padding: 0;
@@ -45,23 +46,23 @@
   aspect-ratio: 16 / 9;
   border-radius: 10px;
   overflow: hidden;
-  /* box-shadow: 0 10px 22px rgba(0, 0, 0, 0.25); */
-  /* background: rgba(255, 255, 255, 0.06); */
   display: grid;
   place-items: center;
+  transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
 }
 .tca__capImage:hover {
   background: rgba(255, 255, 255, 0.1);
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.32);
   transform: translateY(-4px);
-  transition: all 0.3s ease;
 }
 
 .tca__capImage img {
   width: 100%;
-  /* height: 100%; */
-  /* object-fit: cover; */
   display: block;
+  /* Uncomment if you want crop-to-fill:
+     height: 100%;
+     object-fit: cover;
+   */
 }
 
 .tca__capText {
@@ -70,6 +71,7 @@
   text-align: center;
 }
 
+/* Approach */
 .tca__approachGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -89,12 +91,12 @@
   min-height: 220px;
   justify-content: center;
   text-align: center;
+  transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
 }
 .tca__approachItem:hover {
   background: rgba(255, 255, 255, 0.12);
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.32);
   transform: translateY(-4px);
-  transition: all 0.3s ease;
 }
 
 .tca__circle {
@@ -111,7 +113,6 @@
 .tca__circle img {
   height: 100%;
   width: 100%;
-
   object-fit: contain;
 }
 
@@ -128,6 +129,7 @@
   text-align: center;
 }
 
+/* Placeholders */
 .tca__ph {
   background: rgba(255, 255, 255, 0.2);
 }
@@ -141,13 +143,15 @@
   border-radius: 50%;
 }
 
-body.rtl .tca__heading,
-body.rtl .tca__capText,
-body.rtl .tca__approachTitle,
-body.rtl .tca__approachText {
+/* RTL (scoped to this section) */
+.tca--rtl .tca__capText,
+.tca--rtl .tca__approachTitle,
+.tca--rtl .tca__approachText {
   text-align: right;
 }
+/* Heading remains centered; no override here */
 
+/* Responsive */
 @media (max-width: 980px) {
   .tca__capacityGrid {
     grid-template-columns: 1fr;
