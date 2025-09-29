@@ -46,6 +46,15 @@ module.exports = async (req, res) => {
   }
 
   try {
+    // Log environment variables (without sensitive data)
+    console.log("[send-email] Environment check:", {
+      SMTP_HOST: process.env.SMTP_HOST || "NOT_SET",
+      SMTP_PORT: process.env.SMTP_PORT || "NOT_SET", 
+      SMTP_USER: process.env.SMTP_USER ? "SET" : "NOT_SET",
+      SMTP_PASS: process.env.SMTP_PASS ? "SET" : "NOT_SET",
+      TO_EMAIL: process.env.TO_EMAIL || "NOT_SET"
+    });
+
     const body =
       typeof req.body === "string"
         ? JSON.parse(req.body || "{}")
@@ -60,21 +69,34 @@ module.exports = async (req, res) => {
       lang,
     } = body;
 
+    console.log("[send-email] Form data:", { name, email, phone: phone ? "PROVIDED" : "EMPTY", messageLength: message.length });
+
     // Honeypot – if bots fill it, silently succeed
     if (website) return ok(res, { filtered: true });
 
     if (!name.trim() || !email.trim() || !message.trim()) {
+      console.log("[send-email] Validation failed: missing required fields");
       return bad(res, 400, "Missing required fields.");
     }
     const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRe.test(email)) return bad(res, 400, "Invalid email.");
+    if (!emailRe.test(email)) {
+      console.log("[send-email] Validation failed: invalid email format");
+      return bad(res, 400, "Invalid email.");
+    }
 
     const port = Number(process.env.SMTP_PORT || 465);
     const secure =
       String(process.env.SMTP_SECURE || "").toLowerCase() === "true" ||
       port === 465;
 
-    const transporter = nodemailer.createTransporter({
+    console.log("[send-email] Creating transporter with config:", {
+      host: process.env.SMTP_HOST || "smtp.gmail.com",
+      port,
+      secure,
+      user: process.env.SMTP_USER ? "SET" : "NOT_SET"
+    });
+
+    const transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST || "smtp.gmail.com",
       port,
       secure,
@@ -148,6 +170,7 @@ module.exports = async (req, res) => {
       </div>
     `;
 
+    console.log("[send-email] Attempting to send email...");
     await transporter.sendMail({
       from: `"QSMT Website" <${fromAddr}>`,
       to,
@@ -160,7 +183,12 @@ module.exports = async (req, res) => {
     console.log(`[send-email] Email sent successfully to ${to} from ${email}`);
     return ok(res, { message: "Email sent successfully" });
   } catch (err) {
-    console.error("[send-email] Error:", err);
-    return bad(res, 500, "Email failed to send.");
+    console.error("[send-email] Detailed error:", {
+      message: err.message,
+      code: err.code,
+      response: err.response,
+      stack: err.stack
+    });
+    return bad(res, 500, `Email failed to send: ${err.message}`);
   }
 };
