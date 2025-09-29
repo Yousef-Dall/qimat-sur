@@ -1,7 +1,36 @@
 // api/send-email.js - Vercel Serverless Function
 const nodemailer = require("nodemailer");
 
-/** Tiny CORS helper (handles OPTIONS preflight) */
+/** Tiny     console.log("[send-email] Creating transporter with config:", {
+      host: process.env.SMTP_HOST || "smtp.gmail.com",
+      port,
+      secure,
+      user: process.env.SMTP_USER ? "SET" : "NOT_SET"
+    });
+
+    const transporter = nodemailer.createTransporter({
+      host: process.env.SMTP_HOST || "smtp.gmail.com",
+      port,
+      secure,
+      auth: {
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASS,
+      },
+    });
+
+    // Verify SMTP connection before attempting to send
+    console.log("[send-email] Verifying SMTP connection...");
+    try {
+      await transporter.verify();
+      console.log("[send-email] SMTP connection verified successfully");
+    } catch (verifyError) {
+      console.error("[send-email] SMTP verification failed:", {
+        message: verifyError.message,
+        code: verifyError.code,
+        response: verifyError.response
+      });
+      return bad(res, 500, `SMTP connection failed: ${verifyError.message}`);
+    }dles OPTIONS preflight) */
 function applyCors(req, res) {
   const allowList = (process.env.ALLOW_ORIGINS || "")
     .split(",")
@@ -46,14 +75,25 @@ module.exports = async (req, res) => {
   }
 
   try {
+    // Enhanced environment validation
+    const requiredEnvs = ['SMTP_HOST', 'SMTP_USER', 'SMTP_PASS'];
+    const missingEnvs = requiredEnvs.filter(env => !process.env[env]);
+    
     // Log environment variables (without sensitive data)
     console.log("[send-email] Environment check:", {
       SMTP_HOST: process.env.SMTP_HOST || "NOT_SET",
       SMTP_PORT: process.env.SMTP_PORT || "NOT_SET", 
       SMTP_USER: process.env.SMTP_USER ? "SET" : "NOT_SET",
-      SMTP_PASS: process.env.SMTP_PASS ? "SET" : "NOT_SET",
-      TO_EMAIL: process.env.TO_EMAIL || "NOT_SET"
+      SMTP_PASS: process.env.SMTP_PASS ? `SET (${process.env.SMTP_PASS.length} chars)` : "NOT_SET",
+      TO_EMAIL: process.env.TO_EMAIL || "NOT_SET",
+      MISSING_ENVS: missingEnvs.length > 0 ? missingEnvs : "NONE"
     });
+
+    // Fail fast if critical environment variables are missing
+    if (missingEnvs.length > 0) {
+      console.error("[send-email] Missing critical environment variables:", missingEnvs);
+      return bad(res, 500, `Server configuration error: Missing ${missingEnvs.join(', ')}`);
+    }
 
     const body =
       typeof req.body === "string"
