@@ -17,98 +17,10 @@ import {
   AccessTime as ClockIcon,
   Phone as PhoneIcon,
 } from '@mui/icons-material';
-import { styled } from '@mui/material/styles';
 import logo from "../assets/logo.png";
 import { useI18n } from "../i18n/I18nProvider";
 
-// Styled components for custom styling
-const StyledAppBar = styled(AppBar)(({ theme, visible }) => ({
-  position: 'fixed',
-  top: 0,
-  left: 0,
-  right: 0,
-  zIndex: 9999,
-  backdropFilter: 'saturate(1.1) blur(6px)',
-  background: 'rgba(255, 255, 255, 0.86)',
-  boxShadow: '0 10px 24px rgba(0, 0, 0, 0.08)',
-  transform: visible ? 'translateY(0)' : 'translateY(-110%)',
-  opacity: visible ? 1 : 0,
-  transition: 'transform 220ms ease, opacity 220ms ease',
-  color: '#4b5563',
-}));
 
-const StyledLogo = styled('img')({
-  width: '64px',
-  height: '64px',
-  borderRadius: '50%',
-  objectFit: 'contain',
-  background: '#fff',
-});
-
-const BookButton = styled(Button)({
-  borderRadius: '10px',
-  background: '#1f1b5a',
-  color: '#fff',
-  fontWeight: 700,
-  padding: '10px 18px',
-  textTransform: 'none',
-  boxShadow: '0 8px 16px rgba(31, 27, 90, 0.35)',
-  '&:hover': {
-    background: '#2a2570',
-    boxShadow: '0 12px 24px rgba(31, 27, 90, 0.45)',
-  },
-});
-
-const NavButton = styled(Button)(({ theme }) => ({
-  borderRadius: '20px',
-  border: '2px solid rgba(255, 255, 255, 0.3)',
-  background: 'rgba(255, 255, 255, 0.1)',
-  color: '#4b5563',
-  fontWeight: 500,
-  textTransform: 'none',
-  margin: '0 4px',
-  padding: '6px 16px',
-  '&:hover': {
-    background: 'rgba(255, 255, 255, 0.2)',
-    border: '2px solid rgba(255, 255, 255, 0.5)',
-  },
-}));
-
-const LangButton = styled(Button)(({ active }) => ({
-  color: active ? '#1f1b5a' : '#6b7280',
-  fontWeight: active ? 700 : 400,
-  textTransform: 'none',
-  minWidth: 'auto',
-  padding: '4px 8px',
-  '&:hover': {
-    background: 'rgba(31, 27, 90, 0.1)',
-  },
-}));
-
-const HotzoneBox = styled(Box)({
-  position: 'fixed',
-  top: 0,
-  left: 0,
-  right: 0,
-  height: '160px',
-  zIndex: 9998,
-});
-
-const InfoItem = styled(Box)({
-  display: 'flex',
-  alignItems: 'center',
-  gap: '8px',
-  minWidth: '220px',
-  color: '#4b5563',
-  fontSize: '14px',
-  '& a': {
-    color: 'inherit',
-    textDecoration: 'none',
-    '&:hover': {
-      textDecoration: 'underline',
-    },
-  },
-});
 
 export default function Header() {
   const { t, lang, setLang } = useI18n();
@@ -182,7 +94,7 @@ export default function Header() {
       />
 
       {/* Top hotzone: only hovering here shows the header */}
-      <HotzoneBox
+      <Box
         onMouseEnter={() => { 
           setInHotzone(true); 
           setVisible(true); 
@@ -194,11 +106,32 @@ export default function Header() {
         }}
         onTouchEnd={() => setInHotzone(false)}
         aria-hidden="true"
+        sx={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          height: '160px',
+          zIndex: 9998,
+        }}
       />
 
-      <StyledAppBar
+      <AppBar
         ref={headerRef}
-        visible={visible}
+        sx={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          zIndex: 9999,
+          backdropFilter: 'saturate(1.1) blur(6px)',
+          background: 'rgba(255, 255, 255, 0.86)',
+          boxShadow: '0 10px 24px rgba(0, 0, 0, 0.08)',
+          transform: visible ? 'translateY(0)' : 'translateY(-110%)',
+          opacity: visible ? 1 : 0,
+          transition: 'transform 220ms ease, opacity 220ms ease',
+          color: '#4b5563',
+        }}
         onMouseEnter={() => { 
           setHovered(true); 
           clearTimeout(idleRef.current); 
@@ -218,7 +151,18 @@ export default function Header() {
             }}>
               {/* Logo */}
               <Box>
-                <StyledLogo src={logo} alt="QSMT logo" />
+                <Box
+                  component="img"
+                  src={logo} 
+                  alt="QSMT logo"
+                  sx={{
+                    width: '64px',
+                    height: '64px',
+                    borderRadius: '50%',
+                    objectFit: 'contain',
+                    background: '#fff',
+                  }}
+                />
               </Box>
 
               {/* Info section */}
@@ -232,34 +176,81 @@ export default function Header() {
                   display: 'none'
                 }
               }}>
-                <InfoItem 
+                <Box 
                   component="a"
                   href={mapsUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  sx={{ textDecoration: 'none' }}
+                  sx={{ 
+                    textDecoration: 'none',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '8px',
+                    minWidth: '220px',
+                    color: '#4b5563',
+                    fontSize: '14px',
+                    '& a': {
+                      color: 'inherit',
+                      textDecoration: 'none',
+                      '&:hover': {
+                        textDecoration: 'underline',
+                      },
+                    },
+                  }}
                 >
                   <LocationIcon fontSize="small" />
                   <Typography variant="body2">
                     {t("header.address")}
                   </Typography>
-                </InfoItem>
+                </Box>
 
-                <InfoItem>
+                <Box 
+                  sx={{ 
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '8px',
+                    minWidth: '220px',
+                    color: '#4b5563',
+                    fontSize: '14px',
+                    '& a': {
+                      color: 'inherit',
+                      textDecoration: 'none',
+                      '&:hover': {
+                        textDecoration: 'underline',
+                      },
+                    },
+                  }}
+                >
                   <ClockIcon fontSize="small" />
                   <Typography variant="body2">
                     {t("header.hours")}
                   </Typography>
-                </InfoItem>
+                </Box>
 
-                <InfoItem>
+                <Box 
+                  sx={{ 
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '8px',
+                    minWidth: '220px',
+                    color: '#4b5563',
+                    fontSize: '14px',
+                    '& a': {
+                      color: 'inherit',
+                      textDecoration: 'none',
+                      '&:hover': {
+                        textDecoration: 'underline',
+                      },
+                    },
+                  }}
+                >
                   <PhoneIcon fontSize="small" />
                   <Typography variant="body2">
                     <a href="tel:+96892405017">+968 92405017</a>
                     <span>&nbsp;·&nbsp;</span>
                     <a href="tel:+96879178056">+968 79178056</a>
                   </Typography>
-                </InfoItem>
+                </Box>
               </Box>
 
               {/* CTA and Language */}
@@ -269,32 +260,63 @@ export default function Header() {
                 alignItems: 'flex-end',
                 gap: 1
               }}>
-                <BookButton
+                <Button
                   component="a"
                   href={`https://wa.me/${waNumber}?text=${encodeURIComponent(
                     isAr ? "مرحبًا QSMT، أود حجز خدمة." : "Hello QSMT, I'd like to book a service."
                   )}`}
                   target="_blank"
                   rel="noopener noreferrer"
+                  sx={{
+                    borderRadius: '10px',
+                    background: '#1f1b5a',
+                    color: '#fff',
+                    fontWeight: 700,
+                    padding: '10px 18px',
+                    textTransform: 'none',
+                    boxShadow: '0 8px 16px rgba(31, 27, 90, 0.35)',
+                    '&:hover': {
+                      background: '#2a2570',
+                      boxShadow: '0 12px 24px rgba(31, 27, 90, 0.45)',
+                    },
+                  }}
                 >
                   {t("header.book")}
-                </BookButton>
+                </Button>
 
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                  <LangButton
-                    active={lang === "en"}
+                  <Button
                     onClick={() => setLang("en")}
+                    sx={{
+                      color: lang === "en" ? '#1f1b5a' : '#6b7280',
+                      fontWeight: lang === "en" ? 700 : 400,
+                      textTransform: 'none',
+                      minWidth: 'auto',
+                      padding: '4px 8px',
+                      '&:hover': {
+                        background: 'rgba(31, 27, 90, 0.1)',
+                      },
+                    }}
                   >
                     {t("header.lang_en")}
-                  </LangButton>
+                  </Button>
                   <Typography variant="body2" sx={{ color: '#6b7280' }}>|</Typography>
-                  <LangButton
-                    active={lang === "ar"}
+                  <Button
                     onClick={() => setLang("ar")}
                     dir="rtl"
+                    sx={{
+                      color: lang === "ar" ? '#1f1b5a' : '#6b7280',
+                      fontWeight: lang === "ar" ? 700 : 400,
+                      textTransform: 'none',
+                      minWidth: 'auto',
+                      padding: '4px 8px',
+                      '&:hover': {
+                        background: 'rgba(31, 27, 90, 0.1)',
+                      },
+                    }}
                   >
                     {t("header.lang_ar")}
-                  </LangButton>
+                  </Button>
                 </Box>
               </Box>
             </Box>
@@ -306,22 +328,86 @@ export default function Header() {
               justifyContent: 'center',
               width: '100%'
             }}>
-              <NavButton onClick={() => go("services")}>
+              <Button 
+                onClick={() => go("services")}
+                sx={{
+                  borderRadius: '20px',
+                  border: '2px solid rgba(255, 255, 255, 0.3)',
+                  background: 'rgba(255, 255, 255, 0.1)',
+                  color: '#4b5563',
+                  fontWeight: 500,
+                  textTransform: 'none',
+                  margin: '0 4px',
+                  padding: '6px 16px',
+                  '&:hover': {
+                    background: 'rgba(255, 255, 255, 0.2)',
+                    border: '2px solid rgba(255, 255, 255, 0.5)',
+                  },
+                }}
+              >
                 {t("header.nav.services")}
-              </NavButton>
-              <NavButton onClick={() => go("location")}>
+              </Button>
+              <Button 
+                onClick={() => go("location")}
+                sx={{
+                  borderRadius: '20px',
+                  border: '2px solid rgba(255, 255, 255, 0.3)',
+                  background: 'rgba(255, 255, 255, 0.1)',
+                  color: '#4b5563',
+                  fontWeight: 500,
+                  textTransform: 'none',
+                  margin: '0 4px',
+                  padding: '6px 16px',
+                  '&:hover': {
+                    background: 'rgba(255, 255, 255, 0.2)',
+                    border: '2px solid rgba(255, 255, 255, 0.5)',
+                  },
+                }}
+              >
                 {t("header.nav.location")}
-              </NavButton>
-              <NavButton onClick={() => go("gallery")}>
+              </Button>
+              <Button 
+                onClick={() => go("gallery")}
+                sx={{
+                  borderRadius: '20px',
+                  border: '2px solid rgba(255, 255, 255, 0.3)',
+                  background: 'rgba(255, 255, 255, 0.1)',
+                  color: '#4b5563',
+                  fontWeight: 500,
+                  textTransform: 'none',
+                  margin: '0 4px',
+                  padding: '6px 16px',
+                  '&:hover': {
+                    background: 'rgba(255, 255, 255, 0.2)',
+                    border: '2px solid rgba(255, 255, 255, 0.5)',
+                  },
+                }}
+              >
                 {t("header.nav.gallery")}
-              </NavButton>
-              <NavButton onClick={() => go("staff")}>
+              </Button>
+              <Button 
+                onClick={() => go("staff")}
+                sx={{
+                  borderRadius: '20px',
+                  border: '2px solid rgba(255, 255, 255, 0.3)',
+                  background: 'rgba(255, 255, 255, 0.1)',
+                  color: '#4b5563',
+                  fontWeight: 500,
+                  textTransform: 'none',
+                  margin: '0 4px',
+                  padding: '6px 16px',
+                  '&:hover': {
+                    background: 'rgba(255, 255, 255, 0.2)',
+                    border: '2px solid rgba(255, 255, 255, 0.5)',
+                  },
+                }}
+              >
                 {t("header.nav.staff")}
-              </NavButton>
+              </Button>
             </Box>
           </Toolbar>
         </Container>
-      </StyledAppBar>
+      </AppBar>
     </>
   );
 }

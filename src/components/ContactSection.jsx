@@ -11,112 +11,10 @@ import {
   Alert,
   CircularProgress,
 } from '@mui/material';
-import { styled } from '@mui/material/styles';
 import { useI18n } from "../i18n/I18nProvider";
 import mechanic from "../assets/hero-mechanic.jpg";
 
-const ContactHero = styled(Box)(({ dir }) => ({
-  position: 'relative',
-  minHeight: '100vh',
-  backgroundImage: `url(${mechanic})`,
-  backgroundSize: 'cover',
-  backgroundPosition: 'center',
-  backgroundAttachment: 'fixed',
-  display: 'flex',
-  alignItems: 'center',
-  direction: dir,
-}));
 
-const ContactScrim = styled(Box)({
-  position: 'absolute',
-  inset: 0,
-  background: 'linear-gradient(135deg, rgba(8, 124, 207, 0.85) 0%, rgba(27, 26, 120, 0.85) 100%)',
-});
-
-const ContactCard = styled(Card)({
-  position: 'relative',
-  zIndex: 2,
-  background: 'rgba(255, 255, 255, 0.95)',
-  backdropFilter: 'blur(20px)',
-  borderRadius: '20px',
-  maxWidth: '600px',
-  margin: '0 auto',
-  boxShadow: '0 20px 60px rgba(0, 0, 0, 0.3)',
-});
-
-const ContactTitle = styled(Typography)({
-  fontWeight: 700,
-  fontSize: 'clamp(1.5rem, 4vw, 2.2rem)',
-  textAlign: 'center',
-  marginBottom: '32px',
-  color: '#1f1b5a',
-});
-
-const StyledTextField = styled(TextField)({
-  marginBottom: '20px',
-  '& .MuiOutlinedInput-root': {
-    backgroundColor: 'rgba(255, 255, 255, 0.9)',
-    borderRadius: '12px',
-    color: '#1f1b5a', // Ensure input text is dark and visible
-    '& input': {
-      color: '#1f1b5a !important', // Force input text color
-    },
-    '& textarea': {
-      color: '#1f1b5a !important', // Force textarea text color
-    },
-    '&:hover .MuiOutlinedInput-notchedOutline': {
-      borderColor: '#087ccf',
-    },
-    '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-      borderColor: '#1f1b5a',
-      borderWidth: '2px',
-    },
-  },
-  '& .MuiInputLabel-root': {
-    color: '#4b5563',
-    '&.Mui-focused': {
-      color: '#1f1b5a',
-    },
-  },
-  '& .MuiInputBase-input': {
-    color: '#1f1b5a !important', // Additional specificity for input text
-  },
-});
-
-const HoneypotInput = styled('input')({
-  position: 'absolute',
-  left: '-9999px',
-  top: '-9999px',
-  width: '1px',
-  height: '1px',
-  opacity: 0,
-  pointerEvents: 'none',
-});
-
-const SubmitButton = styled(Button)({
-  borderRadius: '12px',
-  padding: '12px 32px',
-  fontWeight: 700,
-  fontSize: '1.1rem',
-  textTransform: 'none',
-  background: 'linear-gradient(135deg, #087ccf 0%, #1f1b5a 100%)',
-  color: '#fff',
-  minHeight: '48px',
-  '&:hover': {
-    background: 'linear-gradient(135deg, #0668a8 0%, #2a2570 100%)',
-    boxShadow: '0 8px 24px rgba(31, 27, 90, 0.4)',
-  },
-  '&:disabled': {
-    background: '#94a3b8',
-    color: '#fff',
-  },
-});
-
-const StyledDivider = styled(Divider)({
-  margin: '40px 0',
-  background: 'rgba(255, 255, 255, 0.3)',
-  height: '2px',
-});
 
 export default function ContactSection() {
   const { t, lang } = useI18n();
@@ -204,27 +102,71 @@ export default function ContactSection() {
   return (
     <>
       <Container maxWidth="xl">
-        <StyledDivider />
+        <Divider 
+          sx={{
+            margin: '40px 0',
+            background: 'rgba(255, 255, 255, 0.3)',
+            height: '2px',
+          }}
+        />
       </Container>
 
-      <ContactHero
+      <Box
         component="section"
         id="contact"
         dir={isAr ? "rtl" : "ltr"}
         aria-label={t("contact.heading", "Contact Us")}
+        sx={{
+          position: 'relative',
+          minHeight: '100vh',
+          backgroundImage: `url(${mechanic})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundAttachment: 'fixed',
+          display: 'flex',
+          alignItems: 'center',
+          direction: isAr ? "rtl" : "ltr",
+        }}
       >
-        <ContactScrim />
+        <Box 
+          sx={{
+            position: 'absolute',
+            inset: 0,
+            background: 'linear-gradient(135deg, rgba(8, 124, 207, 0.85) 0%, rgba(27, 26, 120, 0.85) 100%)',
+          }}
+        />
         
         <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 2 }}>
-          <ContactCard>
+          <Card 
+            sx={{
+              position: 'relative',
+              zIndex: 2,
+              background: 'rgba(255, 255, 255, 0.95)',
+              backdropFilter: 'blur(20px)',
+              borderRadius: '20px',
+              maxWidth: '600px',
+              margin: '0 auto',
+              boxShadow: '0 20px 60px rgba(0, 0, 0, 0.3)',
+            }}
+          >
             <CardContent sx={{ padding: '40px' }}>
-              <ContactTitle component="h2">
+              <Typography 
+                component="h2"
+                sx={{
+                  fontWeight: 700,
+                  fontSize: 'clamp(1.5rem, 4vw, 2.2rem)',
+                  textAlign: 'center',
+                  marginBottom: '32px',
+                  color: '#1f1b5a',
+                }}
+              >
                 {t("contact.heading", "Contact Us")}
-              </ContactTitle>
+              </Typography>
 
               <Box component="form" onSubmit={onSubmit} noValidate>
                 {/* Honeypot (bots fill it, humans never see it) */}
-                <HoneypotInput
+                <Box
+                  component="input"
                   type="text"
                   name="website"
                   value={form.website}
@@ -232,9 +174,18 @@ export default function ContactSection() {
                   tabIndex={-1}
                   autoComplete="off"
                   aria-hidden="true"
+                  sx={{
+                    position: 'absolute',
+                    left: '-9999px',
+                    top: '-9999px',
+                    width: '1px',
+                    height: '1px',
+                    opacity: 0,
+                    pointerEvents: 'none',
+                  }}
                 />
 
-                <StyledTextField
+                <TextField
                   fullWidth
                   type="text"
                   name="name"
@@ -244,9 +195,39 @@ export default function ContactSection() {
                   autoComplete="name"
                   required
                   variant="outlined"
+                  sx={{
+                    marginBottom: '20px',
+                    '& .MuiOutlinedInput-root': {
+                      backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                      borderRadius: '12px',
+                      color: '#1f1b5a',
+                      '& input': {
+                        color: '#1f1b5a !important',
+                      },
+                      '& textarea': {
+                        color: '#1f1b5a !important',
+                      },
+                      '&:hover .MuiOutlinedInput-notchedOutline': {
+                        borderColor: '#087ccf',
+                      },
+                      '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                        borderColor: '#1f1b5a',
+                        borderWidth: '2px',
+                      },
+                    },
+                    '& .MuiInputLabel-root': {
+                      color: '#4b5563',
+                      '&.Mui-focused': {
+                        color: '#1f1b5a',
+                      },
+                    },
+                    '& .MuiInputBase-input': {
+                      color: '#1f1b5a !important',
+                    },
+                  }}
                 />
 
-                <StyledTextField
+                <TextField
                   fullWidth
                   type="tel"
                   name="phone"
@@ -255,9 +236,39 @@ export default function ContactSection() {
                   onChange={onChange}
                   autoComplete="tel"
                   variant="outlined"
+                  sx={{
+                    marginBottom: '20px',
+                    '& .MuiOutlinedInput-root': {
+                      backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                      borderRadius: '12px',
+                      color: '#1f1b5a',
+                      '& input': {
+                        color: '#1f1b5a !important',
+                      },
+                      '& textarea': {
+                        color: '#1f1b5a !important',
+                      },
+                      '&:hover .MuiOutlinedInput-notchedOutline': {
+                        borderColor: '#087ccf',
+                      },
+                      '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                        borderColor: '#1f1b5a',
+                        borderWidth: '2px',
+                      },
+                    },
+                    '& .MuiInputLabel-root': {
+                      color: '#4b5563',
+                      '&.Mui-focused': {
+                        color: '#1f1b5a',
+                      },
+                    },
+                    '& .MuiInputBase-input': {
+                      color: '#1f1b5a !important',
+                    },
+                  }}
                 />
 
-                <StyledTextField
+                <TextField
                   fullWidth
                   type="email"
                   name="email"
@@ -267,9 +278,39 @@ export default function ContactSection() {
                   autoComplete="email"
                   required
                   variant="outlined"
+                  sx={{
+                    marginBottom: '20px',
+                    '& .MuiOutlinedInput-root': {
+                      backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                      borderRadius: '12px',
+                      color: '#1f1b5a',
+                      '& input': {
+                        color: '#1f1b5a !important',
+                      },
+                      '& textarea': {
+                        color: '#1f1b5a !important',
+                      },
+                      '&:hover .MuiOutlinedInput-notchedOutline': {
+                        borderColor: '#087ccf',
+                      },
+                      '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                        borderColor: '#1f1b5a',
+                        borderWidth: '2px',
+                      },
+                    },
+                    '& .MuiInputLabel-root': {
+                      color: '#4b5563',
+                      '&.Mui-focused': {
+                        color: '#1f1b5a',
+                      },
+                    },
+                    '& .MuiInputBase-input': {
+                      color: '#1f1b5a !important',
+                    },
+                  }}
                 />
 
-                <StyledTextField
+                <TextField
                   fullWidth
                   multiline
                   rows={4}
@@ -279,6 +320,36 @@ export default function ContactSection() {
                   onChange={onChange}
                   required
                   variant="outlined"
+                  sx={{
+                    marginBottom: '20px',
+                    '& .MuiOutlinedInput-root': {
+                      backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                      borderRadius: '12px',
+                      color: '#1f1b5a',
+                      '& input': {
+                        color: '#1f1b5a !important',
+                      },
+                      '& textarea': {
+                        color: '#1f1b5a !important',
+                      },
+                      '&:hover .MuiOutlinedInput-notchedOutline': {
+                        borderColor: '#087ccf',
+                      },
+                      '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                        borderColor: '#1f1b5a',
+                        borderWidth: '2px',
+                      },
+                    },
+                    '& .MuiInputLabel-root': {
+                      color: '#4b5563',
+                      '&.Mui-focused': {
+                        color: '#1f1b5a',
+                      },
+                    },
+                    '& .MuiInputBase-input': {
+                      color: '#1f1b5a !important',
+                    },
+                  }}
                 />
 
                 {status.state !== "idle" && (
@@ -296,22 +367,40 @@ export default function ContactSection() {
                 )}
 
                 <Box sx={{ textAlign: 'center' }}>
-                  <SubmitButton
+                  <Button
                     type="submit"
                     disabled={status.state === "loading"}
                     startIcon={status.state === "loading" ? <CircularProgress size={20} color="inherit" /> : null}
+                    sx={{
+                      borderRadius: '12px',
+                      padding: '12px 32px',
+                      fontWeight: 700,
+                      fontSize: '1.1rem',
+                      textTransform: 'none',
+                      background: 'linear-gradient(135deg, #087ccf 0%, #1f1b5a 100%)',
+                      color: '#fff',
+                      minHeight: '48px',
+                      '&:hover': {
+                        background: 'linear-gradient(135deg, #0668a8 0%, #2a2570 100%)',
+                        boxShadow: '0 8px 24px rgba(31, 27, 90, 0.4)',
+                      },
+                      '&:disabled': {
+                        background: '#94a3b8',
+                        color: '#fff',
+                      },
+                    }}
                   >
                     {status.state === "loading" 
                       ? t("contact.sending", "Sending...") 
                       : t("contact.send", "Send Message")
                     }
-                  </SubmitButton>
+                  </Button>
                 </Box>
               </Box>
             </CardContent>
-          </ContactCard>
+          </Card>
         </Container>
-      </ContactHero>
+      </Box>
     </>
   );
 }
