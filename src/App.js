@@ -1,5 +1,9 @@
 import React from "react";
-import "./styles/globals.css";
+import { ThemeProvider } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+import Box from '@mui/material/Box';
+import muiTheme from './theme/muiTheme';
+// Old CSS import removed - now using Material UI styling
 import { I18nProvider } from "./i18n/I18nProvider";
 import HeroBanner from "./components/HeroBanner";
 import AboutServices from "./components/AboutServices";
@@ -36,70 +40,60 @@ export default function App() {
   ];
 
   return (
-    <>
-      <></>
-      <main className="page">
+    <ThemeProvider theme={muiTheme}>
+      <CssBaseline />
+      <Box sx={{ minHeight: '100vh', position: 'relative' }}>
         <I18nProvider>
-          <section className="site-section">
-            <div className="site-container">
-              <Header />
-            </div>
-          </section>
-          <section className="site-section">
-            <div className="site-container">
-              <HeroBanner />
-            </div>
-          </section>
-          <section className="site-section">
-            <div className="site-container">
-              <FacilityShowcase />
-            </div>
-          </section>
-          <section className="site-section">
-            <div className="site-container">
-              <AboutServices />
-            </div>
-          </section>
-          <section className="site-section">
-            <div className="site-container">
-              <SpecialisedBrands />
-            </div>
-          </section>
-          <section className="site-section">
-            <div className="site-container">
-              <TechCapacityApproach />
-            </div>
-          </section>
-          <section className="site-section">
-            <div className="site-container">
-              <LocationSection />
-            </div>
-          </section>
-          <section className="site-section">
-            <div className="site-container">
-              <Carousel
-                images={gallery}
-                intervalMs={1500}
-                aspect="16/9"
-                titleEn="Gallery"
-                titleAr="المعرض"
-                titleAlign="center"
-              />
-            </div>
-          </section>
-          <section className="site-section">
-            <div className="site-container">
-              <TeamWhoIsWho />
-            </div>
-          </section>
-          <section className="site-section">
-            <div className="site-container">
-              <ContactSection />
-            </div>
-          </section>
-          <SiteFooter />
+          <Box component="section" sx={{ py: 2 }}>
+            <Header />
+          </Box>
+          
+          <Box component="section" sx={{ py: 2 }}>
+            <HeroBanner />
+          </Box>
+          
+          <Box component="section" sx={{ py: 2 }}>
+            <FacilityShowcase />
+          </Box>
+          
+          <Box component="section" sx={{ py: 2 }}>
+            <AboutServices />
+          </Box>
+          
+          <Box component="section" sx={{ py: 2 }}>
+            <SpecialisedBrands />
+          </Box>
+          
+          <Box component="section" sx={{ py: 2 }}>
+            <TechCapacityApproach />
+          </Box>
+          
+          <Box component="section" sx={{ py: 2 }}>
+            <LocationSection />
+          </Box>
+          
+          <Box component="section" sx={{ py: 2 }}>
+            <Carousel
+              images={gallery}
+              intervalMs={1500}
+              aspect="16/9"
+              titleEn="Gallery"
+              titleAr="المعرض"
+              titleAlign="center"
+            />
+          </Box>
+          
+          <Box component="section" sx={{ py: 2 }}>
+            <TeamWhoIsWho />
+          </Box>
+          
+          <Box component="section" sx={{ py: 2 }}>
+            <ContactSection />
+          </Box>
+          
+          <SiteFooter />    
         </I18nProvider>
-      </main>
-    </>
+      </Box>
+    </ThemeProvider>
   );
 }

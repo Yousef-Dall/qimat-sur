@@ -1,16 +1,81 @@
 import React from "react";
-import "./LocationSection.css";
+import {
+  Box,
+  Typography,
+  Container,
+  Card,
+  Divider,
+  Link,
+} from '@mui/material';
+import { LocationOn as LocationIcon } from '@mui/icons-material';
+import { styled } from '@mui/material/styles';
 import { useI18n } from "../i18n/I18nProvider";
 import mapImg from "../assets/qsmt-map.png";
 
-const PinIcon = (props) => (
-  <svg viewBox="0 0 256 256" width="20" height="20" aria-hidden="true" {...props}>
-    <path
-      fill="currentColor"
-      d="M128 24a80 80 0 0 0-80 80c0 58.67 72.89 121.8 76 124.44a8 8 0 0 0 10.08 0C135.11 225.8 208 162.67 208 104a80 80 0 0 0-80-80Zm0 184.2C113.52 196.15 64 150.45 64 104a64 64 0 0 1 128 0c0 46.45-49.52 92.15-64 104.2ZM128 72a32 32 0 1 0 32 32a32 32 0 0 0-32-32Zm0 48a16 16 0 1 1 16-16a16 16 0 0 1-16 16Z"
-    />
-  </svg>
-);
+const LocationSectionContainer = styled(Box)(({ dir }) => ({
+  padding: '60px 0',
+  direction: dir,
+}));
+
+const LocationTitle = styled(Typography)({
+  fontWeight: 700,
+  fontSize: 'clamp(1.8rem, 4vw, 2.5rem)',
+  textAlign: 'center',
+  marginBottom: '32px',
+  color: '#ffffff',
+  textShadow: '0 2px 8px rgba(0, 0, 0, 0.3)',
+});
+
+const AddressLink = styled(Link)({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  gap: '12px',
+  padding: '16px 24px',
+  borderRadius: '12px',
+  background: 'rgba(255, 255, 255, 0.1)',
+  backdropFilter: 'blur(10px)',
+  border: '1px solid rgba(255, 255, 255, 0.2)',
+  color: '#ffffff',
+  textDecoration: 'none',
+  fontSize: '1.1rem',
+  textAlign: 'center',
+  marginBottom: '32px',
+  transition: 'all 0.3s ease',
+  '&:hover': {
+    background: 'rgba(255, 255, 255, 0.15)',
+    transform: 'translateY(-2px)',
+    boxShadow: '0 8px 24px rgba(0, 0, 0, 0.3)',
+  },
+});
+
+const MapFrame = styled(Card)({
+  borderRadius: '20px',
+  overflow: 'hidden',
+  background: 'rgba(255, 255, 255, 0.1)',
+  backdropFilter: 'blur(10px)',
+  border: '1px solid rgba(255, 255, 255, 0.2)',
+  boxShadow: '0 20px 60px rgba(0, 0, 0, 0.3)',
+  transition: 'all 0.3s ease',
+  '&:hover': {
+    transform: 'translateY(-8px)',
+    boxShadow: '0 30px 80px rgba(0, 0, 0, 0.4)',
+  },
+});
+
+const MapImage = styled('img')({
+  width: '100%',
+  height: 'auto',
+  display: 'block',
+  objectFit: 'cover',
+});
+
+const StyledDivider = styled(Divider)({
+  margin: '0 auto 48px',
+  background: 'rgba(255, 255, 255, 0.3)',
+  height: '2px',
+  width: '60%',
+});
 
 export default function LocationSection() {
   const { t, lang } = useI18n();
@@ -30,41 +95,36 @@ export default function LocationSection() {
   const mapsUrl = "https://maps.app.goo.gl/QpwBGe4HPZCzp3FY6";
 
   return (
-    <section className={`location ${isAr ? "location--rtl" : ""}`} dir={isAr ? "rtl" : "ltr"}>
-      <div className="site-container location__wrap">
-        <hr className="tca__rule" />
+    <LocationSectionContainer component="section" dir={isAr ? "rtl" : "ltr"}>
+      <Container maxWidth="lg">
+        <StyledDivider />
 
-        <h2 id="location" className="location__title">
+        <LocationTitle id="location" component="h2">
           {title}
-        </h2>
+        </LocationTitle>
 
         {/* Clickable address with pin icon */}
-        <a
+        <AddressLink
           href={mapsUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="location__address"
           aria-label={openMaps}
         >
-          <PinIcon className="location__icon" />
-          <span className="location__text">{address}</span>
-        </a>
+          <LocationIcon />
+          <Typography component="span">
+            {address}
+          </Typography>
+        </AddressLink>
 
-        {/* Map image opens Google Maps */}
-        <a
-          href={mapsUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="location__map"
-          aria-label={openMaps}
-        >
-          <img
+        {/* Map image */}
+        <MapFrame component="figure" sx={{ margin: 0 }}>
+          <MapImage
             src={mapImg}
-            alt={t("location.mapAlt", isAr ? "افتح الموقع على خرائط جوجل" : "Open the location in Google Maps")}
+            alt={t("location.map_alt", "Map showing QSMT location in Barka Industrial Area")}
             loading="lazy"
           />
-        </a>
-      </div>
-    </section>
+        </MapFrame>
+      </Container>
+    </LocationSectionContainer>
   );
 }

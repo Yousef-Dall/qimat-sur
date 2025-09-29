@@ -11,7 +11,12 @@
     "deploy": "gh-pages -d build"
   },
   "dependencies": {
-    "nodemailer": "^6.10.1",
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
+    "@mui/icons-material": "^7.3.2",
+    "@mui/material": "^7.3.2",
+    "@mui/system": "^7.3.2",
+    "nodemailer": "^7.0.6",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-scripts": "^5.0.1",
@@ -23,19 +28,15 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "eslint-plugin-react-hooks": "^5.2.0",
     "gh": "^2.8.9",
     "gh-pages": "^6.3.0",
     "pages": "^0.0.16"
   },
   "homepage": "http://qimat-surtrd.com",
   "eslintConfig": {
-    "plugins": [
-      "react-hooks"
-    ],
-    "rules": {
-      "react-hooks/rules-of-hooks": "error",
-      "react-hooks/exhaustive-deps": "warn"
-    }
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
   }
 }

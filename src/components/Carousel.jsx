@@ -1,153 +1,173 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState, useEffect } from "react";
+import {
+  Box,
+  Typography,
+  Container,
+  Card,
+  IconButton,
+  MobileStepper,
+} from '@mui/material';
+import { KeyboardArrowLeft, KeyboardArrowRight } from '@mui/icons-material';
+import { styled } from '@mui/material/styles';
 import { useI18n } from "../i18n/I18nProvider";
-import "./Carousel.css";
 
-export default function GalleryCarousel({
-  images = [],
-  intervalMs = 500,
-  aspect = "16/9",
-  titleEn = "Gallery",
+const CarouselSection = styled(Box)(({ dir }) => ({
+  padding: '60px 0',
+  direction: dir,
+}));
+
+const CarouselTitle = styled(Typography)({
+  fontWeight: 700,
+  fontSize: 'clamp(1.8rem, 4vw, 2.5rem)',
+  textAlign: 'center',
+  marginBottom: '48px',
+  color: '#ffffff',
+  textShadow: '0 2px 8px rgba(0, 0, 0, 0.3)',
+});
+
+const ImageCard = styled(Card)({
+  borderRadius: '20px',
+  overflow: 'hidden',
+  background: 'rgba(255, 255, 255, 0.1)',
+  backdropFilter: 'blur(10px)',
+  border: '1px solid rgba(255, 255, 255, 0.2)',
+  boxShadow: '0 20px 60px rgba(0, 0, 0, 0.3)',
+});
+
+const CarouselImage = styled('img')({
+  width: '100%',
+  height: '400px',
+  objectFit: 'cover',
+  display: 'block',
+});
+
+export default function Carousel({ 
+  images = [], 
+  intervalMs = 3000, 
+  titleEn = "Gallery", 
   titleAr = "المعرض",
-  titleAlign = "center",
+  titleAlign = "center" 
 }) {
   const { lang } = useI18n();
   const isAr = lang === "ar";
-  const titleText = isAr ? titleAr : titleEn;
+  
+  const [activeStep, setActiveStep] = useState(0);
+  const maxSteps = images.length;
 
-  const [index, setIndex] = useState(0);
-  const timer = useRef(null);
-  const viewportRef = useRef(null);
-  const touchStartX = useRef(null);
-  const count = images.length;
-
-  // reduced motion?
-  const prefersReducedMotion =
-    typeof window !== "undefined" &&
-    window.matchMedia &&
-    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-  const goTo = (i) => setIndex(((i % count) + count) % count);
-  const prev = () => goTo(index - 1);
-  const next = () => goTo(index + 1);
-
-  // reset slide on language flip (caption width etc.)
-  useEffect(() => { setIndex(0); }, [isAr]);
-
-  const stop = () => clearInterval(timer.current);
-  const start = () => {
-    if (count <= 1 || prefersReducedMotion) return;
-    stop();
-    timer.current = setInterval(() => setIndex((i) => (i + 1) % count), intervalMs);
-  };
-
-  // autoplay (basic)
   useEffect(() => {
-    start();
-    return stop;
-  }, [count, intervalMs, prefersReducedMotion]);
+    if (maxSteps <= 1) return;
+    
+    const timer = setInterval(() => {
+      setActiveStep((prev) => (prev + 1) % maxSteps);
+    }, intervalMs);
+    
+    return () => clearInterval(timer);
+  }, [maxSteps, intervalMs]);
 
-  // pause when out of view
-  useEffect(() => {
-    if (!viewportRef.current || count <= 1 || prefersReducedMotion) return;
-    const io = new IntersectionObserver(
-      ([entry]) => (entry.isIntersecting ? start() : stop()),
-      { threshold: 0.25 }
-    );
-    io.observe(viewportRef.current);
-    return () => io.disconnect();
-  }, [count, prefersReducedMotion]); // start/stop are stable refs
-
-  // touch swipe
-  const onTouchStart = (e) => { touchStartX.current = e.touches[0].clientX; stop(); };
-  const onTouchMove = (e) => {
-    if (touchStartX.current == null) return;
-    const dx = e.touches[0].clientX - touchStartX.current;
-    // do nothing here visually; we keep it simple
-  };
-  const onTouchEnd = (e) => {
-    if (touchStartX.current == null) return;
-    const dx = (e.changedTouches?.[0]?.clientX ?? 0) - touchStartX.current;
-    touchStartX.current = null;
-    const THRESH = 30; // px
-    if (Math.abs(dx) > THRESH) (dx > 0 ? prev() : next());
-    start();
+  const handleNext = () => {
+    setActiveStep((prev) => (prev + 1) % maxSteps);
   };
 
-  if (!count) return null;
+  const handleBack = () => {
+    setActiveStep((prev) => (prev - 1 + maxSteps) % maxSteps);
+  };
 
-  // title align safety
-  const alignValue = ["start", "center", "end"].includes(titleAlign) ? titleAlign : "center";
+  if (!images || images.length === 0) {
+    return null;
+  }
+
+  const currentImage = images[activeStep];
 
   return (
-    <div
-      className={`gc ${isAr ? "gc--ar" : ""}`}
-      key={isAr ? "ar" : "en"}
-      aria-roledescription="carousel"
-      style={{ "--gc-aspect": aspect, "--gc-title-align": alignValue }}
+    <CarouselSection 
+      component="section" 
+      id="gallery" 
       dir={isAr ? "rtl" : "ltr"}
     >
-      <hr className="tca__rule" />
-      <h2 className="gc-title" id="gallery">{titleText}</h2>
-
-      <div
-        ref={viewportRef}
-        className="gc-viewport"
-        onMouseEnter={stop}
-        onMouseLeave={start}
-        onFocus={stop}
-        onBlur={start}
-        onKeyDown={(e) => {
-          if (e.key === "ArrowLeft") prev();
-          if (e.key === "ArrowRight") next();
-        }}
-        onTouchStart={onTouchStart}
-        onTouchMove={onTouchMove}
-        onTouchEnd={onTouchEnd}
-        tabIndex={0}
-        aria-live="polite"
-      >
-        <div
-          className="gc-track"
-          style={{ transform: `translate3d(${-index * 100}%,0,0)` }}
+      <Container maxWidth="lg">
+        <CarouselTitle 
+          component="h2" 
+          sx={{ textAlign: titleAlign }}
         >
-          {images.map((img, i) => (
-            <div key={i} className="gc-slide" aria-hidden={i !== index}>
-              <img
-                src={img.src}
-                alt={isAr ? img.alt_ar || img.alt_en : img.alt_en}
-                loading="lazy"
-              />
-              {(img.caption_en || img.caption_ar) && (
-                <div className="gc-caption">
-                  {isAr ? img.caption_ar || img.caption_en : img.caption_en}
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
+          {isAr ? titleAr : titleEn}
+        </CarouselTitle>
 
-        {count > 1 && (
-          <>
-            <button className="gc-nav gc-prev" onClick={prev} aria-label="Previous slide">‹</button>
-            <button className="gc-nav gc-next" onClick={next} aria-label="Next slide">›</button>
-          </>
-        )}
-      </div>
-
-      {count > 1 && (
-        <div className="gc-dots" role="tablist" aria-label="carousel pagination">
-          {images.map((_, i) => (
-            <button
-              key={i}
-              role="tab"
-              className={`gc-dot ${i === index ? "is-active" : ""}`}
-              aria-selected={i === index}
-              aria-label={`Go to slide ${i + 1}`}
-              onClick={() => goTo(i)}
+        <Box sx={{ position: 'relative' }}>
+          <ImageCard>
+            <CarouselImage
+              src={currentImage.src}
+              alt={currentImage.alt || currentImage.alt_en || `Gallery image ${activeStep + 1}`}
+              loading="lazy"
             />
-          ))}
-        </div>
-      )}
-    </div>
+          </ImageCard>
+
+          {maxSteps > 1 && (
+            <>
+              <Box sx={{
+                position: 'absolute',
+                top: '50%',
+                left: 16,
+                transform: 'translateY(-50%)',
+              }}>
+                <IconButton
+                  onClick={handleBack}
+                  sx={{
+                    backgroundColor: 'rgba(255, 255, 255, 0.8)',
+                    '&:hover': {
+                      backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                    },
+                  }}
+                >
+                  <KeyboardArrowLeft />
+                </IconButton>
+              </Box>
+
+              <Box sx={{
+                position: 'absolute',
+                top: '50%',
+                right: 16,
+                transform: 'translateY(-50%)',
+              }}>
+                <IconButton
+                  onClick={handleNext}
+                  sx={{
+                    backgroundColor: 'rgba(255, 255, 255, 0.8)',
+                    '&:hover': {
+                      backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                    },
+                  }}
+                >
+                  <KeyboardArrowRight />
+                </IconButton>
+              </Box>
+
+              <Box sx={{ 
+                display: 'flex', 
+                justifyContent: 'center', 
+                mt: 3 
+              }}>
+                <MobileStepper
+                  variant="dots"
+                  steps={maxSteps}
+                  position="static"
+                  activeStep={activeStep}
+                  sx={{
+                    backgroundColor: 'transparent',
+                    '& .MuiMobileStepper-dot': {
+                      backgroundColor: 'rgba(255, 255, 255, 0.3)',
+                    },
+                    '& .MuiMobileStepper-dotActive': {
+                      backgroundColor: '#ffffff',
+                    },
+                  }}
+                  nextButton={<div />}
+                  backButton={<div />}
+                />
+              </Box>
+            </>
+          )}
+        </Box>
+      </Container>
+    </CarouselSection>
   );
 }
