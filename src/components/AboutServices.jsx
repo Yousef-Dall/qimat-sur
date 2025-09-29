@@ -9,7 +9,6 @@ import {
   Container,
   Divider,
 } from '@mui/material';
-import { styled } from '@mui/material/styles';
 import { useI18n } from "../i18n/I18nProvider";
 
 import svcRepair      from "../assets/repair.png";
@@ -34,88 +33,7 @@ const SERVICE_IMG = {
   contracts:   svcContracts,
 };
 
-const AboutSection = styled(Box)(({ dir }) => ({
-  padding: '40px 0',
-  direction: dir,
-}));
 
-const StyledDivider = styled(Divider)({
-  margin: '40px 0',
-  background: 'rgba(255, 255, 255, 0.3)',
-  height: '2px',
-});
-
-const AboutBlock = styled(Box)({
-  marginBottom: '32px',
-});
-
-const VisionMissionGrid = styled(Grid)({
-  marginBottom: '32px',
-});
-
-const ServiceCard = styled(Card)(({ theme }) => ({
-  background: 'rgba(255, 255, 255, 0.1)',
-  backdropFilter: 'blur(10px)',
-  border: '1px solid rgba(255, 255, 255, 0.2)',
-  borderRadius: '20px',
-  transition: 'all 0.3s ease',
-  height: '100%',
-  '&:hover': {
-    transform: 'translateY(-8px)',
-    background: 'rgba(255, 255, 255, 0.15)',
-    boxShadow: '0 20px 40px rgba(0, 0, 0, 0.3)',
-  },
-}));
-
-const ServiceIcon = styled(Avatar)({
-  width: 80,
-  height: 80,
-  margin: '0 auto 16px',
-  background: 'rgba(255, 255, 255, 0.9)',
-  border: '3px solid rgba(255, 255, 255, 0.3)',
-  '& img': {
-    width: '70%',
-    height: '70%',
-    objectFit: 'contain',
-  },
-});
-
-const ServiceTitle = styled(Typography)({
-  fontWeight: 600,
-  fontSize: '1.1rem',
-  textAlign: 'center',
-  marginBottom: '12px',
-  color: '#ffffff',
-});
-
-const ServiceDescription = styled(Typography)({
-  textAlign: 'center',
-  fontSize: '0.9rem',
-  lineHeight: 1.5,
-  color: 'rgba(255, 255, 255, 0.9)',
-});
-
-const Heading = styled(Typography)({
-  fontWeight: 700,
-  fontSize: 'clamp(1.8rem, 4vw, 2.5rem)',
-  marginBottom: '24px',
-  color: '#ffffff',
-  textShadow: '0 2px 8px rgba(0, 0, 0, 0.3)',
-});
-
-const SubHeading = styled(Typography)({
-  fontWeight: 600,
-  fontSize: 'clamp(1.2rem, 3vw, 1.6rem)',
-  marginBottom: '16px',
-  color: '#ffffff',
-});
-
-const Paragraph = styled(Typography)({
-  fontSize: '1rem',
-  lineHeight: 1.6,
-  color: 'rgba(255, 255, 255, 0.9)',
-  marginBottom: '16px',
-});
 
 export default function AboutServices() {
   const { t, lang } = useI18n();
@@ -125,57 +43,106 @@ export default function AboutServices() {
   const services = Array.isArray(t("about.services")) ? t("about.services") : [];
 
   return (
-    <AboutSection 
+    <Box 
       component="section" 
       id="about" 
       dir={isAr ? "rtl" : "ltr"}
+      sx={{
+        padding: '40px 0',
+        direction: isAr ? "rtl" : "ltr",
+      }}
     >
       <Container maxWidth="xl">
         {/* Top divider */}
-        <StyledDivider />
+        <Divider sx={{
+          margin: '40px 0',
+          background: 'rgba(255, 255, 255, 0.3)',
+          height: '2px',
+        }} />
 
         {/* About */}
-        <AboutBlock>
-          <Heading component="h2">
+        <Box sx={{ marginBottom: '32px' }}>
+          <Typography component="h2" sx={{
+            fontWeight: 700,
+            fontSize: 'clamp(1.8rem, 4vw, 2.5rem)',
+            marginBottom: '24px',
+            color: '#ffffff',
+            textShadow: '0 2px 8px rgba(0, 0, 0, 0.3)',
+          }}>
             {t("about.heading")}
-          </Heading>
-          <Paragraph>
+          </Typography>
+          <Typography sx={{
+            fontSize: '1rem',
+            lineHeight: 1.6,
+            color: 'rgba(255, 255, 255, 0.9)',
+            marginBottom: '16px',
+          }}>
             {t("about.body")}
-          </Paragraph>
-        </AboutBlock>
+          </Typography>
+        </Box>
 
         {/* Vision / Mission */}
-        <VisionMissionGrid container spacing={4}>
+        <Grid container spacing={4} sx={{ marginBottom: '32px' }}>
           <Grid item xs={12} md={6}>
-            <AboutBlock>
-              <SubHeading component="h3">
+            <Box sx={{ marginBottom: '32px' }}>
+              <Typography component="h3" sx={{
+                fontWeight: 600,
+                fontSize: 'clamp(1.2rem, 3vw, 1.6rem)',
+                marginBottom: '16px',
+                color: '#ffffff',
+              }}>
                 {t("about.vision_h")}
-              </SubHeading>
-              <Paragraph>
+              </Typography>
+              <Typography sx={{
+                fontSize: '1rem',
+                lineHeight: 1.6,
+                color: 'rgba(255, 255, 255, 0.9)',
+                marginBottom: '16px',
+              }}>
                 {t("about.vision_t")}
-              </Paragraph>
-            </AboutBlock>
+              </Typography>
+            </Box>
           </Grid>
           <Grid item xs={12} md={6}>
-            <AboutBlock>
-              <SubHeading component="h3">
+            <Box sx={{ marginBottom: '32px' }}>
+              <Typography component="h3" sx={{
+                fontWeight: 600,
+                fontSize: 'clamp(1.2rem, 3vw, 1.6rem)',
+                marginBottom: '16px',
+                color: '#ffffff',
+              }}>
                 {t("about.mission_h")}
-              </SubHeading>
-              <Paragraph>
+              </Typography>
+              <Typography sx={{
+                fontSize: '1rem',
+                lineHeight: 1.6,
+                color: 'rgba(255, 255, 255, 0.9)',
+                marginBottom: '16px',
+              }}>
                 {t("about.mission_t")}
-              </Paragraph>
-            </AboutBlock>
+              </Typography>
+            </Box>
           </Grid>
-        </VisionMissionGrid>
+        </Grid>
 
         {/* Middle divider */}
-        <StyledDivider />
+        <Divider sx={{
+          margin: '40px 0',
+          background: 'rgba(255, 255, 255, 0.3)',
+          height: '2px',
+        }} />
 
         {/* Services */}
         <Box sx={{ textAlign: 'center', mb: 4 }}>
-          <Heading component="h2" id="services">
+          <Typography component="h2" id="services" sx={{
+            fontWeight: 700,
+            fontSize: 'clamp(1.8rem, 4vw, 2.5rem)',
+            marginBottom: '24px',
+            color: '#ffffff',
+            textShadow: '0 2px 8px rgba(0, 0, 0, 0.3)',
+          }}>
             {t("about.services_h")}
-          </Heading>
+          </Typography>
         </Box>
 
         {/* Services Grid */}
@@ -189,7 +156,19 @@ export default function AboutServices() {
             const img = SERVICE_IMG[s.id];
             return (
               <Grid item xs={12} sm={6} md={4} lg={3} key={s.id} role="listitem">
-                <ServiceCard>
+                <Card sx={{
+                  background: 'rgba(255, 255, 255, 0.1)',
+                  backdropFilter: 'blur(10px)',
+                  border: '1px solid rgba(255, 255, 255, 0.2)',
+                  borderRadius: '20px',
+                  transition: 'all 0.3s ease',
+                  height: '100%',
+                  '&:hover': {
+                    transform: 'translateY(-8px)',
+                    background: 'rgba(255, 255, 255, 0.15)',
+                    boxShadow: '0 20px 40px rgba(0, 0, 0, 0.3)',
+                  },
+                }}>
                   <CardContent sx={{ 
                     padding: '24px',
                     display: 'flex',
@@ -197,7 +176,18 @@ export default function AboutServices() {
                     alignItems: 'center',
                     height: '100%',
                   }}>
-                    <ServiceIcon>
+                    <Avatar sx={{
+                      width: 80,
+                      height: 80,
+                      margin: '0 auto 16px',
+                      background: 'rgba(255, 255, 255, 0.9)',
+                      border: '3px solid rgba(255, 255, 255, 0.3)',
+                      '& img': {
+                        width: '70%',
+                        height: '70%',
+                        objectFit: 'contain',
+                      },
+                    }}>
                       {img ? (
                         <img 
                           src={img} 
@@ -213,20 +203,31 @@ export default function AboutServices() {
                           }} 
                         />
                       )}
-                    </ServiceIcon>
-                    <ServiceTitle component="h4">
+                    </Avatar>
+                    <Typography component="h4" sx={{
+                      fontWeight: 600,
+                      fontSize: '1.1rem',
+                      textAlign: 'center',
+                      marginBottom: '12px',
+                      color: '#ffffff',
+                    }}>
                       {s.title}
-                    </ServiceTitle>
-                    <ServiceDescription>
+                    </Typography>
+                    <Typography sx={{
+                      textAlign: 'center',
+                      fontSize: '0.9rem',
+                      lineHeight: 1.5,
+                      color: 'rgba(255, 255, 255, 0.9)',
+                    }}>
                       {s.desc}
-                    </ServiceDescription>
+                    </Typography>
                   </CardContent>
-                </ServiceCard>
+                </Card>
               </Grid>
             );
           })}
         </Grid>
       </Container>
-    </AboutSection>
+    </Box>
   );
 }

@@ -8,38 +8,9 @@ import {
   MobileStepper,
 } from '@mui/material';
 import { KeyboardArrowLeft, KeyboardArrowRight } from '@mui/icons-material';
-import { styled } from '@mui/material/styles';
 import { useI18n } from "../i18n/I18nProvider";
 
-const CarouselSection = styled(Box)(({ dir }) => ({
-  padding: '60px 0',
-  direction: dir,
-}));
 
-const CarouselTitle = styled(Typography)({
-  fontWeight: 700,
-  fontSize: 'clamp(1.8rem, 4vw, 2.5rem)',
-  textAlign: 'center',
-  marginBottom: '48px',
-  color: '#ffffff',
-  textShadow: '0 2px 8px rgba(0, 0, 0, 0.3)',
-});
-
-const ImageCard = styled(Card)({
-  borderRadius: '20px',
-  overflow: 'hidden',
-  background: 'rgba(255, 255, 255, 0.1)',
-  backdropFilter: 'blur(10px)',
-  border: '1px solid rgba(255, 255, 255, 0.2)',
-  boxShadow: '0 20px 60px rgba(0, 0, 0, 0.3)',
-});
-
-const CarouselImage = styled('img')({
-  width: '100%',
-  height: '400px',
-  objectFit: 'cover',
-  display: 'block',
-});
 
 export default function Carousel({ 
   images = [], 
@@ -79,27 +50,52 @@ export default function Carousel({
   const currentImage = images[activeStep];
 
   return (
-    <CarouselSection 
+    <Box 
       component="section" 
       id="gallery" 
       dir={isAr ? "rtl" : "ltr"}
+      sx={{
+        padding: '60px 0',
+        direction: isAr ? "rtl" : "ltr",
+      }}
     >
       <Container maxWidth="lg">
-        <CarouselTitle 
+        <Typography 
           component="h2" 
-          sx={{ textAlign: titleAlign }}
+          sx={{ 
+            textAlign: titleAlign,
+            fontWeight: 700,
+            fontSize: 'clamp(1.8rem, 4vw, 2.5rem)',
+            marginBottom: '48px',
+            color: '#ffffff',
+            textShadow: '0 2px 8px rgba(0, 0, 0, 0.3)',
+          }}
         >
           {isAr ? titleAr : titleEn}
-        </CarouselTitle>
+        </Typography>
 
         <Box sx={{ position: 'relative' }}>
-          <ImageCard>
-            <CarouselImage
+          <Card sx={{
+            borderRadius: '20px',
+            overflow: 'hidden',
+            background: 'rgba(255, 255, 255, 0.1)',
+            backdropFilter: 'blur(10px)',
+            border: '1px solid rgba(255, 255, 255, 0.2)',
+            boxShadow: '0 20px 60px rgba(0, 0, 0, 0.3)',
+          }}>
+            <Box
+              component="img"
               src={currentImage.src}
               alt={currentImage.alt || currentImage.alt_en || `Gallery image ${activeStep + 1}`}
               loading="lazy"
+              sx={{
+                width: '100%',
+                height: '400px',
+                objectFit: 'cover',
+                display: 'block',
+              }}
             />
-          </ImageCard>
+          </Card>
 
           {maxSteps > 1 && (
             <>
@@ -168,6 +164,6 @@ export default function Carousel({
           )}
         </Box>
       </Container>
-    </CarouselSection>
+    </Box>
   );
 }
