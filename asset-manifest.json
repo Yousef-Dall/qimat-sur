@@ -1,8 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.6b06bdbb.css",
-    "main.js": "/static/js/main.15436d5b.js",
-    "static/js/453.a56096d8.chunk.js": "/static/js/453.a56096d8.chunk.js",
+    "main.js": "/static/js/main.d7a0b6c8.js",
+    "static/js/453.ee655ab9.chunk.js": "/static/js/453.ee655ab9.chunk.js",
     "static/media/cooling.png": "/static/media/cooling.32bbbe1b5a76b0c6293d.png",
     "static/media/hero-mechanic.jpg": "/static/media/hero-mechanic.ced866db5152ec701b73.jpg",
     "static/media/fleet.png": "/static/media/fleet.f5987deba9796fd70bbe.png",
@@ -27,13 +26,9 @@
     "static/media/qsmt-map.png": "/static/media/qsmt-map.86d49917b25b1ee02d41.png",
     "static/media/logo.png": "/static/media/logo.c6e53c8f6cc29752faf4.png",
     "static/media/painting.png": "/static/media/painting.cbd58b64d382e18270b2.png",
-    "static/media/tools.jpg": "/static/media/tools.0d74ff950b1050a09263.jpg",
-    "static/media/market.png": "/static/media/market.2e146fa90dad32571257.png",
     "static/media/mercedes.png": "/static/media/mercedes.f18b5c288d014202e46e.png",
     "static/media/preventive.png": "/static/media/preventive.585046d6916f73c0fd81.png",
     "static/media/emergency.png": "/static/media/emergency.c6726cf3875ce1a1eb06.png",
-    "static/media/service.png": "/static/media/service.083c08eb78c92ab96ef1.png",
-    "static/media/adapt.png": "/static/media/adapt.e1999930bbe645d6d03d.png",
     "static/media/daihatsu.png": "/static/media/daihatsu.52d7dae3ea0db24c135c.png",
     "static/media/volvo.png": "/static/media/volvo.11712f7d26ce4e19a864.png",
     "static/media/man.png": "/static/media/man.164527c0edbe7587c48b.png",
@@ -41,12 +36,10 @@
     "static/media/scania.png": "/static/media/scania.1cb7b21ad25b6deb7fdc.png",
     "static/media/isuzu.png": "/static/media/isuzu.d882bf4501bd540f6841.png",
     "index.html": "/index.html",
-    "main.6b06bdbb.css.map": "/static/css/main.6b06bdbb.css.map",
-    "main.15436d5b.js.map": "/static/js/main.15436d5b.js.map",
-    "453.a56096d8.chunk.js.map": "/static/js/453.a56096d8.chunk.js.map"
+    "main.d7a0b6c8.js.map": "/static/js/main.d7a0b6c8.js.map",
+    "453.ee655ab9.chunk.js.map": "/static/js/453.ee655ab9.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.6b06bdbb.css",
-    "static/js/main.15436d5b.js"
+    "static/js/main.d7a0b6c8.js"
   ]
 }
