@@ -14,7 +14,6 @@ import mapImg from "../assets/qsmt-map.png";
 
 const MBox = motion(Box);
 const MTypo = motion(Typography);
-const MCard = motion(Card);
 const MDivider = motion(Divider);
 const MLink = motion(Link);
 
@@ -53,19 +52,12 @@ export default function LocationSection() {
 
   const containerStagger = {
     initial: { opacity: 1 },
-    whileInView: {
-      opacity: 1,
-      transition: { staggerChildren: 0.12, delayChildren: 0.08 },
-    },
+    whileInView: { opacity: 1, transition: { staggerChildren: 0.12, delayChildren: 0.08 } },
     viewport,
   };
 
   return (
-    <Box
-      component="section"
-      dir={isAr ? "rtl" : "ltr"}
-      sx={{ py: { xs: 4, sm: 6 }, direction: isAr ? "rtl" : "ltr" }}
-    >
+    <Box component="section" dir={isAr ? "rtl" : "ltr"} sx={{ py: { xs: 4, sm: 6 }, direction: isAr ? "rtl" : "ltr" }}>
       <Container maxWidth="lg" sx={{ px: { xs: 2, sm: 3 } }}>
         <MBox variants={containerStagger} initial="initial" whileInView="whileInView" viewport={viewport}>
           <MDivider
@@ -101,9 +93,7 @@ export default function LocationSection() {
             rel="noopener noreferrer"
             aria-label={openMaps}
             variants={fadeUp(0.1)}
-            whileHover={
-              prefersReduced ? {} : { scale: 1.02, y: -2, transition: { duration: 0.18 } }
-            }
+            whileHover={prefersReduced ? {} : { scale: 1.02, y: -2, transition: { duration: 0.18 } }}
             whileTap={prefersReduced ? {} : { scale: 0.99 }}
             sx={{
               display: "inline-flex",
@@ -135,73 +125,65 @@ export default function LocationSection() {
             <Typography component="span">{address}</Typography>
           </MLink>
 
-          <MCard
-            component="figure"
+  
+          <MLink
+            href={mapsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={openMaps}
             variants={fadeUp(0.15)}
-            whileHover={
-              prefersReduced ? {} : { y: -6, boxShadow: "0 30px 80px rgba(0,0,0,.40)" }
-            }
+            whileHover={prefersReduced ? {} : { y: -6 }}
             transition={{ type: "tween", duration: 0.25 }}
             sx={{
-              m: 0,
+              display: "block",
+              textDecoration: "none",
               mx: "auto",
-              borderRadius: { xs: 2, sm: 3 },
-              overflow: "hidden",
-              background: "rgba(255,255,255,0.10)",
-              backdropFilter: "blur(10px)",
-              border: "1px solid rgba(255,255,255,0.20)",
-              boxShadow: "0 20px 60px rgba(0,0,0,.30)",
               maxWidth: { xs: "100%", md: 1100 },
+              borderRadius: { xs: 2, sm: 3 },
+              "&:hover .map-figure": { boxShadow: "0 30px 80px rgba(0,0,0,.40)" },
             }}
           >
-            <Box
+            <Card
+              component="figure"
+              className="map-figure"
               sx={{
-                position: "relative",
-                width: "100%",
-                aspectRatio: { xs: "16/9", md: "21/9" },
+                m: 0,
+                borderRadius: "inherit",
+                overflow: "hidden",
+                background: "rgba(255,255,255,0.10)",
+                backdropFilter: "blur(10px)",
+                border: "1px solid rgba(255,255,255,0.20)",
+                boxShadow: "0 20px 60px rgba(0,0,0,.30)",
+                transition: "box-shadow .3s ease",
               }}
             >
-              <MBox
-                component="img"
-                src={mapImg}
-                alt={t(
-                  "location.map_alt",
-                  "Map showing QSMT location in Barka Industrial Area"
-                )}
-                loading="lazy"
-                initial={{ scale: 1.02 }}
-                whileInView={{
-                  scale: 1,
-                  transition: { duration: 0.6, ease: "easeOut" },
-                }}
-                viewport={viewport}
-                sx={{
-                  position: "absolute",
-                  inset: 0,
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "cover",
-                  display: "block",
-                }}
-              />
-            </Box>
-          </MCard>
+              <Box sx={{ position: "relative", width: "100%", aspectRatio: { xs: "16/9", md: "21/9" } }}>
+                <MBox
+                  component="img"
+                  src={mapImg}
+                  alt={t("location.map_alt", "Map showing QSMT location in Barka Industrial Area")}
+                  loading="lazy"
+                  initial={{ scale: 1.02 }}
+                  whileInView={{ scale: 1, transition: { duration: 0.6, ease: "easeOut" } }}
+                  viewport={viewport}
+                  sx={{
+                    position: "absolute",
+                    inset: 0,
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                    display: "block",
+                  }}
+                />
+              </Box>
+            </Card>
+          </MLink>
 
           <MTypo
             variant="caption"
             variants={fadeIn(0.2)}
-            sx={{
-              display: "block",
-              textAlign: "center",
-              mt: 1.5,
-              opacity: 0.8,
-              color: "#fff",
-            }}
+            sx={{ display: "block", textAlign: "center", mt: 1.5, opacity: 0.8, color: "#fff" }}
           >
-            {t(
-              "location.directions",
-              isAr ? "اضغط على الخريطة لفتح الموقع في خرائط جوجل" : "Tap the map to open in Google Maps"
-            )}
           </MTypo>
         </MBox>
       </Container>

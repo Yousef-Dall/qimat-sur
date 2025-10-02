@@ -60,9 +60,7 @@ export default function AboutServices() {
       sx={{ py: { xs: 4, md: 5 }, direction: isAr ? "rtl" : "ltr" }}
     >
       <Container maxWidth="xl">
-        <Divider
-          sx={{ my: { xs: 4, md: 5 }, background: "rgba(255,255,255,.3)", height: 2 }}
-        />
+        <Divider sx={{ my: { xs: 4, md: 5 }, background: "rgba(255,255,255,.3)", height: 2 }} />
 
         <Reveal>
           <Box
@@ -105,13 +103,7 @@ export default function AboutServices() {
           </Box>
         </Reveal>
 
-        <Box
-          sx={{
-            maxWidth: 1100,
-            mx: "auto",
-            mt: 3,
-          }}
-        >
+        <Box sx={{ maxWidth: 1100, mx: "auto", mt: 3 }}>
           <Stagger>
             <Box
               sx={{
@@ -121,7 +113,6 @@ export default function AboutServices() {
                 alignItems: "stretch",
               }}
             >
-
               <MotionBox variants={item} style={{ willChange: "transform, opacity" }}>
                 <Box
                   sx={{
@@ -131,6 +122,7 @@ export default function AboutServices() {
                     display: "flex",
                     flexDirection: "column",
                     justifyContent: "center",
+                    direction: isAr ? "rtl" : "ltr",
                   }}
                 >
                   <Typography
@@ -140,7 +132,7 @@ export default function AboutServices() {
                       fontSize: "clamp(1.15rem,3vw,1.4rem)",
                       mb: 1,
                       color: "#fff",
-                      textAlign: { xs: "center", md: "left" },
+                      textAlign: { xs: "center", md: isAr ? "right" : "left" },
                     }}
                   >
                     {t("about.vision_h")}
@@ -150,7 +142,7 @@ export default function AboutServices() {
                       fontSize: "1rem",
                       lineHeight: 1.6,
                       color: "rgba(233,238,247,.95)",
-                      textAlign: { xs: "center", md: "left" },
+                      textAlign: { xs: "center", md: isAr ? "right" : "left" },
                     }}
                   >
                     {t("about.vision_t")}
@@ -167,6 +159,7 @@ export default function AboutServices() {
                     display: "flex",
                     flexDirection: "column",
                     justifyContent: "center",
+                    direction: isAr ? "rtl" : "ltr",
                   }}
                 >
                   <Typography
@@ -176,7 +169,7 @@ export default function AboutServices() {
                       fontSize: "clamp(1.15rem,3vw,1.4rem)",
                       mb: 1,
                       color: "#fff",
-                      textAlign: { xs: "center", md: "left" },
+                      textAlign: { xs: "center", md: isAr ? "right" : "left" },
                     }}
                   >
                     {t("about.mission_h")}
@@ -186,7 +179,7 @@ export default function AboutServices() {
                       fontSize: "1rem",
                       lineHeight: 1.6,
                       color: "rgba(233,238,247,.95)",
-                      textAlign: { xs: "center", md: "left" },
+                      textAlign: { xs: "center", md: isAr ? "right" : "left" },
                     }}
                   >
                     {t("about.mission_t")}
@@ -197,9 +190,7 @@ export default function AboutServices() {
           </Stagger>
         </Box>
 
-        <Divider
-          sx={{ my: { xs: 4, md: 5 }, background: "rgba(255,255,255,.3)", height: 2 }}
-        />
+        <Divider sx={{ my: { xs: 4, md: 5 }, background: "rgba(255,255,255,.3)", height: 2 }} />
 
         <Reveal>
           <Box sx={{ textAlign: "center", mb: 3 }}>
@@ -247,10 +238,7 @@ export default function AboutServices() {
                         justifyContent: "center",
                         textAlign: "center",
                         transition: "transform .25s ease, box-shadow .25s ease",
-                        "&:hover": {
-                          transform: "translateY(-4px)",
-                          boxShadow: "0 22px 44px rgba(0,0,0,.45)",
-                        },
+                        "&:hover": { transform: "translateY(-4px)", boxShadow: "0 22px 44px rgba(0,0,0,.45)" },
                       }}
                     >
                       <CardContent

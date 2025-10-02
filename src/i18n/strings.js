@@ -177,7 +177,7 @@ export const STRINGS = {
         {
           id: "dhiaa_md",
           name: "Dhiaa Ahmed Baddawi",
-          role: "Shareholder & Managing Director",
+          role: "Admin & Logistics Manager",
           bio: "Experienced in logistics and customer-care fields with strong knowledge of the spare-parts market in Oman and the region.",
           email: "dhiaa.badawi@qsmtoman.com",
           phone: "0096879178056",
@@ -193,7 +193,6 @@ export const STRINGS = {
         "Barka Industrial Area, Barka Province, Al Batinah South Governorate, Muscat, Oman",
       openMaps: "Open in Google Maps", // <— alias for the code that asks "openMaps"
       open_maps: "Open in Google Maps", // keep original too
-      directions: "Get Directions",
     },
 
     contact: {
@@ -397,7 +396,7 @@ export const STRINGS = {
         {
           id: "dhiaa_md",
           name: "ضياء أحمد بدوي",
-          role: "شريك ومدير عام",
+          role: "مدير الشؤون اللوجيستية",
           bio: "ذو خبرة في مجالي اللوجستيات وخدمة العملاء، مع معرفة قوية بسوق قطع الغيار في عُمان والمنطقة.",
           email: "dhiaa.badawi@qsmtoman.com",
           phone: "0096879178056",
@@ -412,7 +411,6 @@ export const STRINGS = {
         "منطقة بركاء الصناعية، ولاية بركاء، محافظة جنوب الباطنة، مسقط، عمان",
       openMaps: "افتح في خرائط جوجل", // alias used by code
       open_maps: "افتح في خرائط جوجل", // keep original too
-      directions: "الاتجاهات",
     },
 
     contact: {
