@@ -10,11 +10,14 @@ import {
   Divider,
   Alert,
   CircularProgress,
-} from '@mui/material';
+} from "@mui/material";
 import { useI18n } from "../i18n/I18nProvider";
 import mechanic from "../assets/hero-mechanic.jpg";
 
-
+import { motion } from "framer-motion";
+const MotionBox = motion(Box);
+const MotionCard = motion(Card);
+const MotionTypography = motion(Typography);
 
 export default function ContactSection() {
   const { t, lang } = useI18n();
@@ -25,7 +28,7 @@ export default function ContactSection() {
     phone: "",
     email: "",
     message: "",
-    website: "", // honeypot field (must stay empty)
+    website: "",
   });
   const [status, setStatus] = useState({ state: "idle", msg: "" });
 
@@ -33,9 +36,9 @@ export default function ContactSection() {
     setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
 
   const validate = () => {
-    if (!form.name.trim()) return t("contact.name_required", "Name is required");
-    if (!/^\S+@\S+\.\S+$/.test(form.email)) return t("contact.email_invalid", "Valid email is required");
-    if (!form.message.trim()) return t("contact.message_required", "Message is required");
+    if (!form.name.trim()) return t("contact.name", "Your Name");
+    if (!/^\S+@\S+\.\S+$/.test(form.email)) return t("contact.email", "Your E-mail");
+    if (!form.message.trim()) return t("contact.message", "Message");
     return null;
   };
 
@@ -44,15 +47,14 @@ export default function ContactSection() {
     const err = validate();
     if (err) return setStatus({ state: "error", msg: err });
 
-    // Check honeypot - if filled, silently "succeed"
     if (form.website) {
-      setStatus({ state: "success", msg: t("contact.sent", "Message sent successfully!") });
+      setStatus({ state: "success", msg: t("contact.sent", "Sent! We’ll get back to you shortly.") });
       setForm({ name: "", phone: "", email: "", message: "", website: "" });
       return;
     }
 
     try {
-      setStatus({ state: "loading", msg: t("contact.sending", "Sending...") });
+      setStatus({ state: "loading", msg: t("contact.sending", "Sending…") });
 
       const res = await fetch("/api/send-email", {
         method: "POST",
@@ -62,7 +64,7 @@ export default function ContactSection() {
           phone: form.phone,
           email: form.email,
           message: form.message,
-          website: form.website, // honeypot
+          website: form.website,
           lang,
         }),
       });
@@ -70,43 +72,67 @@ export default function ContactSection() {
       const data = await res.json().catch(() => ({}));
       if (!res.ok) throw new Error(data?.error || "Failed");
 
-      setStatus({ state: "success", msg: t("contact.sent", "Message sent successfully! We'll get back to you soon.") });
+      setStatus({ state: "success", msg: t("contact.sent", "Sent! We’ll get back to you shortly.") });
       setForm({ name: "", phone: "", email: "", message: "", website: "" });
     } catch (error) {
-      console.error("Contact form error:", error);
-      
-      // Check if it's a 404 error (likely local development)
-      const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-      
-      if (error.message.includes('404') || error.message.includes('Failed to fetch')) {
-        if (isLocal) {
-          setStatus({ 
-            state: "error", 
-            msg: "⚠️ Development Mode: Contact form will work on Vercel deployment. For now, please email us directly at yousef.n.d.2002@gmail.com" 
-          });
-        } else {
-          setStatus({ 
-            state: "error", 
-            msg: "Service temporarily unavailable. Please email us directly at yousef.n.d.2002@gmail.com" 
-          });
-        }
+      const isLocal =
+        window.location.hostname === "localhost" ||
+        window.location.hostname === "127.0.0.1";
+      if (error.message.includes("404") || error.message.includes("Failed to fetch")) {
+        setStatus({
+          state: "error",
+          msg: isLocal
+            ? "⚠️ Development Mode: This form works on Vercel. For now, email us at yousef.n.d.2002@gmail.com"
+            : "Service temporarily unavailable. Please email us at yousef.n.d.2002@gmail.com",
+        });
       } else {
-        setStatus({ 
-          state: "error", 
-          msg: t("contact.err_generic", "Couldn't send right now. Please try again or email us directly at yousef.n.d.2002@gmail.com") 
+        setStatus({
+          state: "error",
+          msg: t(
+            "contact.err_generic",
+            "Couldn’t send right now. Please try again in a minute or email us directly."
+          ),
         });
       }
     }
   };
 
+  const fieldSx = {
+    mb: 2,
+    "& .MuiOutlinedInput-root": {
+      backgroundColor: "rgba(244,246,255,1)",
+      borderRadius: "10px",
+      "&:hover .MuiOutlinedInput-notchedOutline": { borderColor: "#6366f1" },
+      "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+        borderColor: "#6366f1",
+        borderWidth: 2,
+      },
+      "& input, & textarea": { color: "#111827 !important" },
+    },
+    "& .MuiInputLabel-root": { display: "none" }, 
+  };
+
+
+  const formContainer = {
+    hidden: { opacity: 1 },
+    show: {
+      opacity: 1,
+      transition: { staggerChildren: 0.08, delayChildren: 0.1 },
+    },
+  };
+  const fadeUp = {
+    hidden: { opacity: 0, y: 12 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.35, ease: "easeOut" } },
+  };
+
   return (
     <>
       <Container maxWidth="xl">
-        <Divider 
+        <Divider
           sx={{
-            margin: '40px 0',
-            background: 'rgba(255, 255, 255, 0.3)',
-            height: '2px',
+            my: 5,
+            background: "rgba(255,255,255,.3)",
+            height: 2,
           }}
         />
       </Container>
@@ -115,56 +141,73 @@ export default function ContactSection() {
         component="section"
         id="contact"
         dir={isAr ? "rtl" : "ltr"}
-        aria-label={t("contact.heading", "Contact Us")}
+        aria-label={t("contact.heading", "Inquiry and\nFeedback")}
         sx={{
-          position: 'relative',
-          minHeight: '100vh',
+          position: "relative",
+          minHeight: "100vh",
           backgroundImage: `url(${mechanic})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundAttachment: 'fixed',
-          display: 'flex',
-          alignItems: 'center',
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundAttachment: "fixed",
+          display: "flex",
+          alignItems: "center",
           direction: isAr ? "rtl" : "ltr",
         }}
       >
-        <Box 
+        <MotionBox
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
           sx={{
-            position: 'absolute',
+            position: "absolute",
             inset: 0,
-            background: 'linear-gradient(135deg, rgba(8, 124, 207, 0.85) 0%, rgba(27, 26, 120, 0.85) 100%)',
+            background:
+              "linear-gradient(90deg, rgba(0,59,118,0.55), rgba(30,25,106,0.25))",
           }}
         />
-        
-        <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 2 }}>
-          <Card 
+
+        <Container maxWidth="lg" sx={{ position: "relative", zIndex: 1 }}>
+          <MotionCard
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, margin: "-10% 0px -10% 0px" }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
             sx={{
-              position: 'relative',
-              zIndex: 2,
-              background: 'rgba(255, 255, 255, 0.95)',
-              backdropFilter: 'blur(20px)',
-              borderRadius: '20px',
-              maxWidth: '600px',
-              margin: '0 auto',
-              boxShadow: '0 20px 60px rgba(0, 0, 0, 0.3)',
+              width: "min(560px, 92%)",
+              mx: "auto",
+              borderRadius: "18px",
+              background: "#ffffff",
+              boxShadow: "0 30px 60px rgba(0,0,0,.3)",
             }}
           >
-            <CardContent sx={{ padding: '40px' }}>
-              <Typography 
+            <CardContent sx={{ p: 4 }}>
+              <MotionTypography
                 component="h2"
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: false, margin: "-10% 0px -10% 0px" }}
                 sx={{
-                  fontWeight: 700,
-                  fontSize: 'clamp(1.5rem, 4vw, 2.2rem)',
-                  textAlign: 'center',
-                  marginBottom: '32px',
-                  color: '#1f1b5a',
+                  fontWeight: 800,
+                  fontSize: "clamp(28px,4vw,40px)",
+                  textAlign: "center",
+                  mb: 3,
+                  color: "#111827",
+                  whiteSpace: "pre-line",
                 }}
               >
-                {t("contact.heading", "Contact Us")}
-              </Typography>
+                {t("contact.heading", "Inquiry and\nFeedback")}
+              </MotionTypography>
 
-              <Box component="form" onSubmit={onSubmit} noValidate>
-                {/* Honeypot (bots fill it, humans never see it) */}
+              <MotionBox
+                component="form"
+                onSubmit={onSubmit}
+                noValidate
+                variants={formContainer}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: false, margin: "-10% 0px -10% 0px" }}
+              >
                 <Box
                   component="input"
                   type="text"
@@ -175,230 +218,126 @@ export default function ContactSection() {
                   autoComplete="off"
                   aria-hidden="true"
                   sx={{
-                    position: 'absolute',
-                    left: '-9999px',
-                    top: '-9999px',
-                    width: '1px',
-                    height: '1px',
+                    position: "absolute",
+                    left: "-9999px",
+                    top: "-9999px",
+                    width: 1,
+                    height: 1,
                     opacity: 0,
-                    pointerEvents: 'none',
+                    pointerEvents: "none",
                   }}
                 />
 
-                <TextField
-                  fullWidth
-                  type="text"
-                  name="name"
-                  label={t("contact.name", "Name")}
-                  value={form.name}
-                  onChange={onChange}
-                  autoComplete="name"
-                  required
-                  variant="outlined"
-                  sx={{
-                    marginBottom: '20px',
-                    '& .MuiOutlinedInput-root': {
-                      backgroundColor: 'rgba(255, 255, 255, 0.9)',
-                      borderRadius: '12px',
-                      color: '#1f1b5a',
-                      '& input': {
-                        color: '#1f1b5a !important',
-                      },
-                      '& textarea': {
-                        color: '#1f1b5a !important',
-                      },
-                      '&:hover .MuiOutlinedInput-notchedOutline': {
-                        borderColor: '#087ccf',
-                      },
-                      '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                        borderColor: '#1f1b5a',
-                        borderWidth: '2px',
-                      },
-                    },
-                    '& .MuiInputLabel-root': {
-                      color: '#4b5563',
-                      '&.Mui-focused': {
-                        color: '#1f1b5a',
-                      },
-                    },
-                    '& .MuiInputBase-input': {
-                      color: '#1f1b5a !important',
-                    },
-                  }}
-                />
+                <MotionBox variants={fadeUp}>
+                  <TextField
+                    fullWidth
+                    name="name"
+                    placeholder={t("contact.name", "Your Name")}
+                    value={form.name}
+                    onChange={onChange}
+                    autoComplete="name"
+                    variant="outlined"
+                    sx={fieldSx}
+                  />
+                </MotionBox>
 
-                <TextField
-                  fullWidth
-                  type="tel"
-                  name="phone"
-                  label={t("contact.phone", "Phone (optional)")}
-                  value={form.phone}
-                  onChange={onChange}
-                  autoComplete="tel"
-                  variant="outlined"
-                  sx={{
-                    marginBottom: '20px',
-                    '& .MuiOutlinedInput-root': {
-                      backgroundColor: 'rgba(255, 255, 255, 0.9)',
-                      borderRadius: '12px',
-                      color: '#1f1b5a',
-                      '& input': {
-                        color: '#1f1b5a !important',
-                      },
-                      '& textarea': {
-                        color: '#1f1b5a !important',
-                      },
-                      '&:hover .MuiOutlinedInput-notchedOutline': {
-                        borderColor: '#087ccf',
-                      },
-                      '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                        borderColor: '#1f1b5a',
-                        borderWidth: '2px',
-                      },
-                    },
-                    '& .MuiInputLabel-root': {
-                      color: '#4b5563',
-                      '&.Mui-focused': {
-                        color: '#1f1b5a',
-                      },
-                    },
-                    '& .MuiInputBase-input': {
-                      color: '#1f1b5a !important',
-                    },
-                  }}
-                />
+                <MotionBox variants={fadeUp}>
+                  <TextField
+                    fullWidth
+                    name="phone"
+                    placeholder={t("contact.phone", "Your Contact Number")}
+                    value={form.phone}
+                    onChange={onChange}
+                    autoComplete="tel"
+                    variant="outlined"
+                    sx={fieldSx}
+                  />
+                </MotionBox>
 
-                <TextField
-                  fullWidth
-                  type="email"
-                  name="email"
-                  label={t("contact.email", "Email")}
-                  value={form.email}
-                  onChange={onChange}
-                  autoComplete="email"
-                  required
-                  variant="outlined"
-                  sx={{
-                    marginBottom: '20px',
-                    '& .MuiOutlinedInput-root': {
-                      backgroundColor: 'rgba(255, 255, 255, 0.9)',
-                      borderRadius: '12px',
-                      color: '#1f1b5a',
-                      '& input': {
-                        color: '#1f1b5a !important',
-                      },
-                      '& textarea': {
-                        color: '#1f1b5a !important',
-                      },
-                      '&:hover .MuiOutlinedInput-notchedOutline': {
-                        borderColor: '#087ccf',
-                      },
-                      '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                        borderColor: '#1f1b5a',
-                        borderWidth: '2px',
-                      },
-                    },
-                    '& .MuiInputLabel-root': {
-                      color: '#4b5563',
-                      '&.Mui-focused': {
-                        color: '#1f1b5a',
-                      },
-                    },
-                    '& .MuiInputBase-input': {
-                      color: '#1f1b5a !important',
-                    },
-                  }}
-                />
+                <MotionBox variants={fadeUp}>
+                  <TextField
+                    fullWidth
+                    type="email"
+                    name="email"
+                    placeholder={t("contact.email", "Your E-mail")}
+                    value={form.email}
+                    onChange={onChange}
+                    autoComplete="email"
+                    variant="outlined"
+                    sx={fieldSx}
+                  />
+                </MotionBox>
 
-                <TextField
-                  fullWidth
-                  multiline
-                  rows={4}
-                  name="message"
-                  label={t("contact.message", "Message")}
-                  value={form.message}
-                  onChange={onChange}
-                  required
-                  variant="outlined"
-                  sx={{
-                    marginBottom: '20px',
-                    '& .MuiOutlinedInput-root': {
-                      backgroundColor: 'rgba(255, 255, 255, 0.9)',
-                      borderRadius: '12px',
-                      color: '#1f1b5a',
-                      '& input': {
-                        color: '#1f1b5a !important',
-                      },
-                      '& textarea': {
-                        color: '#1f1b5a !important',
-                      },
-                      '&:hover .MuiOutlinedInput-notchedOutline': {
-                        borderColor: '#087ccf',
-                      },
-                      '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                        borderColor: '#1f1b5a',
-                        borderWidth: '2px',
-                      },
-                    },
-                    '& .MuiInputLabel-root': {
-                      color: '#4b5563',
-                      '&.Mui-focused': {
-                        color: '#1f1b5a',
-                      },
-                    },
-                    '& .MuiInputBase-input': {
-                      color: '#1f1b5a !important',
-                    },
-                  }}
-                />
+                <MotionBox variants={fadeUp}>
+                  <TextField
+                    fullWidth
+                    multiline
+                    rows={5}
+                    name="message"
+                    placeholder={t("contact.message", "Message")}
+                    value={form.message}
+                    onChange={onChange}
+                    variant="outlined"
+                    sx={fieldSx}
+                  />
+                </MotionBox>
 
                 {status.state !== "idle" && (
-                  <Box sx={{ mb: 3 }}>
-                    <Alert 
+                  <MotionBox variants={fadeUp} sx={{ mb: 2 }} aria-live="polite">
+                    <Alert
                       severity={
-                        status.state === "success" ? "success" : 
-                        status.state === "error" ? "error" : "info"
+                        status.state === "success"
+                          ? "success"
+                          : status.state === "error"
+                          ? "error"
+                          : "info"
                       }
-                      sx={{ borderRadius: '12px' }}
+                      sx={{ borderRadius: "10px" }}
                     >
                       {status.msg}
                     </Alert>
-                  </Box>
+                  </MotionBox>
                 )}
 
-                <Box sx={{ textAlign: 'center' }}>
+                <MotionBox
+                  variants={fadeUp}
+                  sx={{ textAlign: "center" }}
+                >
                   <Button
                     type="submit"
                     disabled={status.state === "loading"}
-                    startIcon={status.state === "loading" ? <CircularProgress size={20} color="inherit" /> : null}
-                    sx={{
-                      borderRadius: '12px',
-                      padding: '12px 32px',
-                      fontWeight: 700,
-                      fontSize: '1.1rem',
-                      textTransform: 'none',
-                      background: 'linear-gradient(135deg, #087ccf 0%, #1f1b5a 100%)',
-                      color: '#fff',
-                      minHeight: '48px',
-                      '&:hover': {
-                        background: 'linear-gradient(135deg, #0668a8 0%, #2a2570 100%)',
-                        boxShadow: '0 8px 24px rgba(31, 27, 90, 0.4)',
-                      },
-                      '&:disabled': {
-                        background: '#94a3b8',
-                        color: '#fff',
-                      },
-                    }}
-                  >
-                    {status.state === "loading" 
-                      ? t("contact.sending", "Sending...") 
-                      : t("contact.send", "Send Message")
+                    startIcon={
+                      status.state === "loading" ? (
+                        <CircularProgress size={20} color="inherit" />
+                      ) : null
                     }
+                    sx={{
+                      mt: 1,
+                      px: 3,
+                      py: 1.25,
+                      borderRadius: "10px",
+                      fontWeight: 700,
+                      fontSize: "16px",
+                      textTransform: "none",
+                      background: "#4f46e5",
+                      color: "#fff",
+                      boxShadow: "0 8px 16px rgba(31,27,90,.35)",
+                      "&:hover": { filter: "brightness(1.05)" },
+                      "&:disabled": { opacity: 0.7 },
+                    }}
+                    component={motion.button}
+                    whileHover={{ y: -2 }}
+                    whileTap={{ y: 0 }}
+                    transition={{ type: "spring", stiffness: 450, damping: 30 }}
+                  >
+                    {status.state === "loading"
+                      ? t("contact.sending", "Sending…")
+                      : t("contact.send", "Send")}
                   </Button>
-                </Box>
-              </Box>
+                </MotionBox>
+              </MotionBox>
             </CardContent>
-          </Card>
+          </MotionCard>
         </Container>
       </Box>
     </>
